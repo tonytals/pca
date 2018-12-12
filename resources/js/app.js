@@ -1,0 +1,75 @@
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
+require('./bootstrap');
+
+window.Vue = require('vue');
+import Vuex from 'Vuex';
+Vue.use(Vuex);
+
+/*
+ * VUEX
+ */
+
+const store = new Vuex.Store({
+    state : {
+      itens : {}
+    },
+    mutations : {
+      setItens (state, obj){
+        state.itens = obj;
+      }
+    }
+});
+
+/*
+ * FIM DO VUEX
+ */
+
+
+Vue.filter('formataData', function (value) {
+  var dataVigencia = new Date(value);
+  return ("0" + dataVigencia.getDate()).slice(-2) + '/' + ("0" + (dataVigencia.getMonth() + 1)).slice(-2) + '/' +  dataVigencia.getFullYear();
+});
+
+/**
+ * The following block of code may be used to automatically register your
+ * Vue components. It will recursively scan this directory for the Vue
+ * components and automatically register them with their "basename".
+ *
+ * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ */
+
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('barra-topo', require('./components/default/BarraTopo.vue'));
+Vue.component('barra-pesquisa', require('./components/default/Pesquisa.vue'));
+Vue.component('notificacoes', require('./components/default/Notificacoes.vue'));
+Vue.component('tarefas', require('./components/default/Tarefas.vue'));
+Vue.component('sidebar-esquerda', require('./components/default/SidebarEsquerda.vue'));
+Vue.component('menu-principal', require('./components/default/MenuPrincipal.vue'));
+Vue.component('informacoes-usuario', require('./components/default/InformacoesUsuario.vue'));
+Vue.component('tabela-de-listagem', require('./components/TabelaDeListagem.vue'));
+Vue.component('painel', require('./components/Painel.vue'));
+Vue.component('modal', require('./components/Modal.vue'));
+Vue.component('modal-link', require('./components/ModalLink.vue'));
+Vue.component('formulario', require('./components/Formulario.vue'));
+
+// const files = require.context('./', true, /\.vue$/i)
+
+// files.keys().map(key => {
+//     return Vue.component(_.last(key.split('/')).split('.')[0], files(key))
+// })
+
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+const app = new Vue({
+    el: '#app',
+    store
+});

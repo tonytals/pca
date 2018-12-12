@@ -1,0 +1,74 @@
+<template>
+  <div class="menu">
+    <ul class="list">
+      <li class="header">NAVEGAÇÃO PRINCIPAL</li>
+      <li :class="activeLink('__')">
+        <a :href="montaRota('dashboard')">
+          <i class="material-icons">home</i>
+          <span>Visão Geral</span>
+        </a>
+      </li>
+      <li :class="activeLink('pacientes') || activeLink('prontuarios')">
+        <a :href="montaRota('pacientes.index')" class="toggled" v-if="activeLink('prontuarios/')">
+          <i class="material-icons">group</i>
+          <span>Meus Pacientes</span>
+        </a>
+        <a :href="montaRota('pacientes.index')" v-else>
+          <i class="material-icons">group</i>
+          <span>Meus Pacientes</span>
+        </a>
+        <ul class="ml-menu">
+            <li :class="activeLink('prontuarios')" v-if="activeLink('prontuarios/')">
+                <a :href="montaRota('prontuarios.index')">Prontuário</a>
+            </li>
+        </ul>
+      </li>
+
+      <li v-if="permissao('admin-view')" :class="activeLink('admin')">
+        <a href="javascript:void(0);" class="menu-toggle">
+            <i class="material-icons">build</i>
+            <span>Administração</span>
+        </a>
+        <ul class="ml-menu">
+            <li :class="activeLink('usuarios')">
+                <a :href="montaRota('usuarios.index')">Usuarios</a>
+            </li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  methods:{
+    montaRota(rota){
+      return route(rota);
+    },
+    activeLink(url){
+      var urlAtual = window.location.href.replace(/^.*\/\/[^\/]+/, '');
+
+      if(urlAtual.indexOf(url) !== -1)
+      {
+        return 'active';
+      }
+
+      if(urlAtual.length === 1 && url === '__')
+      {
+        return 'active';
+      }
+
+      return false;
+
+    },
+    permissao(permissao){
+        var permissoes = JSON.stringify(Laravel.permissoes);
+        if(permissoes.indexOf(permissao) !== -1){
+           return true;
+        }
+        return false;
+    }
+  }
+}
+</script>
