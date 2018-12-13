@@ -7,7 +7,7 @@
 
     </div>
     <div class="row">
-      <painel titulo="{{ $prontuarios[0]->nome_completo }}">
+      <painel titulo="{{ $paciente }}">
         <small slot="small">Prontuários</small>
         <a href="{{ route('pacientes.adicionar') }}" class="btn btn-primary waves-effect">Adicionar Prontuário</a>
 

@@ -39,7 +39,7 @@ class Paciente extends Model
 
     public function tipo_sanguineo()
     {
-        return $this->hasOne(TipoSanguineo::class);
+        return $this->hasOne(TipoSanguineo::class, 'id', 'tipo_sanguineo_id')->select('tipo_sanguineo');
     }
 
     public function familia()

@@ -4,6 +4,9 @@ namespace ProntuarioEletronico\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ProntuarioEletronico\Prontuario;
+use ProntuarioEletronico\Paciente;
+use ProntuarioEletronico\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProntuarioController extends Controller
 {
@@ -46,16 +49,20 @@ class ProntuarioController extends Controller
      */
     public function show($id)
     {
-        $prontuarios = Prontuario::with('paciente.users:user_id')->get();
-        if ($prontuarios->contains('user_id', 1))
-        {
-          echo "usuario pode acessar";
-        }
 
-        var_dump($prontuarios->contains('1.paciente.users.user_id'));
-        //die;
-dd($prontuarios);
-        return view('prontuarios.index',compact('prontuarios'));
+        $prontuarios = Prontuario::with(['paciente.users'])
+                                  ->where('id', $id)
+                                  ->get();
+                                  
+       if(!collect($prontuarios[0]->paciente->users)
+                  ->contains('id', Auth::user()->id)){
+          return redirect()->action('PacienteController@index')
+                          ->with('info', 'Sem permissão para acessar esse paciente');
+       }
+
+       $paciente = $prontuarios[0]->paciente;
+
+        return view('prontuarios.index',compact('prontuarios','paciente'));
     }
 
     /**

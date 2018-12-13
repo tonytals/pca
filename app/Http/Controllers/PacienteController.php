@@ -70,7 +70,7 @@ class PacienteController extends Controller
 
       $paciente->users()->attach($data['user_id']);
 
-      return redirect()->action('PacienteController@index');;
+      return redirect()->action('PacienteController@index');
     }
 
     /**
@@ -85,8 +85,19 @@ class PacienteController extends Controller
           abort(403,"Não autorizado!");
       }
 
+      if(empty(Paciente::find($id)
+                        ->users()
+                        ->where('user_id', Auth::user()->id)
+                        ->get()->count()
+                      ))
+      {
+        return redirect()->back()->with('info', 'Sem permissão para acessar esse paciente');
+      };
+
       $prontuarios = new Prontuario();
       $prontuarios = $prontuarios->getProntuariosByPaciente($id);
+
+      $paciente = Paciente::find($id)->nome_completo;
 
       $tituloColunas = json_encode([
         array('id' => '#'),
@@ -96,6 +107,7 @@ class PacienteController extends Controller
 
       return view('pacientes.listprontuarios',
         compact(
+          'paciente',
           'prontuarios',
           'tituloColunas'
         ));

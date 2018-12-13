@@ -61,7 +61,6 @@
     <barra-pesquisa></barra-pesquisa>
     <barra-topo nomeapp="{{ config('app.name', 'prontuario eletronico') }}"></barra-topo>
     <sidebar-esquerda nomeapp="{{ config('app.name', 'prontuario eletronico') }}"></sidebar-esquerda>
-
     @yield('content')
 
   </div>
@@ -71,16 +70,40 @@
   -->
   <script src="{{ asset('js/app.js') }}"></script>
 
-
+  <script src="{{ asset('plugins/bootstrap-notify/bootstrap-notify.js') }}"></script>
+  <script src="{{ asset('plugins/notifications.js') }}"></script>
   <script src="{{ asset('plugins/node-waves/waves.js') }}"></script>
   <script src="{{ asset('plugins/jquery-validation/jquery.validate.js') }}"></script>
   <script src="{{ asset('js/admin.js') }}"></script>
 
-  @yield('includeJs')
-  <script type="text/javascript">
-
-      @yield ('scripts')
-
+  @if(session()->has('info'))
+    <script type="text/javascript">
+        $(function () {
+          $.notify({
+              message: 'Sem permissão para acessar esse paciente!'
+          }, {
+            allow_dismiss: true,
+            newest_on_top: true,
+            timer: 1000,
+            placement: {
+                from: 'bottom',
+                align: 'right'
+            },
+          	animate: {
+          		enter: 'animated fadeInDown',
+          		exit: 'animated fadeOutUp'
+          	},
+            template:
+              '<div class="alert bg-red alert-dismissible col-sm-4" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong>Sem permissão para acessar!</strong></div>'
+          });
+        });
     </script>
+  @endif
+
+  @yield('includeJs')
+
+  <script type="text/javascript">
+      @yield ('scripts')
+  </script>
 </body>
 </html>

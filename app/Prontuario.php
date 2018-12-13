@@ -28,7 +28,7 @@ class Prontuario extends Model
         return DB::table('prontuarios')
                 ->join('tipos_registros', 'tipos_registros.id', '=', 'prontuarios.tipo_registro_id')
                 ->join('pacientes', 'pacientes.id', '=', 'prontuarios.paciente_id')
-                ->select('prontuarios.id','pacientes.nome_completo','tipos_registros.tipo_registro','prontuarios.problema_queixa')
+                ->select('prontuarios.id','tipos_registros.tipo_registro','prontuarios.problema_queixa')
                 ->where('paciente_id', $paciente_id)
                 ->get();
     }
