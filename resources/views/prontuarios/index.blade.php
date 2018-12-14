@@ -33,7 +33,6 @@
                         <li><b>Nome do Pai:</b> {{ $paciente->nome_pai }}</li>
                         <li><b>Nome da Mãe:</b> {{ $paciente->nome_mae }}</li>
                         <li><b>Sexo:</b> {{ $paciente->sexo }}</li>
-                        <li><b>Matrícula:</b> xxxxxxx</li>
                         <li><b>Religião:</b> {{ $paciente->religiao }}</li>
                       </ul>
                     </div>
@@ -56,7 +55,8 @@
                     </div>
                   </div>
                 <div class="row clearfix">
-
+                  @comments(['model' => $prontuarios])
+                  @endcomments
 
                 </div>
             </div>
@@ -71,6 +71,7 @@
 
 @section('includeJs')
   @include('layouts.includes.inputMask')
+  @include('layouts.includes.select')
 @stop
 
 @section('scripts')

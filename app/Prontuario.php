@@ -4,9 +4,13 @@ namespace ProntuarioEletronico;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Laravelista\Comments\Commentable;
 
 class Prontuario extends Model
 {
+
+    use Commentable;
+
     protected $fillable = [
       'paciente_id',
       'tipo_registro_id',

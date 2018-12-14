@@ -53,7 +53,7 @@ class ProntuarioController extends Controller
         $prontuarios = Prontuario::with(['paciente.users'])
                                   ->where('id', $id)
                                   ->get();
-                                  
+
        if(!collect($prontuarios[0]->paciente->users)
                   ->contains('id', Auth::user()->id)){
           return redirect()->action('PacienteController@index')
@@ -61,6 +61,7 @@ class ProntuarioController extends Controller
        }
 
        $paciente = $prontuarios[0]->paciente;
+       $prontuarios = $prontuarios[0];
 
         return view('prontuarios.index',compact('prontuarios','paciente'));
     }
