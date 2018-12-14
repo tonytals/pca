@@ -1,9 +1,9 @@
 
-<ul class="list-unstyled">
+<ul class="list-unstyled" >
 @if(isset($reply) && $reply === true)
   <div id="comment-{{ $comment->id }}" >
 @else
-  <li id="comment-{{ $comment->id }}" >
+  <li id="comment-{{ $comment->id }}"  style="display:none">
 @endif
     <div class="card">
         <div class="header">

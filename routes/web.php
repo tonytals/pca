@@ -20,7 +20,9 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('pacientes/adicionar', ['as'=>'pacientes.adicionar','uses'=>'PacienteController@adicionar']);
   Route::resource('pacientes', 'PacienteController');
 
-
+  Route::post('comments', 'ComentarioController@store');
+  Route::put('comments/{comment}', 'ComentarioController@update');
+  
   Route::resource('prontuarios', 'ProntuarioController');
 
 });

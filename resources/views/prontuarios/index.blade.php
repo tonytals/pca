@@ -57,7 +57,6 @@
                 <div class="row clearfix">
                   @comments(['model' => $prontuarios])
                   @endcomments
-
                 </div>
             </div>
         </div>
