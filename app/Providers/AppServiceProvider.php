@@ -3,6 +3,8 @@
 namespace ProntuarioEletronico\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Jenssegers\Date\Date;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Date::setLocale('pt-br');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace ProntuarioEletronico;
 
 use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Date\Date;
 
 class Paciente extends Model
 {
@@ -34,7 +35,7 @@ class Paciente extends Model
 
     public function estado_civil()
     {
-        return $this->hasOne(EstadoCivil::class);
+        return $this->hasOne(EstadoCivil::class, 'id', 'estado_civil_id');
     }
 
     public function tipo_sanguineo()
@@ -60,5 +61,19 @@ class Paciente extends Model
     public function setDataNascimentoAttribute($value){
         $originalDate = $value;
         $this->attributes['data_nascimento'] =  date("Y-m-d", strtotime($originalDate));
+    }
+
+    public function getDataNascimentoAttribute($value){
+        return $this->attributes['data_nascimento'] = Date::parse($value)->format('j \d\e F\, Y') . ' ('. Date::parse($value)->age .' anos)';
+    }
+
+    public function getSexoAttribute($value){
+        if($value == 'M'){
+            return 'Masculino';
+        }elseif($value == 'F'){
+            return 'Feminino';
+        }else{
+            return 'Não Informado';
+        }
     }
 }

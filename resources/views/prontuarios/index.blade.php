@@ -25,11 +25,16 @@
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                       <ul class="list-unstyled">
                         <li><b>Data de Nascimento:</b> {{ $paciente->data_nascimento }} </li>
+                        <li><b>CPF:</b> <span class="cpf">{{ $paciente->cpf }}</span></li>
+                        <li><b>RG:</b> {{ $paciente->rg }}</li>
+                        <li><b>Estado Civil:</b> {{ $paciente->estado_civil['estado_civil'] }}</li>
                         <li><b>Tipo Sanguineo:</b> {{ $paciente->tipo_sanguineo['tipo_sanguineo'] }}</li>
-                        <li><b>Cidade:</b> São Paulo</li>
-                        <li><b>Telefone:</b> 9999.9999</li>
-                        <li><b>Sexo:</b> Masculino</li>
+                        <li><b>E-mail:</b> {{ $paciente->email }}</li>
+                        <li><b>Nome do Pai:</b> {{ $paciente->nome_pai }}</li>
+                        <li><b>Nome da Mãe:</b> {{ $paciente->nome_mae }}</li>
+                        <li><b>Sexo:</b> {{ $paciente->sexo }}</li>
                         <li><b>Matrícula:</b> xxxxxxx</li>
+                        <li><b>Religião:</b> {{ $paciente->religiao }}</li>
                       </ul>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
@@ -53,98 +58,21 @@
                 <div class="row clearfix">
 
 
-                  <ul class="list-unstyled">
-                    <li>
-
-                      <div class="card">
-                          <div class="header">
-                              <h2>
-                                  01 de novembro de 2018 <small>Autor: Debora Alavarce</small>
-                              </h2>
-                              <ul class="header-dropdown m-r-0">
-                                  <li>
-
-                                          <i class="material-icons">place</i> Residência do Paciente
-
-                                  </li>
-                                  <li>
-
-                                          <i class="material-icons">watch</i> 14h30min
-
-                                  </li>
-                              </ul>
-                          </div>
-                          <div class="body">
-                              Quis pharetra a pharetra fames blandit. Risus faucibus velit Risus imperdiet mattis neque volutpat, etiam lacinia netus dictum magnis per facilisi sociosqu. Volutpat. Ridiculus nostra.
-                          </div>
-                      </div>
-
-                    </li>
-                    <li>
-
-                      <div class="card">
-                          <div class="header">
-                              <h2>
-                                  08 de novembro de 2018 <small>Autor: Debora Alavarce</small>
-                              </h2>
-                              <ul class="header-dropdown m-r-0">
-                                  <li>
-
-                                          <i class="material-icons">place</i> Consultório
-
-                                  </li>
-                                  <li>
-
-                                          <i class="material-icons">watch</i> 10h
-
-                                  </li>
-                              </ul>
-                          </div>
-                          <div class="body">
-                              Quis pharetra a pharetra fames blandit. Risus faucibus velit Risus imperdiet mattis neque volutpat, etiam lacinia netus dictum magnis per facilisi sociosqu. Volutpat. Ridiculus nostra.
-                          </div>
-                      </div>
-
-
-                      <ul style="list-style: none;margin: -18px 0 0 0;">
-                        <li>
-
-                          <div class="card">
-                              <div class="header bg-green">
-                                  <h2>
-                                      08 de novembro de 2018 <small>Autor: Avaliador</small>
-                                  </h2>
-                                  <ul class="header-dropdown m-r-0">
-                                      <li>
-
-                                              <i class="material-icons">place</i> N/A
-
-                                      </li>
-                                      <li>
-
-                                              <i class="material-icons">watch</i> 10h
-
-                                      </li>
-                                  </ul>
-                              </div>
-                              <div class="body">
-                                  Quis pharetra a pharetra fames blandit. Risus faucibus velit Risus imperdiet mattis neque volutpat, etiam lacinia netus dictum magnis per facilisi sociosqu. Volutpat. Ridiculus nostra.
-                              </div>
-                          </div>
-
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-
-
                 </div>
             </div>
         </div>
       </div>
-</div>
+    </div>
 
 
   </div>
 </section>
 @endsection
+
+@section('includeJs')
+  @include('layouts.includes.inputMask')
+@stop
+
+@section('scripts')
+  $("span.cpf").inputmask("999.999.999-99");
+@stop
