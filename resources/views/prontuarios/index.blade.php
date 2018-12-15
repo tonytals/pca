@@ -71,6 +71,7 @@
 @section('includeJs')
   @include('layouts.includes.inputMask')
   @include('layouts.includes.select')
+  @include('layouts.includes.modals')
 @stop
 
 @section('scripts')

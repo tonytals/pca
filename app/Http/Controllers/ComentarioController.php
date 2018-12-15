@@ -5,7 +5,6 @@ namespace ProntuarioEletronico\Http\Controllers;
 use Illuminate\Http\Request;
 use Laravelista\Comments\CommentsController as CommentsController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ComentarioController extends CommentsController
 {
@@ -84,10 +83,22 @@ class ComentarioController extends CommentsController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+     public function update(Request $request, \Laravelista\Comments\Comment $comment)
+     {
+         $this->authorize('edit-comment', $comment);
+
+         $this->validate($request, [
+             'message' => 'required|string'
+         ]);
+
+         $comment->update([
+             'comment' => $request->message,
+             'comment' => $request->local_atendimento,
+             'comment' => $request->data_hora_atendimento
+         ]);
+
+         return redirect()->to(url()->previous() . '#comment-' . $comment->id);
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -98,5 +109,22 @@ class ComentarioController extends CommentsController
     public function destroy($id)
     {
         //
+    }
+
+    public function reply(Request $request, \Laravelista\Comments\Comment $comment)
+    {
+
+        $this->validate($request, [
+            'message' => 'required|string'
+        ]);
+
+        $reply = new \Laravelista\Comments\Comment;
+        $reply->commenter()->associate(auth()->user());
+        $reply->commentable()->associate($comment->commentable);
+        $reply->parent()->associate($comment);
+        $reply->comment = $request->message;
+        $reply->save();
+
+        return redirect()->to(url()->previous() . '#comment-' . $reply->id);
     }
 }

@@ -49127,14 +49127,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "button",
+    "a",
     {
       class: _vm.corBotao,
-      attrs: {
-        type: "button",
-        "data-toggle": "modal",
-        "data-target": "#" + _vm.modal
-      }
+      attrs: { "data-toggle": "modal", "data-target": "#" + _vm.modal }
     },
     [_vm._v(_vm._s(_vm.titulo))]
   )

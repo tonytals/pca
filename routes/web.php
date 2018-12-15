@@ -22,7 +22,8 @@ Route::group(['middleware' => ['auth']], function() {
 
   Route::post('comments', 'ComentarioController@store');
   Route::put('comments/{comment}', 'ComentarioController@update');
-  
+  Route::post('comments/{comment}', 'ComentarioController@reply');
+
   Route::resource('prontuarios', 'ProntuarioController');
 
 });

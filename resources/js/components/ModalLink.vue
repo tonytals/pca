@@ -1,5 +1,5 @@
 <template>
-  <button type="button" v-bind:class="corBotao" data-toggle="modal" v-bind:data-target="'#' + modal">{{titulo}}</button>
+  <a v-bind:class="corBotao" data-toggle="modal" v-bind:data-target="'#' + modal">{{titulo}}</a>
 </template>
 
 <script>
