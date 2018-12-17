@@ -4,7 +4,7 @@
 <section class="content">
   <div class="container-fluid">
     <div class="block-header">
-      <h2>PRONTUÁRIO</h2>
+      <h2>PORTFÓLIO CLÍNICO</h2>
     </div>
 
 

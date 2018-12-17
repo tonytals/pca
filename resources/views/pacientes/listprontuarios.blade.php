@@ -9,7 +9,7 @@
     <div class="row">
       <painel titulo="{{ $paciente }}">
         <small slot="small">Prontuários</small>
-        <a href="{{ route('pacientes.adicionar') }}" class="btn btn-primary waves-effect">Adicionar Prontuário</a>
+        <a href="{{ route('pacientes.adicionar') }}" class="btn btn-primary waves-effect">Adicionar Registro</a>
 
         <tabela-de-listagem
         v-bind:colunas="{{$tituloColunas}}"

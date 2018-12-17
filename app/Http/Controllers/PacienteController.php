@@ -85,13 +85,15 @@ class PacienteController extends Controller
           abort(403,"Não autorizado!");
       }
 
-      if(empty(Paciente::find($id)
+      $canAccess = Paciente::findOrFail($id)
                         ->users()
                         ->where('user_id', Auth::user()->id)
-                        ->get()->count()
-                      ))
+                        ->get()->count();
+
+      if(empty($canAccess) || $canAccess == 0)
       {
-        return redirect()->back()->with('info', 'Sem permissão para acessar esse paciente');
+        return redirect()->action('PacienteController@index')
+                          ->with('info', 'Sem permissão para acessar esse paciente');
       };
 
       $prontuarios = new Prontuario();
@@ -101,7 +103,7 @@ class PacienteController extends Controller
 
       $tituloColunas = json_encode([
         array('id' => '#'),
-        array('tipo_registro' => 'Tipo de Registro'),
+        array('tipo_registro' => 'Registro'),
         array('problema_queixa' => 'Problema / Queixa')
       ]);
 
