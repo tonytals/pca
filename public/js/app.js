@@ -48543,9 +48543,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['colunas', 'registros', 'acoes', 'link'],
+  props: ['colunas', 'registros', 'acoes', 'link', 'csrf'],
   computed: {},
   methods: {
     campoArray: function campoArray(valor) {
@@ -48569,7 +48578,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return true;
     },
     montaRota: function montaRota(acao, id) {
-      return route(this.acoes + '.' + acao, { 'id': id });
+
+      try {
+        return route(this.acoes + '.' + acao, { 'id': id });
+      } catch (error) {
+        console.log(error);
+      }
+      //var rota = route(this.acoes + '.' + acao, {'id':id});
+      //if(rota != null || rota != 'undefined'){
+      //  return rota;
+      //}else{
+      return '#';
+      //}
     }
   }
 });
@@ -48693,34 +48713,78 @@ var render = function() {
                 _vm.acoes
                   ? _c("th", [
                       _c(
-                        "a",
+                        "form",
                         {
-                          staticClass: "btn btn-primary waves-effect",
                           attrs: {
-                            title: "Editar",
-                            href: _vm.montaRota("edit", registro.id)
+                            action: _vm.montaRota("destroy", registro.id),
+                            method: "post"
                           }
                         },
                         [
-                          _c("i", { staticClass: "material-icons" }, [
-                            _vm._v("mode_edit")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-danger waves-effect",
-                          attrs: {
-                            title: "Excluir",
-                            href: _vm.montaRota("destroy", registro.id)
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "material-icons" }, [
-                            _vm._v("delete")
-                          ])
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-primary waves-effect",
+                              attrs: {
+                                title: "Editar",
+                                href: _vm.montaRota("edit", registro.id)
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "material-icons" }, [
+                                _vm._v("mode_edit")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              type: "hidden",
+                              name: "_method",
+                              value: "delete"
+                            }
+                          }),
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(_vm.csrf) +
+                              "\n              "
+                          ),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-danger waves-effect",
+                              attrs: {
+                                title: "Excluir",
+                                href: _vm.montaRota("destroy", registro.id)
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "material-icons" }, [
+                                _vm._v("delete")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.acoes == "papeis"
+                            ? _c(
+                                "a",
+                                {
+                                  staticClass: "btn blue",
+                                  attrs: {
+                                    title: "Permissões",
+                                    href: _vm.montaRota(
+                                      "permissao",
+                                      registro.id
+                                    )
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "material-icons" }, [
+                                    _vm._v("lock_outline")
+                                  ])
+                                ]
+                              )
+                            : _vm._e()
                         ]
                       )
                     ])

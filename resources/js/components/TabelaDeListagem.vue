@@ -29,12 +29,21 @@
             </div>
           </td>
           <th v-if="acoes">
+            <form :action="montaRota('destroy', registro.id)" method="post">
             <a title="Editar" class="btn btn-primary waves-effect" :href="montaRota('edit', registro.id)">
               <i class="material-icons">mode_edit</i>
             </a>
-            <a title="Excluir" class="btn btn-danger waves-effect" :href="montaRota('destroy', registro.id)">
-              <i class="material-icons">delete</i>
+
+                <input type="hidden" name="_method" value="delete" />
+                {{ csrf }}
+                <a title="Excluir" class="btn btn-danger waves-effect" :href="montaRota('destroy', registro.id)">
+                  <i class="material-icons">delete</i>
+                </a>
+
+            <a v-if="(acoes == 'papeis')" title="Permissões" class="btn blue" :href="montaRota('permissao', registro.id)">
+              <i class="material-icons">lock_outline</i>
             </a>
+            </form>
             <!--<div class="btn-group" role="group">
               <modal-link
                 titulo="Detalhar"
@@ -57,7 +66,7 @@
 </template>
 <script>
   export default {
-    props: ['colunas','registros','acoes','link'],
+    props: ['colunas','registros','acoes','link','csrf'],
     computed:{
 
     },
@@ -83,7 +92,18 @@
         return true;
       },
       montaRota(acao, id){
-        return route(this.acoes + '.' + acao, {'id':id});
+
+        try {
+          return route(this.acoes + '.' + acao, {'id':id});
+        } catch (error) {
+          console.log(error);
+        }
+        //var rota = route(this.acoes + '.' + acao, {'id':id});
+        //if(rota != null || rota != 'undefined'){
+        //  return rota;
+        //}else{
+          return '#';
+        //}
       }
     }
   }

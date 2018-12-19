@@ -1,7 +1,28 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
 @section('content')
-	<div class="container">
+
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header"></div>
+
+		<div class="row">
+      <painel titulo='PAPÉIS DE SISTEMA'>
+        <a href="{{route('papeis.create')}}" class="btn btn-primary waves-effect">Adicionar Novo Papel</a>
+
+        <tabela-de-listagem
+        v-bind:colunas="{{$tituloColunas}}"
+        v-bind:registros="{{$registros}}"
+        acoes='papeis'
+
+      ></tabela-de-listagem>
+    </painel>
+		</div>
+
+
+  </div>
+</section>
+	<!--<div class="container">
 		<h2 class="center">Lista de Papéis</h2>
 
 		<div class="row">
@@ -51,6 +72,6 @@
 		<div class="row">
 			<a class="btn blue" href="{{route('papeis.create')}}">Adicionar</a>
 		</div>
-	</div>
+	</div>-->
 
 @endsection

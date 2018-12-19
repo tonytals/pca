@@ -22,9 +22,15 @@ class PapelController extends Controller
         abort(403,"Não autorizado!");
       }
 
+      $tituloColunas = json_encode([
+        array('id' => '#'),
+        array('nome' => 'Nome'),
+        array('descricao' => 'Descrição')
+      ]);
+
       $registros = Papel::all();
 
-      return view('admin.papel.index',compact('registros'));
+      return view('admin.papel.index',compact('registros','tituloColunas'));
     }
 
     public function permissao($id)
@@ -33,10 +39,15 @@ class PapelController extends Controller
         abort(403,"Não autorizado!");
       }
 
+      $tituloColunas = json_encode([
+        array('nome' => 'Nome'),
+        array('descricao' => 'Descrição')
+      ]);
+
       $papel = Papel::find($id);
       $permissao = Permissao::all();
 
-      return view('admin.papel.permissao',compact('papel','permissao'));
+      return view('admin.papel.permissao',compact('papel','permissao','tituloColunas'));
     }
 
     public function permissaoStore(Request $request,$id)
@@ -176,5 +187,5 @@ class PapelController extends Controller
       return redirect()->route('papeis.index');
     }
 
-    
+
 }

@@ -51,6 +51,13 @@
                               <span>Baixar Prontuário</span>
                           </button>
                         </li>
+                        <li>
+                          <br />
+                          <button type="button" class="btn bg-teal btn-block btn-lg waves-effect" data-toggle="modal" data-target="#adicionarRegistro">
+                              <i class="material-icons">add</i>
+                              <span>Adicionar Um Novo Registro</span>
+                          </button>
+                        </li>
                       </ul>
                     </div>
                   </div>

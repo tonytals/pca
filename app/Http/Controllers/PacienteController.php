@@ -96,23 +96,7 @@ class PacienteController extends Controller
                           ->with('info', 'Sem permissão para acessar esse paciente');
       };
 
-      $prontuarios = new Prontuario();
-      $prontuarios = $prontuarios->getProntuariosByPaciente($id);
-
-      $paciente = Paciente::find($id)->nome_completo;
-
-      $tituloColunas = json_encode([
-        array('id' => '#'),
-        array('tipo_registro' => 'Registro'),
-        array('problema_queixa' => 'Problema / Queixa')
-      ]);
-
-      return view('pacientes.listprontuarios',
-        compact(
-          'paciente',
-          'prontuarios',
-          'tituloColunas'
-        ));
+      return redirect()->action('ProntuarioController@show', $id);
     }
 
     /**

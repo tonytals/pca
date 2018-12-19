@@ -51,7 +51,7 @@ class ProntuarioController extends Controller
     {
 
         $prontuarios = Prontuario::with(['paciente.users'])
-                                  ->where('id', $id)
+                                  ->where('paciente_id', $id)
                                   ->get();
 
        if(!collect($prontuarios[0]->paciente->users)
