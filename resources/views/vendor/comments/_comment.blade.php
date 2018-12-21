@@ -29,7 +29,7 @@
     <div class="body">
         <h5 >{{ $comment->commenter->name }} <small>- {{ $comment->created_at->diffForHumans() }}</small></h5>
 
-        <p>{{ $comment->comment }}</p>
+        <p>{!! $comment->comment !!}</p>
 
         <div style="float:right">
           <modal-link titulo="Responder" css="nenhum" modal="reply-modal-{{ $comment->id }}"></modal-link> |

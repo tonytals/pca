@@ -14,7 +14,7 @@
             <div class="card">
               <div class="header">
 
-                  <h2>{{ $paciente->nome_completo }}</h2>
+                  <h2>{{ $paciente->nome_completo }}</h2><small>{{ $paciente->familia_id }}</small>
 
               </div>
                 <div class="body">
@@ -28,7 +28,7 @@
                         <li><b>CPF:</b> <span class="cpf">{{ $paciente->cpf }}</span></li>
                         <li><b>RG:</b> {{ $paciente->rg }}</li>
                         <li><b>Estado Civil:</b> {{ $paciente->estado_civil['estado_civil'] }}</li>
-                        <li><b>Tipo Sanguineo:</b> {{ $paciente->tipo_sanguineo['tipo_sanguineo'] }}</li>
+                        <li><b>Tipo Sanguineo:</b> {{ $paciente->tipo_sanguineo_id }}</li>
                         <li><b>E-mail:</b> {{ $paciente->email }}</li>
                         <li><b>Nome do Pai:</b> {{ $paciente->nome_pai }}</li>
                         <li><b>Nome da Mãe:</b> {{ $paciente->nome_mae }}</li>

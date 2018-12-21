@@ -65,6 +65,7 @@
 
   </div>
 
+  <script src="//cdn.ckeditor.com/4.6.2/full/ckeditor.js"></script>
   <!--
   ## JQUERY COMPILADO
   -->

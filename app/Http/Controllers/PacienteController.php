@@ -31,11 +31,11 @@ class PacienteController extends Controller
         array('nome_completo' => 'Nome'),
         array('email' => 'E-mail'),
         array('sexo' => 'Sexo'),
+        array('familia_id' => 'Familia')
       ]);
 
-      $usuarios = new User();
-      $pacientes = $usuarios->getPacientes(Auth::user()->id);
-      $pacientes = $pacientes[0]->pacientes;
+      $pacientes = new Paciente();
+      $pacientes = $pacientes->getPacientesPorUsuario(['id','nome_completo','email','sexo','familia_id']);
 
       return view('pacientes.index', compact('pacientes', 'tituloColunas'));
 

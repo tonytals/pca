@@ -13,9 +13,31 @@
                   <div class="row clearfix">
                     <div class="col-sm-12">
                       <div class="form-group">
-                          <div class="form-line">
-                              <textarea rows="4" class="form-control no-resize" name="message" placeholder="Por favor digite o comentário..."></textarea>
-                          </div>
+
+
+                              <ckeditor
+                                id="message"
+                                value="Por favor digite o comentário..."
+                                :config="{
+                                  toolbar : [
+{ name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
+{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+{ name: 'editing', items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+{ name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+'/',
+{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+{ name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+{ name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+'/',
+{ name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+{ name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+{ name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+{ name: 'about', items: [ 'About' ] }
+]
+                                          }"
+                                name="message">
+                              </ckeditor>
                       </div>
                     </div>
                   </div>

@@ -56,7 +56,8 @@ Vue.component('painel', require('./components/Painel.vue'));
 Vue.component('modal', require('./components/Modal.vue'));
 Vue.component('modal-link', require('./components/ModalLink.vue'));
 Vue.component('formulario', require('./components/Formulario.vue'));
-
+//Vue.component('ckeditor', require('vue-ckeditor2'));
+import ckeditor from 'vue-ckeditor2';
 // const files = require.context('./', true, /\.vue$/i)
 
 // files.keys().map(key => {
@@ -71,5 +72,8 @@ Vue.component('formulario', require('./components/Formulario.vue'));
 
 const app = new Vue({
     el: '#app',
-    store
+    store,
+    components: {
+      ckeditor,
+    }
 });

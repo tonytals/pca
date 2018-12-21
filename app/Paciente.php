@@ -5,6 +5,7 @@ namespace ProntuarioEletronico;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Date\Date;
 use Laravelista\Comments\Commentable;
+use Illuminate\Support\Facades\Auth;
 
 class Paciente extends Model
 {
@@ -49,7 +50,7 @@ class Paciente extends Model
 
     public function familia()
     {
-       return $this->hasOne(Familia::class);
+       return $this->hasOne(Familia::class, 'id', 'familia_id');
     }
 
     public function prontuarios()
@@ -71,6 +72,17 @@ class Paciente extends Model
         return $this->attributes['data_nascimento'] = Date::parse($value)->format('j \d\e F\, Y') . ' ('. Date::parse($value)->age .' anos)';
     }
 
+    public function getTipoSanguineoIdAttribute($value){
+        $tipoSanguineo = TipoSanguineo::find($value);
+        return $this->attributes['tipo_sanguineo_id'] = $tipoSanguineo['tipo_sanguineo'];
+    }
+
+    public function getFamiliaIdAttribute($value){
+        $familia = Familia::find($value);
+        $familia = $familia != null ? $familia['familia'] : 'Não Associado';
+        return $this->attributes['familia_id'] = $familia;
+    }
+
     public function getSexoAttribute($value){
         if($value == 'M'){
             return 'Masculino';
@@ -79,5 +91,12 @@ class Paciente extends Model
         }else{
             return 'Não Informado';
         }
+    }
+
+    public function getPacientesPorUsuario($colunas=''){
+
+        return Paciente::whereHas('users', function ($query) {
+                    $query->where('user_id', '=', Auth::user()->id);
+                })->select($colunas)->get();
     }
 }
