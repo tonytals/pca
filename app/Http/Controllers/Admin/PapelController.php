@@ -30,7 +30,14 @@ class PapelController extends Controller
 
       $registros = Papel::all();
 
-      return view('admin.papel.index',compact('registros','tituloColunas'));
+      $extras = json_encode([
+        array("rota"  => "papeis.permissao",
+              "icone" => "security",
+              "titulo" => "Permissões Deste Papel",
+              "class"    => "btn bg-teal waves-effect"),
+      ]);
+
+      return view('admin.papel.index',compact('registros','tituloColunas','extras'));
     }
 
     public function permissao($id)

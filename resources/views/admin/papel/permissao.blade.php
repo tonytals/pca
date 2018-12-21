@@ -7,7 +7,7 @@
     <div class="block-header"></div>
 
 		<div class="row">
-      <painel titulo='PERMISSÕES PARA {{$papel->nome}}'>
+      <painel titulo='PERMISSÕES PARA O PAPEL: {{$papel->nome}}'>
 
 				<div class="row">
 					<form action="{{route('papeis.permissao.store',$papel->id)}}" method="post">

@@ -48053,6 +48053,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
@@ -48102,42 +48105,36 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "li",
-        { class: _vm.activeLink("pacientes") || _vm.activeLink("prontuarios") },
-        [
-          _vm.activeLink("prontuarios/")
-            ? _c(
-                "a",
-                {
-                  staticClass: "toggled",
-                  attrs: { href: _vm.montaRota("pacientes.index") }
-                },
-                [
-                  _c("i", { staticClass: "material-icons" }, [_vm._v("group")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Meus Pacientes")])
-                ]
-              )
-            : _c("a", { attrs: { href: _vm.montaRota("pacientes.index") } }, [
+      _c("li", { class: _vm.activeLink("pacientes") }, [
+        _vm.activeLink("pacientes/")
+          ? _c(
+              "a",
+              {
+                staticClass: "toggled",
+                attrs: { href: _vm.montaRota("pacientes.index") }
+              },
+              [
                 _c("i", { staticClass: "material-icons" }, [_vm._v("group")]),
                 _vm._v(" "),
                 _c("span", [_vm._v("Meus Pacientes")])
-              ]),
-          _vm._v(" "),
-          _c("ul", { staticClass: "ml-menu" }, [
-            _vm.activeLink("prontuarios/")
-              ? _c("li", { class: _vm.activeLink("prontuarios") }, [
-                  _c(
-                    "a",
-                    { attrs: { href: _vm.montaRota("prontuarios.index") } },
-                    [_vm._v("Prontuário")]
-                  )
+              ]
+            )
+          : _c("a", { attrs: { href: _vm.montaRota("pacientes.index") } }, [
+              _c("i", { staticClass: "material-icons" }, [_vm._v("group")]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Meus Pacientes")])
+            ]),
+        _vm._v(" "),
+        _c("ul", { staticClass: "ml-menu" }, [
+          _vm.activeLink("pacientes/")
+            ? _c("li", { class: _vm.activeLink("pacientes") }, [
+                _c("a", { attrs: { href: _vm.montaRota("pacientes.index") } }, [
+                  _vm._v("Prontuário")
                 ])
-              : _vm._e()
-          ])
-        ]
-      ),
+              ])
+            : _vm._e()
+        ])
+      ]),
       _vm._v(" "),
       _vm.permissao("admin-view")
         ? _c("li", { class: _vm.activeLink("admin") }, [
@@ -48147,6 +48144,12 @@ var render = function() {
               _c("li", { class: _vm.activeLink("usuarios") }, [
                 _c("a", { attrs: { href: _vm.montaRota("usuarios.index") } }, [
                   _vm._v("Usuarios")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { class: _vm.activeLink("papeis") }, [
+                _c("a", { attrs: { href: _vm.montaRota("papeis.index") } }, [
+                  _vm._v("Papéis")
                 ])
               ])
             ])
@@ -48542,21 +48545,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['colunas', 'registros', 'acoes', 'link', 'csrf'],
+  props: ['colunas', 'registros', 'acoes', 'link', 'acoesextras'],
   computed: {},
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  },
+
   methods: {
+    extraField: function extraField(value) {
+      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      var acoesex = JSON.parse(this.acoesextras);
+      switch (value) {
+        case 'icone':
+          return acoesex[0].icone;
+          break;
+        case 'rota':
+          return route(acoesex[0].rota, { 'id': id });
+          break;
+        case 'class':
+          return acoesex[0].class;
+          break;
+        case 'titulo':
+          return acoesex[0].titulo;
+          break;
+        default:
+
+      }
+    },
     campoArray: function campoArray(valor) {
       if (Array.isArray(valor)) {
         return false;
@@ -48584,12 +48604,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } catch (error) {
         console.log(error);
       }
-      //var rota = route(this.acoes + '.' + acao, {'id':id});
-      //if(rota != null || rota != 'undefined'){
-      //  return rota;
-      //}else{
+
       return '#';
-      //}
     }
   }
 });
@@ -48650,7 +48666,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.registros, function(registro) {
+          _vm._l(_vm.registros, function(registro, key) {
             return _c(
               "tr",
               [
@@ -48741,46 +48757,30 @@ var render = function() {
                             attrs: {
                               type: "hidden",
                               name: "_method",
-                              value: "delete"
+                              value: "DELETE"
                             }
                           }),
-                          _vm._v(
-                            "\n              " +
-                              _vm._s(_vm.csrf) +
-                              "\n              "
-                          ),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "btn btn-danger waves-effect",
-                              attrs: {
-                                title: "Excluir",
-                                href: _vm.montaRota("destroy", registro.id)
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "material-icons" }, [
-                                _vm._v("delete")
-                              ])
-                            ]
-                          ),
                           _vm._v(" "),
-                          _vm.acoes == "papeis"
+                          _c("input", {
+                            attrs: { type: "hidden", name: "_token" },
+                            domProps: { value: _vm.csrf }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(0, true),
+                          _vm._v(" "),
+                          _vm.acoesextras != null
                             ? _c(
                                 "a",
                                 {
-                                  staticClass: "btn blue",
+                                  class: _vm.extraField("class"),
                                   attrs: {
-                                    title: "Permissões",
-                                    href: _vm.montaRota(
-                                      "permissao",
-                                      registro.id
-                                    )
+                                    title: _vm.extraField("titulo"),
+                                    href: _vm.extraField("rota", registro.id)
                                   }
                                 },
                                 [
                                   _c("i", { staticClass: "material-icons" }, [
-                                    _vm._v("lock_outline")
+                                    _vm._v(_vm._s(_vm.extraField("icone")))
                                   ])
                                 ]
                               )
@@ -48798,7 +48798,21 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-danger waves-effect",
+        attrs: { type: "submit", title: "Excluir" }
+      },
+      [_c("i", { staticClass: "material-icons" }, [_vm._v("delete")])]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

@@ -4,9 +4,13 @@ namespace ProntuarioEletronico;
 
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Date\Date;
+use Laravelista\Comments\Commentable;
 
 class Paciente extends Model
 {
+
+    use Commentable;
+
     protected $fillable = [
       'familia_id',
       'cpf',

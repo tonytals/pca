@@ -68,6 +68,7 @@ class PacienteController extends Controller
       $paciente = new Paciente();
       $paciente = Paciente::create($data);
 
+      $paciente->prontuarios()->attach($data['user_id']);
       $paciente->users()->attach($data['user_id']);
 
       return redirect()->action('PacienteController@index');
@@ -96,7 +97,9 @@ class PacienteController extends Controller
                           ->with('info', 'Sem permissão para acessar esse paciente');
       };
 
-      return redirect()->action('ProntuarioController@show', $id);
+      $paciente = Paciente::find($id);
+
+      return view('pacientes.prontuario',compact('paciente'));
     }
 
     /**
@@ -132,7 +135,15 @@ class PacienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $paciente = new Paciente();
+        $paciente = Paciente::create($data);
+
+        $paciente->prontuarios()->attach($data['user_id']);
+        $paciente->users()->attach($data['user_id']);
+
+        return redirect()->action('PacienteController@index');
     }
 
     /**
@@ -146,6 +157,10 @@ class PacienteController extends Controller
       if(Gate::denies('pacientes-destroy')){
           abort(403,"Não autorizado!");
       }
+
+      Paciente::find($id)->delete();
+      return redirect()->back();
+
     }
 
     public function adicionar()

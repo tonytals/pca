@@ -32,10 +32,16 @@ class UsuarioController extends Controller
           array('papeis' => 'Papeis')
         ]);
 
-        //$usuarios = User::all();
+        $extras = json_encode([
+          array("rota"  => "usuarios.papel",
+                "icone" => "assignment_ind",
+                "titulo" => "Papéis do Usuário",
+                "class"    => "btn bg-teal waves-effect"),
+        ]);
+
         $usuarios = User::select('id','name','cpf','email')->with('papeis:nome')->get();
 
-        return view('admin.usuarios.index',compact('usuarios','tituloColunas'));
+        return view('admin.usuarios.index',compact('usuarios','tituloColunas','extras'));
     }
 
     public function papel($id)
@@ -44,10 +50,16 @@ class UsuarioController extends Controller
         abort(403,"Não autorizado!");
       }
 
+      $tituloColunas = json_encode([
+        array('nome' => 'Nome'),
+        array('descricao' => 'Descrição')
+      ]);
+
+
       $usuario = User::find($id);
       $papel = Papel::all();
 
-      return view('admin.usuarios.papel',compact('usuario','papel'));
+      return view('admin.usuarios.papel',compact('usuario','papel','tituloColunas'));
     }
 
     public function papelStore(Request $request,$id)
@@ -174,6 +186,9 @@ class UsuarioController extends Controller
         if(Gate::denies('usuario-delete')){
           abort(403,"Não autorizado!");
         }
+
+        User::find($id)->delete();
+        return redirect()->back();
     }
 
     public function adicionar()
@@ -187,6 +202,6 @@ class UsuarioController extends Controller
       return view('admin.usuarios.form',compact('papel'));
     }
 
-    
+
 
 }

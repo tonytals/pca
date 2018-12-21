@@ -3,10 +3,10 @@
 @section('content')
 <section class="content">
   <div class="container-fluid">
-    <div class="block-header">
-	<h2 class="center">Editar Papel</h2>
+    <div class="block-header"></div>
 
-	<div class="row">
+		<div class="row">
+      <painel titulo='EDITAR PAPEL'>
 		<form action="{{ route('papeis.update',$registro->id) }}" method="post">
 
 		{{csrf_field()}}
@@ -18,9 +18,8 @@
 
 		</form>
 
-	</div>
-
-</div>
+  </painel>
+  </div>
 </div>
 </section>
 

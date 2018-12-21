@@ -15,7 +15,7 @@
         </tr>
       </tfoot>
       <tbody>
-        <tr v-for="registro in registros">
+        <tr v-for="(registro, key) in registros">
           <td v-for="(value, key) in registro" v-if="exibeColunas(key)">
             <span v-if="value != null && validaCampoData(value)" style="display:none;">{{value}}</span>
             <span v-if="value != null && validaCampoData(value)">
@@ -30,47 +30,61 @@
           </td>
           <th v-if="acoes">
             <form :action="montaRota('destroy', registro.id)" method="post">
-            <a title="Editar" class="btn btn-primary waves-effect" :href="montaRota('edit', registro.id)">
-              <i class="material-icons">mode_edit</i>
-            </a>
+              <a title="Editar" class="btn btn-primary waves-effect" :href="montaRota('edit', registro.id)">
+                <i class="material-icons">mode_edit</i>
+              </a>
+                  <input type="hidden" name="_method" value="DELETE" />
+                  <input type="hidden" name="_token" :value="csrf">
 
-                <input type="hidden" name="_method" value="delete" />
-                {{ csrf }}
-                <a title="Excluir" class="btn btn-danger waves-effect" :href="montaRota('destroy', registro.id)">
-                  <i class="material-icons">delete</i>
-                </a>
+                  <button type="submit" title="Excluir" class="btn btn-danger waves-effect">
+                    <i class="material-icons">delete</i>
+                  </button>
 
-            <a v-if="(acoes == 'papeis')" title="Permissões" class="btn blue" :href="montaRota('permissao', registro.id)">
-              <i class="material-icons">lock_outline</i>
-            </a>
+                  <a v-if="acoesextras != null" :title="extraField('titulo')" :class="extraField('class')" :href="extraField('rota',registro.id)">
+                    <i class="material-icons">{{extraField('icone')}}</i>
+                  </a>
+
             </form>
-            <!--<div class="btn-group" role="group">
-              <modal-link
-                titulo="Detalhar"
-                modal="detalha"
-                css="btn btn-sm bg-teal waves-effect"
-                ></modal-link>
-              <modal-link
-                titulo="Editar"
-                modal="editar"
-                css="btn btn-sm bg-teal waves-effect"
-                ></modal-link>
-                <button type="button" class="btn btn-sm bg-deep-orange waves-effect">Remover</button>
-            </div>-->
           </th>
         </tr>
+
       </tbody>
     </table>
+
   </div>
   <!-- #FIM# -->
 </template>
 <script>
   export default {
-    props: ['colunas','registros','acoes','link','csrf'],
+    props: ['colunas','registros','acoes','link','acoesextras'],
     computed:{
 
     },
+    data() {
+        return {
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        }
+    },
     methods:{
+      extraField:function(value,id=0){
+        var acoesex = JSON.parse(this.acoesextras);
+        switch (value) {
+          case 'icone':
+            return acoesex[0].icone;
+            break;
+          case 'rota':
+            return route(acoesex[0].rota, {'id':id});
+            break;
+          case 'class':
+            return acoesex[0].class;
+            break;
+          case 'titulo':
+            return acoesex[0].titulo;
+            break;
+          default:
+
+        }
+      },
       campoArray:function(valor){
         if(Array.isArray(valor)){
           return false;
@@ -98,12 +112,9 @@
         } catch (error) {
           console.log(error);
         }
-        //var rota = route(this.acoes + '.' + acao, {'id':id});
-        //if(rota != null || rota != 'undefined'){
-        //  return rota;
-        //}else{
+
           return '#';
-        //}
+
       }
     }
   }

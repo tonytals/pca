@@ -8,8 +8,8 @@
           <span>Visão Geral</span>
         </a>
       </li>
-      <li :class="activeLink('pacientes') || activeLink('prontuarios')">
-        <a :href="montaRota('pacientes.index')" class="toggled" v-if="activeLink('prontuarios/')">
+      <li :class="activeLink('pacientes')">
+        <a :href="montaRota('pacientes.index')" class="toggled" v-if="activeLink('pacientes/')">
           <i class="material-icons">group</i>
           <span>Meus Pacientes</span>
         </a>
@@ -18,8 +18,8 @@
           <span>Meus Pacientes</span>
         </a>
         <ul class="ml-menu">
-            <li :class="activeLink('prontuarios')" v-if="activeLink('prontuarios/')">
-                <a :href="montaRota('prontuarios.index')">Prontuário</a>
+            <li :class="activeLink('pacientes')" v-if="activeLink('pacientes/')">
+                <a :href="montaRota('pacientes.index')">Prontuário</a>
             </li>
         </ul>
       </li>
@@ -32,6 +32,9 @@
         <ul class="ml-menu">
             <li :class="activeLink('usuarios')">
                 <a :href="montaRota('usuarios.index')">Usuarios</a>
+            </li>
+            <li :class="activeLink('papeis')">
+                <a :href="montaRota('papeis.index')">Papéis</a>
             </li>
         </ul>
       </li>

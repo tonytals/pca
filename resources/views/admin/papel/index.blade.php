@@ -14,6 +14,7 @@
         v-bind:colunas="{{$tituloColunas}}"
         v-bind:registros="{{$registros}}"
         acoes='papeis'
+        acoesextras='{{$extras}}'
 
       ></tabela-de-listagem>
     </painel>
