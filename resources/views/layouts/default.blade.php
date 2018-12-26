@@ -65,7 +65,6 @@
 
   </div>
 
-  <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
   <!--
   ## JQUERY COMPILADO
   -->

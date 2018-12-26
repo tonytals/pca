@@ -48055,6 +48055,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
@@ -48119,7 +48126,9 @@ var render = function() {
               ]
             )
           : _c("a", { attrs: { href: _vm.montaRota("pacientes.index") } }, [
-              _c("i", { staticClass: "material-icons" }, [_vm._v("group")]),
+              _c("i", { staticClass: "material-icons" }, [
+                _vm._v("accessibility")
+              ]),
               _vm._v(" "),
               _c("span", [_vm._v("Meus Pacientes")])
             ]),
@@ -48132,6 +48141,14 @@ var render = function() {
                 ])
               ])
             : _vm._e()
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { class: _vm.activeLink("familias") }, [
+        _c("a", { attrs: { href: _vm.montaRota("familias.index") } }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("group")]),
+          _vm._v(" "),
+          _c("span", [_vm._v("Famílias")])
         ])
       ]),
       _vm._v(" "),

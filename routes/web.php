@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth']], function() {
 
   Route::resource('prontuarios', 'ProntuarioController');
 
+  Route::get('familias/adicionar', ['as'=>'familias.adicionar','uses'=>'FamiliaController@adicionar']);
+  Route::resource('familias', 'FamiliaController');
+
   Route::get('summernoteeditor',array('as'=>'summernoteeditor.get','uses'=>'SummernotefileController@getSummernoteeditor'));
   Route::post('summernoteeditor',array('as'=>'summernoteeditor.post','uses'=>'SummernotefileController@postSummernoteeditor'));
 });

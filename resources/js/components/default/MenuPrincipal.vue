@@ -14,7 +14,7 @@
           <span>Meus Pacientes</span>
         </a>
         <a :href="montaRota('pacientes.index')" v-else>
-          <i class="material-icons">group</i>
+          <i class="material-icons">accessibility</i>
           <span>Meus Pacientes</span>
         </a>
         <ul class="ml-menu">
@@ -23,6 +23,13 @@
             </li>
         </ul>
       </li>
+      <li :class="activeLink('familias')">
+        <a :href="montaRota('familias.index')">
+          <i class="material-icons">group</i>
+          <span>Famílias</span>
+        </a>
+      </li>
+
 
       <li v-if="permissao('admin-view')" :class="activeLink('admin')">
         <a href="javascript:void(0);" class="menu-toggle">
