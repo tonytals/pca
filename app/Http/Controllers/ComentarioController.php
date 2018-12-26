@@ -44,12 +44,31 @@ class ComentarioController extends CommentsController
 
          $model = $request->commentable_type::findOrFail($request->commentable_id);
 
+         $detail = $request->input('message');
+         $dom = new \DomDocument();
+         $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+         $images = $dom->getElementsByTagName('img');
+
+         foreach($images as $k => $img){
+           $data = $img->getAttribute('src');
+           list($type, $data) = explode(';', $data);
+           list(, $data)      = explode(',', $data);
+           $data = base64_decode($data);
+           $image_name= "/upload/" . time().$k.'.png';
+           $path = public_path() . $image_name;
+           file_put_contents($path, $data);
+           $img->removeAttribute('src');
+           $img->setAttribute('src', $image_name);
+         }
+
+         $detail = $dom->saveHTML();
+
          $comment = new \Laravelista\Comments\Comment;
          $comment->commenter()->associate(auth()->user());
          $comment->commentable()->associate($model);
-         $comment->comment = $request->message;
          $comment->local_atendimento = $request->local_atendimento;
          $comment->data_hora_atendimento =  date("Y-m-d H:i:s", strtotime($request->data_hora_atendimento));
+         $comment->comment = $detail;
          $comment->save();
 
          return redirect()->to(url()->previous() . '#comment-' . $comment->id);
