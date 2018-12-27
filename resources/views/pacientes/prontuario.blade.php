@@ -20,12 +20,14 @@
                 <div class="body">
                   <div class="row clearfix">
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                      <img src="https://cdn2.iconfinder.com/data/icons/lil-faces/226/lil-face-14-512.png" style="max-width:100%" alt="..." class="img-thumbnail">
+                      <div class="image-area">
+                          <img src="{{ $paciente->foto }}" style="max-width:100%" alt="{{$paciente->nome_completo}}" class="img-thumbnail">
+                      </div>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                       <ul class="list-unstyled">
-                        <li><b>Data de Nascimento:</b> {{ $paciente->data_nascimento }} </li>
-                        <li><b>CPF:</b> <span class="cpf">{{ $paciente->cpf }}</span></li>
+                        <li><b>Data de Nascimento:</b> {{ Date::parse($paciente->data_nascimento)->format('j \d\e F\, Y') . ' ('. Date::parse($paciente->data_nascimento)->age .' anos)' }} </li>
+                        <li><b>CPF:</b> <span>{{ mascara("###.###.###-##", $paciente->cpf) }}</span></li>
                         <li><b>RG:</b> {{ $paciente->rg }}</li>
                         <li><b>Estado Civil:</b> {{ $paciente->estado_civil['estado_civil'] }}</li>
                         <li><b>Tipo Sanguineo:</b> {{ $paciente->tipo_sanguineo_id }}</li>
@@ -82,5 +84,11 @@
 @stop
 
 @section('scripts')
-  $("span.cpf").inputmask("999.999.999-99");
+  $(document).ready(function() {
+    $('.summernote').summernote({
+      tabsize: 2,
+      lang: 'pt-BR',
+      height: 180
+    });
+  });
 @stop

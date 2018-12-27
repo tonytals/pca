@@ -25,6 +25,7 @@ class Paciente extends Model
       'nome_pai',
       'nome_mae',
       'tipo_sanguineo_id',
+      'foto',
       'alfabetizado',
       'frequenta_escola',
       'chefe_familia',
@@ -68,10 +69,6 @@ class Paciente extends Model
         $this->attributes['data_nascimento'] =  date("Y-m-d", strtotime($originalDate));
     }
 
-    public function getDataNascimentoAttribute($value){
-        return $this->attributes['data_nascimento'] = Date::parse($value)->format('j \d\e F\, Y') . ' ('. Date::parse($value)->age .' anos)';
-    }
-
     public function getTipoSanguineoIdAttribute($value){
         $tipoSanguineo = TipoSanguineo::find($value);
         return $this->attributes['tipo_sanguineo_id'] = $tipoSanguineo['tipo_sanguineo'];
@@ -81,6 +78,15 @@ class Paciente extends Model
         $familia = Familia::find($value);
         $familia = $familia != null ? $familia['familia'] : 'Não Associado';
         return $this->attributes['familia_id'] = $familia;
+    }
+
+    public function getFotoAttribute($value){
+        if($value == null){
+          return $this->attributes['foto'] = '/images/sem-imagem.png';
+        }else{
+          return $this->attributes['foto'] = '/storage/' . $value;
+        }
+
     }
 
     public function getSexoAttribute($value){
@@ -94,7 +100,6 @@ class Paciente extends Model
     }
 
     public function getPacientesPorUsuario($colunas=''){
-
         return Paciente::whereHas('users', function ($query) {
                     $query->where('user_id', '=', Auth::user()->id);
                 })->select($colunas)->get();

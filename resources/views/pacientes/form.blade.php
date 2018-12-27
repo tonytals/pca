@@ -19,8 +19,13 @@
       @endif
 
       <painel titulo='ADICIONAR PACIENTE'>
-        <formulario id="adicionaPaciente" method="post" action="{{ route('pacientes.store') }}" token="{{ csrf_token() }}">
-          <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+        @if(isset($paciente))
+            <formulario id="adicionaPaciente" method="put" action="{{ route('pacientes.update', $paciente->id) }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
+        @endif
+        @if(!isset($paciente))
+            <formulario id="adicionaPaciente" method="post" action="{{ route('pacientes.store') }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+        @endif
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group form-float">
@@ -98,7 +103,7 @@
           <div class="col-sm-3">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input type="text" class="form-control date" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', $paciente->data_nascimento ?? null) }}">
+                    <input type="text" class="form-control date" name="data_nascimento" placeholder="" value="{{ old('data_nascimento',  Date::parse($paciente->data_nascimento)->format('d/m/Y') ?? null) }}">
                     <label class="form-label">Data de Nascimento</label>
                 </div>
             </div>
@@ -182,7 +187,16 @@
               </div>
             </div>
           </div>
-
+        </div>
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="form-group form-float">
+              <div class="form-line">
+                <label for="foto">Foto do Paciente</label>
+                <input type="file" id="foto" name="foto">
+              </div>
+            </div>
+          </div>
         </div>
         <div class="align-right">
             <button class="btn btn-link waves-effect">SALVAR</button>
@@ -220,6 +234,7 @@ $(function () {
           $(element).parents('.form-group').append(error);
       }
     });
+
     $('#adicionaPaciente').find('input[required]').css('border-bottom','solid thin red');
     $('.required').css('border-bottom','solid thin red');
 

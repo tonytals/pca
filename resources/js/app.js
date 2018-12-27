@@ -44,13 +44,9 @@ Vue.filter('formataData', function (value) {
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('barra-topo', require('./components/default/BarraTopo.vue'));
-Vue.component('barra-pesquisa', require('./components/default/Pesquisa.vue'));
 Vue.component('notificacoes', require('./components/default/Notificacoes.vue'));
 Vue.component('tarefas', require('./components/default/Tarefas.vue'));
-Vue.component('sidebar-esquerda', require('./components/default/SidebarEsquerda.vue'));
 Vue.component('menu-principal', require('./components/default/MenuPrincipal.vue'));
-Vue.component('informacoes-usuario', require('./components/default/InformacoesUsuario.vue'));
 Vue.component('tabela-de-listagem', require('./components/TabelaDeListagem.vue'));
 Vue.component('painel', require('./components/Painel.vue'));
 Vue.component('modal', require('./components/Modal.vue'));

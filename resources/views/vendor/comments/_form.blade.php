@@ -14,7 +14,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                           <div class="form-line">
-                              <textarea rows="4" id="message" class="form-control no-resize" name="message" placeholder="Por favor digite o comentário..."></textarea>
+                              <textarea rows="4" id="message" class="form-control no-resize summernote" name="message" placeholder="Por favor digite o comentário..."></textarea>
                           </div>
                       </div>
                     </div>
@@ -57,12 +57,4 @@
 
 @section('includeJs')
   @include('layouts.includes.summernote')
-@stop
-
-@section('scripts')
-$(document).ready(function() {
-  $('#message').summernote({
-    height:300,
-  });
-});
 @stop

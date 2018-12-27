@@ -23,7 +23,49 @@
               </div>
 
           </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box bg-green hover-expand-effect">
+                  <div class="icon">
+                      <a href="#">
+                        <i class="material-icons">forum</i>
+                      </a>
+
+                  </div>
+                  <div class="content">
+                      <div class="text">REGISTROS</div>
+                      <div class="number count-to" data-from="0" data-to="{{$quantidade_comentarios}}" data-speed="1000" data-fresh-interval="20"></div>
+                  </div>
+              </div>
+
+          </div>
       </div>
+
+      <div class="row clearfix">
+          <!-- Task Info -->
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+          </div>
+          <!-- #END# Task Info -->
+          <!-- Browser Usage -->
+          <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="card">
+                <div class="body bg-teal">
+                    <div class="font-bold m-b--35">N. de Atendimentos</div>
+                      <ul class="dashboard-stat-list">
+                        @foreach($locais_atendimento as $local)
+                          @if($local[0]->local_atendimento != null)
+                            <li>{{ $local[0]->local_atendimento }}
+                              <span class="pull-right"><b>{{$local->count()}}</b> <small></small></span>
+                            </li>
+                          @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+          </div>
+          <!-- #END# Browser Usage -->
+      </div>
+
   </div>
 </section>
 @endsection
@@ -34,7 +76,6 @@
 
 @section('scripts')
 $(function () {
-    //Widgets count
     $('.count-to').countTo();
   });
 @stop

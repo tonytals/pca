@@ -65,10 +65,15 @@ class PacienteController extends Controller
 
       $data = $request->all();
 
+      if($request->file('foto') != null){
+        $arquivo = $request->file('foto')->store('pacientes','public');
+        $data['foto'] = $arquivo;
+      }
+
       $paciente = new Paciente();
       $paciente = Paciente::create($data);
 
-      $paciente->prontuarios()->attach($data['user_id']);
+      //$paciente->prontuarios()->attach($data['user_id']);
       $paciente->users()->attach($data['user_id']);
 
       return redirect()->action('PacienteController@index');
@@ -137,11 +142,14 @@ class PacienteController extends Controller
     {
         $data = $request->all();
 
-        $paciente = new Paciente();
-        $paciente = Paciente::create($data);
+        if($request->file('foto') != null){
+          $arquivo = $request->file('foto')->store('pacientes','public');
+          $data['foto'] = $arquivo;
+        }
 
-        $paciente->prontuarios()->attach($data['user_id']);
-        $paciente->users()->attach($data['user_id']);
+        $paciente = new Paciente();
+        $paciente = Paciente::find($id)->update($data);
+
 
         return redirect()->action('PacienteController@index');
     }

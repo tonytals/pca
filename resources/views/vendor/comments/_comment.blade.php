@@ -47,7 +47,7 @@
               <div>
                 <div class="form-group">
                     <div class="form-line">
-                        <textarea rows="4" class="form-control no-resize" name="message" placeholder="Por favor digite o comentário..."></textarea>
+                        <textarea rows="4" class="form-control no-resize summernote" name="message" placeholder="Por favor digite o comentário..."></textarea>
                     </div>
                 </div>
               </div>
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <div class="form-line">
                       <label for="message">Atualize sua mensagem:</label>
-                        <textarea rows="4" class="form-control no-resize" name="message">{{ $comment->comment }}</textarea>
+                        <textarea rows="4" class="form-control no-resize summernote" name="message">{{ $comment->comment }}</textarea>
                     </div>
                 </div>
               </div>

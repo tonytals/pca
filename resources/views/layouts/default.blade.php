@@ -58,9 +58,20 @@
   <!-- #fim Overlay -->
 
   <div id="app">
-    <barra-pesquisa></barra-pesquisa>
-    <barra-topo nomeapp="{{ config('app.name', 'prontuario eletronico') }}"></barra-topo>
-    <sidebar-esquerda nomeapp="{{ config('app.name', 'prontuario eletronico') }}"></sidebar-esquerda>
+    @include('layouts.partials.barraPesquisa')
+    @include('layouts.partials.barraTopo')
+    <section>
+      <aside id="leftsidebar" class="sidebar">
+        @include('layouts.partials.informacoesUsuario')
+        <menu-principal></menu-principal>
+        <div class="legal">
+          <div class="copyright">
+            © 2018 <a href="javascript:void(0);">{{ config('app.name', 'prontuario eletronico') }}</a>.
+          </div>
+          <div class="version"><b>Versão: </b> 0.1 a</div>
+        </div>
+      </aside>
+    </section>
     @yield('content')
 
   </div>
