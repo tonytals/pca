@@ -18,11 +18,13 @@
         @endforeach
       @endif
 
-      <painel titulo='ADICIONAR PACIENTE'>
+
         @if(isset($paciente))
+            <painel titulo='ATUALIZAR PACIENTE'>
             <formulario id="adicionaPaciente" method="put" action="{{ route('pacientes.update', $paciente->id) }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
         @endif
         @if(!isset($paciente))
+            <painel titulo='ADICIONAR PACIENTE'>
             <formulario id="adicionaPaciente" method="post" action="{{ route('pacientes.store') }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
         @endif

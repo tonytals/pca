@@ -173,6 +173,33 @@ class UsuarioController extends Controller
         if(Gate::denies('usuario-edit')){
           abort(403,"Não autorizado!");
         }
+
+        $data = $request->all();
+
+        if($request->file('foto') != null){
+          $arquivo = $request->file('foto')->store('usuarios','public');
+          $data['foto'] = $arquivo;
+        }
+
+        $user = new User();
+        $newPassword = $request->get('password');
+
+        if(empty($newPassword)){
+          unset($data['password']);
+        }else{
+          $data['password'] = Hash::make($data['password']);
+        }
+
+        $user->find($id)->update($data);
+        return redirect()->back();
+    }
+
+    public function perfil($id)
+    {
+
+      $usuario = User::find($id);
+
+      return view('admin.usuarios.perfil',compact('usuario'));
     }
 
     /**

@@ -4,6 +4,7 @@ $(function () {
 
     var $maskedInput = $('form');
     $maskedInput.find('.date').inputmask('dd/mm/yyyy', { placeholder: '__/__/____', showMaskOnHover: false });
+    $maskedInput.find('.data').inputmask('dd/mm/yyyy', { placeholder: '__/__/____', showMaskOnHover: false });
     $maskedInput.find('.time12').inputmask('hh:mm t', { placeholder: '__:__ _m', alias: 'time12', hourFormat: '12' });
     $maskedInput.find('.time24').inputmask('hh:mm', { placeholder: '__:__ _m', alias: 'time24', hourFormat: '24' });
     $maskedInput.find('.datetime').inputmask('d/m/y h:s', { placeholder: '__/__/____ __:__', alias: "datetime", hourFormat: '24' });

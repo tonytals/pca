@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 
   Route::get('/', ['as'=>'admin','uses'=>'Admin\AdminController@index']);
 
+  Route::get('usuarios/perfil/{id}', ['as'=>'usuarios.perfil','uses'=>'Admin\UsuarioController@perfil']);
   Route::get('usuarios/adicionar', ['as'=>'usuarios.adicionar','uses'=>'Admin\UsuarioController@adicionar']);
   Route::resource('usuarios', 'Admin\UsuarioController');
 

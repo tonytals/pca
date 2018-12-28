@@ -65,8 +65,8 @@ class Paciente extends Model
     }
 
     public function setDataNascimentoAttribute($value){
-        $originalDate = $value;
-        $this->attributes['data_nascimento'] =  date("Y-m-d", strtotime($originalDate));
+        $value = str_replace('/', '-', $value); 
+        $this->attributes['data_nascimento'] = Date::parse($value)->format('Y-m-d');
     }
 
     public function getTipoSanguineoIdAttribute($value){

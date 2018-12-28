@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravelista\Comments\Commenter;
+use Jenssegers\Date\Date;
 
 class User extends Authenticatable
 {
@@ -29,7 +30,8 @@ class User extends Authenticatable
         'matricula',
         'ano',
         'turma',
-        'periodo'
+        'periodo',
+        'foto'
     ];
 
     /**
@@ -102,5 +104,23 @@ class User extends Authenticatable
     public function getMinhasPermissoes()
     {
         return $this->papeis()->with('permissoes');
+    }
+
+    public function getFotoAttribute($value){
+        if($value == null){
+          return $this->attributes['foto'] = '/images/sem-imagem.png';
+        }else{
+          return $this->attributes['foto'] = '/storage/' . $value;
+        }
+    }
+
+    public function setCpfAttribute($value)
+    {
+        $this->attributes['cpf'] = preg_replace('/[^a-zA-Z0-9]/', '', $value);
+    }
+
+    public function setDataNascimentoAttribute($value){
+        $value = str_replace('/', '-', $value); 
+        $this->attributes['data_nascimento'] = Date::parse($value)->format('Y-m-d');
     }
 }
