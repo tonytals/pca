@@ -4,6 +4,7 @@ namespace ProntuarioEletronico\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Jenssegers\Date\Date;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         Date::setLocale('pt-br');
     }
 

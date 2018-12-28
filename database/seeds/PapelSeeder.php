@@ -22,6 +22,11 @@ class PapelSeeder extends Seeder
             'descricao' => 'Acesso para alunos'
         ]);
 
+        $p3 = Papel::firstOrCreate([
+            'nome' =>'Preceptores',
+            'descricao' => 'Acesso para Preceptores'
+        ]);
+
 
         echo "Papeis criados com sucesso!";
     }

@@ -32,7 +32,10 @@
         <p>{!! $comment->comment !!}</p>
 
         <div style="float:right">
-          <modal-link titulo="Responder" css="nenhum" modal="reply-modal-{{ $comment->id }}"></modal-link> |
+          @if(Auth::user()->id != $comment->commenter->id)
+            <modal-link titulo="Responder" css="nenhum" modal="reply-modal-{{ $comment->id }}"></modal-link> |
+          @endif
+
           <modal-link titulo="Editar" css="nenhum" modal="comment-modal-{{ $comment->id }}"></modal-link> |
           <a href="{{ url('comments/' . $comment->id) }}" onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->id }}').submit();" >Deletar</a>
           <form id="comment-delete-form-{{ $comment->id }}" action="{{ url('comments/' . $comment->id) }}" method="POST" style="display: none;">

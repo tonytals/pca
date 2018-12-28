@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth']], function() {
 
   Route::get('summernoteeditor',array('as'=>'summernoteeditor.get','uses'=>'SummernotefileController@getSummernoteeditor'));
   Route::post('summernoteeditor',array('as'=>'summernoteeditor.post','uses'=>'SummernotefileController@postSummernoteeditor'));
+
+  Route::get('notificacoes', ['as'=>'notificacoes','uses'=>'NotificationController@notificacoes']);
 });
 
 Auth::routes();

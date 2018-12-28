@@ -11,7 +11,7 @@
         <li><a href="{{ route('usuarios.perfil', Auth::user()->id) }}"><i class="material-icons">person</i>Meu Perfil</a></li>
         <li role="separator" class="divider"></li>
         <li>
-          <a :href="url" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+          <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             <i class="material-icons">input</i>Sair
           </a>
         </li>

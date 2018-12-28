@@ -113,6 +113,11 @@ class UsuarioController extends Controller
 
       $data = $request->all();
 
+      if($request->file('foto') != null){
+        $arquivo = $request->file('foto')->store('usuarios','public');
+        $data['foto'] = $arquivo;
+      }
+
       $validator = \Validator::make($data, [
           'email' => 'required'
       ]);

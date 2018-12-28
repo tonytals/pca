@@ -35,6 +35,12 @@ Vue.filter('formataData', function (value) {
   return ("0" + dataVigencia.getDate()).slice(-2) + '/' + ("0" + (dataVigencia.getMonth() + 1)).slice(-2) + '/' +  dataVigencia.getFullYear();
 });
 
+Vue.filter('striptag', function (value) {
+  var div = document.createElement("div");
+  div.innerHTML = value;
+  var text = div.textContent || div.innerText || "";
+  return text.substring(0,27) + '...';
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -57,7 +63,15 @@ Vue.component('formulario', require('./components/Formulario.vue'));
 // files.keys().map(key => {
 //     return Vue.component(_.last(key.split('/')).split('.')[0], files(key))
 // })
+import VueTimeago from 'vue-timeago';
 
+Vue.use(VueTimeago, {
+  name: 'Timeago', // Component name, `Timeago` by default
+  locale: 'pt-BR', // Default locale
+  locales: {
+    'pt-BR': require('date-fns/locale/pt'),
+  }
+})
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

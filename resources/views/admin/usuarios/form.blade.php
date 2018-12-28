@@ -79,7 +79,7 @@
           <div class="col-sm-2">
             <div class="form-group form-float">
                 <div class="form-line">
-                  <select class="form-control show-tick" data-live-search="true" name="papel_id" required>
+                  <select class="form-control show-tick" data-live-search="true">
                       <option disabled selected value>-- Período --</option>
                       <option value="Matutino">Matutino</option>
                       <option value="Vespertino">Vespertino</option>
@@ -165,6 +165,16 @@
                 </div>
               </div>
             </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="form-group form-float">
+              <div class="form-line">
+                <label for="foto">Foto do Perfil</label>
+                <input type="file" id="foto" name="foto">
+              </div>
+            </div>
+          </div>
         </div>
         <div class="align-right">
             <button class="btn btn-link waves-effect">SALVAR</button>

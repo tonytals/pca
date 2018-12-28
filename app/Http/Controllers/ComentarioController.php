@@ -2,6 +2,7 @@
 
 namespace ProntuarioEletronico\Http\Controllers;
 
+use ProntuarioEletronico\Notifications\ProntuarioCommented;
 use Illuminate\Http\Request;
 use Laravelista\Comments\CommentsController as CommentsController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -143,6 +144,12 @@ class ComentarioController extends CommentsController
         $reply->parent()->associate($comment);
         $reply->comment = $request->message;
         $reply->save();
+
+        /*
+         * NOTIFICAÇÕES
+         */
+        $author = $reply->commenter()->associate(auth()->user())->parent->commenter;
+        $author->notify(new ProntuarioCommented($reply));
 
         return redirect()->to(url()->previous() . '#comment-' . $reply->id);
     }
