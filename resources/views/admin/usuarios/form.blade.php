@@ -18,8 +18,14 @@
         @endforeach
       @endif
 
-      <painel titulo='ADICIONAR USUÁRIO'>
-        <formulario id="adicionaUser" method="post" action="{{ route('usuarios.store') }}" token="{{ csrf_token() }}">
+      @if(isset($usuario))
+          <painel titulo='ATUALIZAR USUÁRIO'>
+          <formulario id="adicionaUser" method="put" action="{{ route('usuarios.update', $usuario->id) }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
+      @endif
+      @if(!isset($usuario))
+          <painel titulo='ADICIONAR USUÁRIO'>
+          <formulario id="adicionaUser" method="post" action="{{ route('usuarios.store') }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
+      @endif
 
         <div class="row">
           <div class="col-sm-6">
@@ -71,7 +77,7 @@
           <div class="col-sm-2">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input type="text" class="form-control date" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', $usuario->data_nascimento ?? null) }}">
+                    <input type="text" class="form-control data" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', $usuario->data_nascimento ?? null) }}">
                     <label class="form-label">Data de Nascimento</label>
                 </div>
             </div>
@@ -131,7 +137,7 @@
             <div class="col-sm-4">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="" required>
+                      <input type="password" class="form-control" name="password" id="password" placeholder="" {{ !isset($usuario) ? 'required' : '' }} >
                       <label class="form-label">Senha</label>
                   </div>
               </div>
@@ -139,7 +145,7 @@
             <div class="col-sm-4">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                      <input id="password-confirm" type="password" class="form-control" name="password_confirmation" {{ !isset($usuario) ? 'required' : '' }}>
                       <label class="form-label">Confirmar Senha</label>
                   </div>
               </div>
@@ -204,13 +210,15 @@ $(function () {
                    required:true,
                    email: true
             },
-            password:{
-                   required:true
-            },
-            password_confirmation: {
-                    required:true,
-                    equalTo: "#password"
-            },
+            @if(!isset($usuario))
+              password:{
+                     required:true
+              },
+              password_confirmation: {
+                      required:true,
+                      equalTo: "#password"
+              },
+            @endif
             papel_id: {
                     required:true
             }
@@ -223,13 +231,15 @@ $(function () {
                    required: "É necessário informar um e-mail",
                    email: "Endereço de e-mail inválido"
             },
-            password:{
-                   required: "Campo de preenchimento obrigatório"
-            },
-            password_confirmation:{
-                  required: "Campo de preenchimento obrigatório",
-                   equalTo: "As senhas devem ser identicas"
-            },
+            @if(!isset($usuario))
+              password:{
+                     required: "Campo de preenchimento obrigatório"
+              },
+              password_confirmation:{
+                    required: "Campo de preenchimento obrigatório",
+                     equalTo: "As senhas devem ser identicas"
+              },
+            @endif
             papel_id:{
                    required: "Escolha um papel para o usuário"
             }

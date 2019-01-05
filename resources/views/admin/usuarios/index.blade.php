@@ -14,9 +14,8 @@
         v-bind:registros="{{$usuarios}}"
         acoes='usuarios'
         acoesextras='{{$extras}}'
-      ></template>
-
-    </tabela-de-listagem>
+      ></tabela-de-listagem>
+      
     </painel>
 		</div>
   </div>

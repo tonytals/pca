@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ProntuarioCommented extends Notification
+class ProntuarioCommented extends Notification implements ShouldQueue
 {
     use Queueable;
 

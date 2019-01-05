@@ -18,11 +18,20 @@ const store = new Vuex.Store({
     state : {
       itens : {}
     },
+
+
     mutations : {
       setItens (state, obj){
         state.itens = obj;
       }
+    },
+
+    actions : {
+      markAsRead(context, params){
+        axios.put('/notificacoes-read', params)
+      }
     }
+
 });
 
 /*

@@ -32,7 +32,10 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('summernoteeditor',array('as'=>'summernoteeditor.get','uses'=>'SummernotefileController@getSummernoteeditor'));
   Route::post('summernoteeditor',array('as'=>'summernoteeditor.post','uses'=>'SummernotefileController@postSummernoteeditor'));
 
+  Route::put('notificacoes-read', ['as'=>'notificacoes.read','uses'=>'NotificationController@markAsRead']);
   Route::get('notificacoes', ['as'=>'notificacoes','uses'=>'NotificationController@notificacoes']);
+
+  Route::resource('agendamentos', 'AgendamentoController');
 });
 
 Auth::routes();
