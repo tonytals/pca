@@ -54,7 +54,3 @@
         </div>
     </div>
 </div>
-
-@section('includeJs')
-  @include('layouts.includes.summernote')
-@stop

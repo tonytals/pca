@@ -47879,6 +47879,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
@@ -47966,6 +47972,14 @@ var render = function() {
           _c("i", { staticClass: "material-icons" }, [_vm._v("group")]),
           _vm._v(" "),
           _c("span", [_vm._v("Famílias")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { class: _vm.activeLink("agendamentos") }, [
+        _c("a", { attrs: { href: _vm.montaRota("agendamentos.index") } }, [
+          _c("i", { staticClass: "material-icons" }, [_vm._v("date_range")]),
+          _vm._v(" "),
+          _c("span", [_vm._v("Agenda")])
         ])
       ]),
       _vm._v(" "),

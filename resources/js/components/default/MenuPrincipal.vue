@@ -29,6 +29,12 @@
           <span>Famílias</span>
         </a>
       </li>
+      <li :class="activeLink('agendamentos')">
+        <a :href="montaRota('agendamentos.index')">
+          <i class="material-icons">date_range</i>
+          <span>Agenda</span>
+        </a>
+      </li>
 
 
       <li v-if="permissao('admin-view')" :class="activeLink('admin')">

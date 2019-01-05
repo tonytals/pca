@@ -4,6 +4,7 @@ namespace ProntuarioEletronico\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ProntuarioEletronico\Agendamento;
+use Jenssegers\Date\Date;
 
 class AgendamentoController extends Controller
 {
@@ -30,7 +31,7 @@ class AgendamentoController extends Controller
           ]
         );
       }
-      $calendar = \Calendar::addEvents($event);
+      $calendar = \Calendar::addEvents($event)->setOptions([ 'lang' => 'pt-br' ]);
 
       return view('agendamentos.index', compact('calendar','events'));
     }
@@ -53,7 +54,11 @@ class AgendamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $data['data_inicio'] = Date::parse($data['data_inicio'])->format('d/m/y H:m:s');
+
+        dd($data);
     }
 
     /**
