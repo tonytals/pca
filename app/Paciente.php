@@ -51,7 +51,7 @@ class Paciente extends Model
 
     public function familia()
     {
-       return $this->hasOne(Familia::class, 'id', 'familia_id');
+       return $this->belongsTo(Familia::class, 'id', 'familia_id');
     }
 
     public function prontuarios()

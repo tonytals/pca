@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function() {
   Route::put('notificacoes-read', ['as'=>'notificacoes.read','uses'=>'NotificationController@markAsRead']);
   Route::get('notificacoes', ['as'=>'notificacoes','uses'=>'NotificationController@notificacoes']);
 
+  Route::delete('agendamentos/delete/{id}', 'AgendamentoController@destroy');
   Route::resource('agendamentos', 'AgendamentoController');
 });
 

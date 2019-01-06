@@ -23,6 +23,7 @@
 
 @section('includeJs')
   @include('layouts.includes.calendar')
+  @include('layouts.includes.dialogs')
 @stop
 
 @section('beforeCloseBody')

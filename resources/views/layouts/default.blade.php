@@ -110,6 +110,29 @@
         });
     </script>
   @endif
+  @if(session()->has('sucesso'))
+    <script type="text/javascript">
+        $(function () {
+          $.notify({
+              message: 'Criado Com Sucesso!'
+          }, {
+            allow_dismiss: true,
+            newest_on_top: true,
+            timer: 1000,
+            placement: {
+                from: 'bottom',
+                align: 'right'
+            },
+          	animate: {
+          		enter: 'animated fadeInDown',
+          		exit: 'animated fadeOutUp'
+          	},
+            template:
+              '<div class="alert bg-green alert-dismissible col-sm-4" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong>Criado Com Sucesso!</strong></div>'
+          });
+        });
+    </script>
+  @endif
 
   @yield('includeJs')
 
