@@ -4,7 +4,6 @@
 <section class="content">
   <div class="container-fluid">
     <div class="block-header">
-      <h2>PORTFÓLIO CLÍNICO</h2>
     </div>
 
 
@@ -14,7 +13,7 @@
             <div class="card">
               <div class="header">
 
-                  <h2>{{ $familia }}</h2><small>Quantidade de Membros: </small>
+                  <h2>{{ $familia->familia }}</h2><small>Quantidade de Membros: {{ $familia->membros->count() }} </small>
 
               </div>
                 <div class="body">
@@ -79,7 +78,7 @@
               <form method="POST" action="{{ route('agendamentos.store') }}">
                 <div class="modal-body">
                   @csrf
-                  <input type="text" name="paciente_id" value="{{ $paciente->id }}">
+                  <input type="text" name="paciente_id" value="{{ $familia->id }}">
                   <input type="text" name="user_id" value="{{ Auth::user()->id }}">
                   <div class="row clearfix">
                     <div class="col-sm-6">

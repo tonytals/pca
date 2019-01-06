@@ -76,10 +76,13 @@ class FamiliaController extends Controller
     public function show($id)
     {
 
-        $familia = Paciente::with('Familia')->where('id', $id)->get();
-        //$familia->membros = Paciente::all()->where('familia_id', $id);
+        $familia = [];
+        $data = Familia::all()->where('id',$id);
+        $familia = $data['1'];
 
-        dd($familia);
+        foreach ($data as $membro) {
+          $familia['membros'] = $membro->pacientes;
+        }
 
         return view('familias.prontuario',compact('familia'));
     }

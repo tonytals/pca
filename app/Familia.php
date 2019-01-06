@@ -11,7 +11,7 @@ class Familia extends Model
 
     public function pacientes()
     {
-        return $this->hasMany(Paciente::class, 'id', 'familia_id');
+        return $this->hasMany(Paciente::class);
     }
 
 }
