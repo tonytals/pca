@@ -234,6 +234,69 @@ class UsuarioController extends Controller
       return view('admin.usuarios.form',compact('papel'));
     }
 
+    public function importar()
+    {
+      return view('admin.usuarios.importar');
+    }
 
+    public function importarCsv(Request $request)
+    {
+
+      $data = $request->all();
+
+      if($request->file('arquivo') != null){
+
+        $extension = $request->file('arquivo')->getClientOriginalExtension();
+        $valid_extension = array("csv");
+
+        if(in_array(strtolower($extension),$valid_extension)){
+
+          $arquivo = $request->file('arquivo')->store('importarcsv','public');
+
+          $data = array_map('str_getcsv', file('storage/'.$arquivo));
+          array_walk($data, function(&$a) use ($data) {
+            $a = array_combine($data[0], $a);
+          });
+
+          array_shift($data);
+
+          foreach ($data as $item) {
+            $salvar['password'] = Hash::make($item['password']);
+            $salvar['cpf'] = $item['cpf'];
+            $salvar['rg'] = $item['rg'];
+            $salvar['email'] = $item['email'];
+            $salvar['name'] = $item['name'];
+
+            switch ($item['papel']) {
+              case 'aluno':
+              case 'Aluno':
+                $salvar['papel_id'] = 2;
+                break;
+
+              case 'preceptor':
+              case 'Preceptores':
+                $salvar['papel_id'] = 4;
+                break;
+
+              case 'tutor':
+              case 'Tutor':
+                $salvar['papel_id'] = 5;
+                break;
+
+              default:
+                $salvar['papel_id'] = 2;
+                break;
+            }
+
+            $user = new User();
+            $user = User::create($salvar);
+
+            $user->papeis()->attach($salvar['papel_id']);
+          }
+
+        }
+      }
+      return redirect()->back();
+    }
 
 }

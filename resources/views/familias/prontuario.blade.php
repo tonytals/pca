@@ -6,7 +6,6 @@
     <div class="block-header">
     </div>
 
-
     <div class="row clearfix">
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -18,14 +17,41 @@
               </div>
                 <div class="body">
                   <div class="row clearfix">
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                      <div class="table-responsive">
+                          <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                              <thead>
+                                  <tr>
+                                      <th>Foto</th>
+                                      <th>Nome</th>
+                                      <th>Idade</th>
+                                      <th>Sexo</th>
+                                  </tr>
+                              </thead>
+                              <tfoot>
+                                  <tr>
+                                    <th>Foto</th>
+                                    <th>Nome</th>
+                                    <th>Idade</th>
+                                    <th>Sexo</th>
+                                  </tr>
+                              </tfoot>
+                              <tbody>
+                                @foreach($familia->membros as $membro)
+                                  <tr>
+                                    <td><img src="{{ $membro->foto }}" style="max-width:48px;"/></td>
+                                    <td>{{ $membro->nome_completo }}</td>
+                                    <td>{{ Date::parse($membro->data_nascimento)->age }}</td>
+                                    <td>{{ $membro->sexo }}</td>
+                                  </tr>
+                                @endforeach
+                              </tbody>
+                          </table>
+                      </div>
+
                       <div class="image-area">
 
                       </div>
-                    </div>
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                      <ul class="list-unstyled">
-                      </ul>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                       <ul class="list-unstyled">
@@ -117,6 +143,7 @@
   @include('layouts.includes.modals')
   @include('layouts.includes.summernote')
   @include('layouts.includes.datetimepicker')
+  @include('layouts.includes.datatables')
 @stop
 
 @section('scripts')
