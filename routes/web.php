@@ -15,6 +15,8 @@
 
 Route::group(['middleware' => ['auth']], function() {
 
+  Route::get('/dashboardTutor', ['as'=>'dashboardTutor','uses'=>'DashboardController@dashboardTutor']);
+  Route::get('/dashboardAluno', ['as'=>'dashboardAluno','uses'=>'DashboardController@dashboardAluno']);
   Route::get('/', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
   Route::get('pacientes/adicionar', ['as'=>'pacientes.adicionar','uses'=>'PacienteController@adicionar']);
