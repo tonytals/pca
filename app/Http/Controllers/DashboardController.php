@@ -50,28 +50,22 @@ class DashboardController extends Controller
       $locais_atendimento = $comentarios::all()->where('commenter_id', $user_id)->groupBy('local_atendimento');
 
       $agenda = new Agendamento();
-      $agenda = $agenda::all()->where('user_id', $user_id);
+      $agenda = $agenda::all()->where('user_id', $user_id)->where('data_inicio', '>', now())->sortBy('data_inicio');
 
       $notificacoes = Auth::user()->unreadNotifications;
       $notificacaoAgenda = [];
 
-      foreach ($agenda as $notificacao) {
-        $notificacaoAgenda['agenda'] = $notificacao;
+      foreach ($agenda as $key => $notificacao) {
+        $notificacaoAgenda[$key] = $notificacao;
         $idPaciente = $notificacao->getOriginal('paciente_id');
-
         foreach ($notificacoes as $item) {
-
           if($item->data['comentario']['commentable_id'] == $idPaciente){
-            $notificacaoAgenda['agenda']['notificacao'] = $item->data['comentario'];
+            $notificacaoAgenda[$key]['notificacao'] = $item->data['comentario'];
           };
-
         }
-
       }
 
-
-      dd($notificacaoAgenda);
-      dd($agenda);
+      $agenda = $notificacaoAgenda;
 
       return view('dashboardAluno',compact('quantidade_pacientes','quantidade_comentarios','locais_atendimento','agenda'));
 
@@ -82,6 +76,10 @@ class DashboardController extends Controller
       if(Gate::denies('dashboard-tutor')){
         abort(403,"Não autorizado!");
       }
-      return view('dashboardTutor');
+
+      $usuarios = new User();
+      $alunos = $usuarios::all()->where('turma', Auth::user()->turma)->where('id', '<>', Auth::user()->id);
+
+      return view('dashboardTutor', compact('alunos'));
     }
 }

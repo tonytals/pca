@@ -47934,38 +47934,44 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("li", { class: _vm.activeLink("pacientes") }, [
-        _vm.activeLink("pacientes/")
-          ? _c(
-              "a",
-              {
-                staticClass: "toggled",
-                attrs: { href: _vm.montaRota("pacientes.index") }
-              },
-              [
-                _c("i", { staticClass: "material-icons" }, [_vm._v("group")]),
-                _vm._v(" "),
-                _c("span", [_vm._v("Meus Pacientes")])
-              ]
-            )
-          : _c("a", { attrs: { href: _vm.montaRota("pacientes.index") } }, [
-              _c("i", { staticClass: "material-icons" }, [
-                _vm._v("accessibility")
-              ]),
-              _vm._v(" "),
-              _c("span", [_vm._v("Meus Pacientes")])
-            ]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "ml-menu" }, [
-          _vm.activeLink("pacientes/")
-            ? _c("li", { class: _vm.activeLink("pacientes") }, [
-                _c("a", { attrs: { href: _vm.montaRota("pacientes.index") } }, [
-                  _vm._v("Prontuário")
-                ])
-              ])
-            : _vm._e()
-        ])
-      ]),
+      _vm.permissao("pacientes-view")
+        ? _c("li", { class: _vm.activeLink("pacientes") }, [
+            _vm.activeLink("pacientes/")
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "toggled",
+                    attrs: { href: _vm.montaRota("pacientes.index") }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("group")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Meus Pacientes")])
+                  ]
+                )
+              : _c("a", { attrs: { href: _vm.montaRota("pacientes.index") } }, [
+                  _c("i", { staticClass: "material-icons" }, [
+                    _vm._v("accessibility")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Meus Pacientes")])
+                ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "ml-menu" }, [
+              _vm.activeLink("pacientes/")
+                ? _c("li", { class: _vm.activeLink("pacientes") }, [
+                    _c(
+                      "a",
+                      { attrs: { href: _vm.montaRota("pacientes.index") } },
+                      [_vm._v("Prontuário")]
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("li", { class: _vm.activeLink("familias") }, [
         _c("a", { attrs: { href: _vm.montaRota("familias.index") } }, [

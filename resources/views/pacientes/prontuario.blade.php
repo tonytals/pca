@@ -89,8 +89,8 @@
               <form method="POST" action="{{ route('agendamentos.store') }}">
                 <div class="modal-body">
                   @csrf
-                  <input type="text" name="paciente_id" value="{{ $paciente->id }}">
-                  <input type="text" name="user_id" value="{{ Auth::user()->id }}">
+                  <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                  <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                   <div class="row clearfix">
                     <div class="col-sm-6">
                       <div class="form-group">

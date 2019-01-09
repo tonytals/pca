@@ -91,16 +91,19 @@ class PacienteController extends Controller
           abort(403,"Não autorizado!");
       }
 
-      $canAccess = Paciente::findOrFail($id)
-                        ->users()
-                        ->where('user_id', Auth::user()->id)
-                        ->get()->count();
-
-      if(empty($canAccess) || $canAccess == 0)
+      if(Auth::user()->papeis[0]->id != 5 || Auth::user()->papeis[0]->id != 4)
       {
-        return redirect()->action('PacienteController@index')
-                          ->with('info', 'Sem permissão para acessar esse paciente');
-      };
+        $canAccess = Paciente::findOrFail($id)
+                          ->users()
+                          ->where('user_id', Auth::user()->id)
+                          ->get()->count();
+
+        if(empty($canAccess) || $canAccess == 0)
+        {
+          return redirect()->action('PacienteController@index')
+                            ->with('info', 'Sem permissão para acessar esse paciente');
+        };
+      }
 
       $paciente = Paciente::find($id);
 

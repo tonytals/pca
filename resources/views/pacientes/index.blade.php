@@ -8,15 +8,19 @@
     </div>
     <div class="row">
       <painel titulo='PACIENTES'>
-        <a href="{{ route('pacientes.adicionar') }}" class="btn btn-primary waves-effect">Adicionar Paciente</a>
-        <a href="{{ route('familias.index') }}" class="btn bg-teal waves-effect">Ver Famílias Cadastradas</a>
+        @can('pacientes-create')
+          <a href="{{ route('pacientes.adicionar') }}" class="btn btn-primary waves-effect">Adicionar Paciente</a>
+          <a href="{{ route('familias.index') }}" class="btn bg-teal waves-effect">Ver Famílias Cadastradas</a>
+        @endcan
+        
+          <tabela-de-listagem
+          v-bind:colunas="{{$tituloColunas}}"
+          v-bind:registros="{{$pacientes}}"
+          acoes='pacientes'
 
-        <tabela-de-listagem
-        v-bind:colunas="{{$tituloColunas}}"
-        v-bind:registros="{{$pacientes}}"
-        acoes='pacientes'
+        ></tabela-de-listagem>
 
-      ></tabela-de-listagem>
+
     </painel>
 		</div>
   </div>

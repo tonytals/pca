@@ -104,4 +104,10 @@ class Paciente extends Model
                     $query->where('user_id', '=', Auth::user()->id);
                 })->select($colunas)->get();
     }
+
+    public function getPacientesPorAluno($colunas='',$id){
+        return Paciente::whereHas('users', function ($query) use ($id) {
+                    $query->where('user_id', '=', $id);
+                })->select($colunas)->get();
+    }
 }

@@ -17,7 +17,7 @@
         acoesextras='{{$extras}}'
       ></tabela-de-listagem>
 
-    </painel>
+      </painel>
 		</div>
   </div>
 </section>

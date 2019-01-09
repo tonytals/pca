@@ -50,7 +50,6 @@
                           <tr>
                               <th>Nome</th>
                               <th>Data do Agendamento</th>
-                              <th>Atendimentos Realizados</th>
                               <th>Notificação</th>
                           </tr>
                       </thead>
@@ -59,8 +58,7 @@
                           <tr>
                             <td>{{ $item->paciente_id }}</td>
                             <td>{{ Date::parse($item->data_inicio)->format('j \d\e F\, Y \- H:m') }}</td>
-                            <td></td>
-                            <td></td>
+                            <td><span class="label bg-green">{{ strip_tags($item->notificacao['comment']) }}</span></td>
                           </tr>
                         @endforeach
                       </tbody>
