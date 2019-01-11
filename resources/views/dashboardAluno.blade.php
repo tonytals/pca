@@ -56,7 +56,7 @@
                       <tbody>
                         @foreach($agenda as $item)
                           <tr>
-                            <td>{{ $item->paciente_id }}</td>
+                            <td> <a href="{{ route('pacientes.show', $item->getOriginal('paciente_id')) }}">{{ $item->paciente_id }}</a> </td>
                             <td>{{ Date::parse($item->data_inicio)->format('j \d\e F\, Y \- H:m') }}</td>
                             <td><span class="label bg-green">{{ strip_tags($item->notificacao['comment']) }}</span></td>
                           </tr>

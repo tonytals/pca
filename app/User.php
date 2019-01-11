@@ -120,7 +120,7 @@ class User extends Authenticatable
     }
 
     public function setDataNascimentoAttribute($value){
-        $value = str_replace('/', '-', $value); 
+        $value = str_replace('/', '-', $value);
         $this->attributes['data_nascimento'] = Date::parse($value)->format('Y-m-d');
     }
 }

@@ -8,7 +8,7 @@
           <span>Visão Geral</span>
         </a>
       </li>
-      <li v-if="permissao('pacientes-view')" :class="activeLink('pacientes')">
+      <li v-if="permissao('pacientes-create')" :class="activeLink('pacientes')">
         <a :href="montaRota('pacientes.index')" class="toggled" v-if="activeLink('pacientes/')">
           <i class="material-icons">group</i>
           <span>Meus Pacientes</span>

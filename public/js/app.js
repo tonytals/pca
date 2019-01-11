@@ -47934,7 +47934,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm.permissao("pacientes-view")
+      _vm.permissao("pacientes-create")
         ? _c("li", { class: _vm.activeLink("pacientes") }, [
             _vm.activeLink("pacientes/")
               ? _c(

@@ -6,6 +6,7 @@ use ProntuarioEletronico\Notifications\ProntuarioCommented;
 use Illuminate\Http\Request;
 use Laravelista\Comments\CommentsController as CommentsController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use ProntuarioEletronico\User;
 
 class ComentarioController extends CommentsController
 {
@@ -71,6 +72,15 @@ class ComentarioController extends CommentsController
          $comment->data_hora_atendimento =  date("Y-m-d H:i:s", strtotime($request->data_hora_atendimento));
          $comment->comment = $detail;
          $comment->save();
+
+         $avisar = new user();
+         $avisar = $avisar->all()->where('turma', auth()->user()->turma);
+
+         foreach ($avisar as $key => $tutor) {
+           if ($tutor->papeis[0]->nome == 'Tutor') {
+             $tutor->notify(new ProntuarioCommented($comment));
+           }
+         }
 
          return redirect()->to(url()->previous() . '#comment-' . $comment->id);
      }

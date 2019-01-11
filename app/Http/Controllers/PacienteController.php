@@ -91,7 +91,7 @@ class PacienteController extends Controller
           abort(403,"Não autorizado!");
       }
 
-      if(Auth::user()->papeis[0]->id != 5 || Auth::user()->papeis[0]->id != 4)
+      if(Auth::user()->papeis[0]->id != 5 && Auth::user()->papeis[0]->id != 4)
       {
         $canAccess = Paciente::findOrFail($id)
                           ->users()
