@@ -77,7 +77,7 @@ class ComentarioController extends CommentsController
          $avisar = $avisar->all()->where('turma', auth()->user()->turma);
 
          foreach ($avisar as $key => $tutor) {
-           if ($tutor->papeis[0]->nome == 'Tutor') {
+           if (isset($tutor->papeis[$key]->nome) && $tutor->papeis[$key]->nome == 'Tutor') {
              $tutor->notify(new ProntuarioCommented($comment));
            }
          }
