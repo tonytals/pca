@@ -15,7 +15,7 @@
                   <h2>{{ $familia->familia }}</h2><small>Quantidade de Membros: {{ $familia->membros->count() }} </small>
 
               </div>
-                <div class="body">
+                <div class="body" id="prontuarioFamilia">
                   <div class="row clearfix">
                     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                       <div class="table-responsive">
@@ -54,7 +54,7 @@
                       </div>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                      <ul class="list-unstyled">
+                      <ul class="list-unstyled" id="botoes">
                         <li>
                           <button type="button" class="btn btn-primary btn-block btn-lg waves-effect">
                               <i class="material-icons">print</i>
@@ -63,7 +63,7 @@
                         </li>
                         <li>
                           <br />
-                          <button type="button" class="btn btn-success btn-block btn-lg waves-effect">
+                          <button type="button" id="baixarProntuario" class="btn btn-success btn-block btn-lg waves-effect">
                               <i class="material-icons">file_download</i>
                               <span>Baixar Prontuário</span>
                           </button>
@@ -144,6 +144,8 @@
   @include('layouts.includes.summernote')
   @include('layouts.includes.datetimepicker')
   @include('layouts.includes.datatables')
+  @include('layouts.includes.dialogs')
+  @include('layouts.includes.pdf')
 @stop
 
 @section('scripts')
@@ -158,6 +160,30 @@ $(function () {
         weekStart: 0,
         lang: 'pt-BR',
         time: true,
+    });
+  });
+  $('#baixarProntuario').click(function () {
+    $('#botoes').hide();
+    swal({
+        title: "Aguarde",
+        text: "Estamos criando seu PDF, pode levar alguns segundos =)",
+        type: "warning"
+      });
+    html2canvas(document.querySelector("#prontuarioFamilia")).then(function(canvas) {
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+        doc.addImage(canvas, 'PNG', 10, 10, 190, 114);
+        doc.save('thisMotion.pdf');
+        $('#botoes').show();
+        swal({
+            title: "Tudo bem",
+            text: "PDF gerado com sucesso",
+            type: "success"
+          });
     });
   });
 @stop

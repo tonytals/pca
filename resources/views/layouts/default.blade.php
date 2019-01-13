@@ -85,8 +85,8 @@
   <script src="{{ asset('plugins/notifications.js') }}"></script>
   <script src="{{ asset('plugins/node-waves/waves.js') }}"></script>
   <script src="{{ asset('plugins/jquery-validation/jquery.validate.js') }}"></script>
-  <script src="{{ asset('js/admin.js') }}"></script>
 
+  <script src="{{ asset('js/admin.js') }}"></script>
   @if(session()->has('info'))
     <script type="text/javascript">
         $(function () {

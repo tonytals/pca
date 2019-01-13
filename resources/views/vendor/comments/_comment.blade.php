@@ -26,7 +26,7 @@
           </ul>
         </div>
       @endif
-    <div class="body">
+    <div class="body" id="registrosPaciente">
         <h5 >{{ $comment->commenter->name }} <small>- {{ $comment->created_at->diffForHumans() }}</small></h5>
 
         <p>{!! $comment->comment !!}</p>
@@ -43,43 +43,44 @@
               @csrf
           </form>
         </div>
-
-        <modal titulo="Responder Análise" modal="reply-modal-{{ $comment->id }}">
-          <form method="POST" action="{{ url('comments/' . $comment->id) }}">
-              @csrf
-              <div>
-                <div class="form-group">
-                    <div class="form-line">
-                        <textarea rows="4" class="form-control no-resize summernote" name="message" placeholder="Por favor digite o comentário..."></textarea>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCELAR</button>
-                  <button type="submit" class="btn btn-link waves-effect">RESPONDER</button>
-              </div>
-          </form>
-        </modal>
-
-        <modal titulo="Editar Análise" modal="comment-modal-{{ $comment->id }}">
-          <form method="POST" action="{{ url('comments/' . $comment->id) }}">
-              @method('PUT')
-              @csrf
-              <div>
-                <div class="form-group">
-                    <div class="form-line">
-                      <label for="message">Atualize sua mensagem:</label>
-                        <textarea rows="4" class="form-control no-resize summernote" name="message">{{ $comment->comment }}</textarea>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCELAR</button>
-                  <button type="submit" class="btn btn-link waves-effect">SALVAR</button>
-              </div>
-          </form>
-        </modal>
       </div>
+
+      <modal titulo="Responder Análise" modal="reply-modal-{{ $comment->id }}">
+        <form method="POST" action="{{ url('comments/' . $comment->id) }}">
+            @csrf
+            <div>
+              <div class="form-group">
+                  <div class="form-line">
+                      <textarea rows="4" class="form-control no-resize summernote" name="message" placeholder="Por favor digite o comentário..."></textarea>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCELAR</button>
+                <button type="submit" class="btn btn-link waves-effect">RESPONDER</button>
+            </div>
+        </form>
+      </modal>
+
+      <modal titulo="Editar Análise" modal="comment-modal-{{ $comment->id }}">
+        <form method="POST" action="{{ url('comments/' . $comment->id) }}">
+            @method('PUT')
+            @csrf
+            <div>
+              <div class="form-group">
+                  <div class="form-line">
+                    <label for="message">Atualize sua mensagem:</label>
+                      <textarea rows="4" class="form-control no-resize summernote" name="message">{{ $comment->comment }}</textarea>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCELAR</button>
+                <button type="submit" class="btn btn-link waves-effect">SALVAR</button>
+            </div>
+        </form>
+      </modal>
+      
     </div>
         <br />{{-- Margin bottom --}}
 
