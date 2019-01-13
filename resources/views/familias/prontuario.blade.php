@@ -56,12 +56,6 @@
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                       <ul class="list-unstyled" id="botoes">
                         <li>
-                          <button type="button" class="btn btn-primary btn-block btn-lg waves-effect">
-                              <i class="material-icons">print</i>
-                              <span>Imprimir</span>
-                          </button>
-                        </li>
-                        <li>
                           <br />
                           <button type="button" id="baixarProntuario" class="btn btn-success btn-block btn-lg waves-effect">
                               <i class="material-icons">file_download</i>
