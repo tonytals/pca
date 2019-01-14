@@ -22,8 +22,7 @@
         @if(isset($paciente))
             <painel titulo='ATUALIZAR PACIENTE'>
             <formulario id="adicionaPaciente" method="put" action="{{ route('pacientes.update', $paciente->id) }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
-        @endif
-        @if(!isset($paciente))
+        @else
             <painel titulo='ADICIONAR PACIENTE'>
             <formulario id="adicionaPaciente" method="post" action="{{ route('pacientes.store') }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
@@ -105,7 +104,11 @@
           <div class="col-sm-3">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input type="text" class="form-control date" name="data_nascimento" placeholder="" value="{{ old('data_nascimento',  Date::parse($paciente->data_nascimento)->format('d/m/Y') ?? null) }}">
+                  @if(isset($paciente))
+                    <input type="text" class="form-control date" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', Date::parse($paciente->data_nascimento)->format('d/m/Y') ?? null) }}">
+                  @else
+                    <input type="text" class="form-control date" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', $paciente->data_nascimento ?? null) }}">
+                  @endif
                     <label class="form-label">Data de Nascimento</label>
                 </div>
             </div>

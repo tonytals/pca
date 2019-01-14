@@ -21,8 +21,7 @@
       @if(isset($usuario))
           <painel titulo='ATUALIZAR USUÁRIO'>
           <formulario id="adicionaUser" method="put" action="{{ route('usuarios.update', $usuario->id) }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
-      @endif
-      @if(!isset($usuario))
+      @else
           <painel titulo='ADICIONAR USUÁRIO'>
           <formulario id="adicionaUser" method="post" action="{{ route('usuarios.store') }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
       @endif
@@ -77,7 +76,11 @@
           <div class="col-sm-2">
             <div class="form-group form-float">
                 <div class="form-line">
+                  @if(isset($usuario))
+                    <input type="text" class="form-control data" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', Date::parse($usuario->data_nascimento)->format('d/m/Y') ?? null) }}">
+                  @else
                     <input type="text" class="form-control data" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', $usuario->data_nascimento ?? null) }}">
+                  @endif
                     <label class="form-label">Data de Nascimento</label>
                 </div>
             </div>

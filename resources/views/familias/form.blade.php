@@ -18,8 +18,15 @@
         @endforeach
       @endif
 
-      <painel titulo='ADICIONAR FAMÍLIA'>
-        <formulario id="adicionaFamilia" method="post" action="{{ route('familias.store') }}" token="{{ csrf_token() }}">
+
+      @if(isset($familia))
+          <painel titulo='ATUALIZAR FAMÍLIA'>
+            <formulario id="adicionaFamilia" method="post" action="{{ route('familias.update', $familia->id) }}" token="{{ csrf_token() }}">
+      @else
+          <painel titulo='ADICIONAR FAMÍLIA'>
+            <formulario id="adicionaFamilia" method="post" action="{{ route('familias.store') }}" token="{{ csrf_token() }}">
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
+      @endif
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group form-float">

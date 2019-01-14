@@ -213,7 +213,7 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Laravelista\Comments\Comment $comment, $id)
+    public function destroy($id)
     {
         if(Gate::denies('usuario-delete')){
           abort(403,"Não autorizado!");

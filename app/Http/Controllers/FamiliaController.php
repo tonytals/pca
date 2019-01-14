@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use ProntuarioEletronico\Familia;
 use Illuminate\Support\Facades\Gate;
 use ProntuarioEletronico\Paciente;
+use Illuminate\Support\Facades\Auth;
 
 class FamiliaController extends Controller
 {
@@ -28,7 +29,7 @@ class FamiliaController extends Controller
           array('contador' => 'Qtd de Pessoas')
         ]);
 
-        $familias = Familia::All();
+        $familias = Familia::All()->where('user_id', Auth::user()->id);
 
         foreach ($familias as $familia) {
           $familia->contador = Paciente::where('familia_id', $familia->id)->count();
@@ -55,7 +56,12 @@ class FamiliaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $familia = new Familia();
+        $familia = Familia::create($data);
+
+        return redirect()->action('FamiliaController@index');
     }
 
     public function adicionar()
@@ -76,7 +82,6 @@ class FamiliaController extends Controller
     public function show($id)
     {
 
-        //$familia = [];
         $data = Familia::with('Pacientes')->where('id', $id)->get();
         $familia = $data[0];
 
@@ -95,7 +100,13 @@ class FamiliaController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Gate::denies('familia-edit')){
+          abort(403,"Não autorizado!");
+        }
+
+        $familia = Familia::find($id);
+
+        return view('admin.usuarios.form',compact('familia'));
     }
 
     /**
@@ -107,7 +118,12 @@ class FamiliaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $familia = new Familia();
+        $familia->find($id)->update($data);
+
+        return redirect()->back();
     }
 
     /**
@@ -118,6 +134,9 @@ class FamiliaController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $familia = new Familia();
+      $familia->find($id)->detele();
+
+      return redirect()->back();
     }
 }
