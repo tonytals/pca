@@ -25,6 +25,8 @@
                       </div>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" id="dadosPaciente">
+                      <span class="font-bold align-center col-cyan">{{$paciente->alfabetizado}},</span>
+                      <span class="font-bold align-center col-cyan">{{$paciente->frequenta_escola}}</span>
                       <ul class="list-unstyled">
                         <li><b>Data de Nascimento:</b> {{ Date::parse($paciente->data_nascimento)->format('j \d\e F\, Y') . ' ('. Date::parse($paciente->data_nascimento)->age .' anos)' }} </li>
                         <li><b>CPF:</b> <span>{{ mascara("###.###.###-##", $paciente->cpf) }}</span></li>
@@ -36,6 +38,12 @@
                         <li><b>Nome da Mãe:</b> {{ $paciente->nome_mae }}</li>
                         <li><b>Sexo:</b> {{ $paciente->sexo }}</li>
                         <li><b>Religião:</b> {{ $paciente->religiao }}</li>
+                        <li><b>Ocupação:</b> {{ $paciente->ocupacao }}</li>
+                        <li><b>Condições Referidas:</b><br/>
+                          @foreach($paciente->condicoes_referidas as $valor)
+                            <span class="label bg-grey">{{$valor->sigla . ' - ' . $valor->nome}}</span>
+                          @endforeach
+                        </li>
                       </ul>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">

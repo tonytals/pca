@@ -135,36 +135,32 @@
           </div>
         </div>
         <div class="row clearfix">
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <div class="demo-radio-button">Sexo:
                 <input name="sexo" type="radio" value="F" class="with-gap" id="feminino"
-                  @if(isset($paciente) && $paciente->sexo == 'F') checked @endif
+                  @if(isset($paciente) && $paciente->getOriginal('sexo') == 'F') checked @endif
                 >
                 <label for="feminino">Feminino</label>
 
                 <input name="sexo" type="radio" value="M" id="masculino" class="with-gap"
-                  @if(isset($paciente) && $paciente->sexo == 'M') checked @endif
+                  @if(isset($paciente) && $paciente->getOriginal('sexo') == 'M') checked @endif
                 >
                 <label for="masculino">Masculino</label>
             </div>
           </div>
-          <div class="col-sm-9">
+          <div class="col-sm-8">
             <div class="demo-checkbox">
-                <input type="checkbox" id="alfabetizado" name="alfabetizado" class="filled-in chk-col-teal" />
+                <input type="checkbox" value="1" id="alfabetizado" name="alfabetizado" @if(isset($paciente) && $paciente->alfabetizado != '') checked @endif class="filled-in chk-col-teal" />
                 <label for="alfabetizado">Alfabetizado</label>
-                <input type="checkbox" id="frequenta_escola" name="frequenta_escola" class="filled-in chk-col-teal" />
+                <input type="checkbox" value="1" id="frequenta_escola" name="frequenta_escola" @if(isset($paciente) && $paciente->frequenta_escola != '') checked @endif class="filled-in chk-col-teal" />
                 <label for="frequenta_escola">Frequenta Escola</label>
-                <input type="checkbox" id="chefe_familia" name="chefe_familia" class="filled-in chk-col-teal" />
+                <input type="checkbox" value="1" id="chefe_familia" name="chefe_familia" @if(isset($paciente) && $paciente->chefe_familia != '') checked @endif class="filled-in chk-col-teal" />
                 <label for="chefe_familia">Chefe de Familia</label>
-                <input type="checkbox" id="trabalha" name="trabalha" class="filled-in chk-col-teal" />
-                <label for="trabalha">Trabalha</label>
-                <input type="checkbox" id="gestante" name="gestante" class="filled-in chk-col-teal" />
-                <label for="gestante">Gestante</label>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <div class="form-group form-float">
                 <div class="form-line">
                     <input type="text" class="form-control" name="religiao" placeholder="" value="{{ old('religiao', $paciente->religiao ?? null) }}">
@@ -172,12 +168,20 @@
                 </div>
             </div>
           </div>
-          <div class="col-sm-8">
+          <div class="col-sm-3">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input type="text" class="form-control" name="ocupacao" placeholder="" value="{{ old('ocupacao', $paciente->ocupacao ?? null) }}">
+                    <label class="form-label">Ocupação</label>
+                </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
             <div class="form-group form-float">
               <div class="form-line">
                 <select class="form-control show-tick" data-live-search="true" name="familia_id">
                   @if(!isset($paciente))
-                    <option value>-- Familia --</option>
+                    <option value selected>-- Familia --</option>
                   @endif
                   @foreach($familia as $valor)
                     @if(isset($paciente))
@@ -191,6 +195,22 @@
                 </select>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <h5>Doenças e/ou Condições Referidas</h5>
+            <select name="doencasCondicoes[]" id="doencasCondicoes" class="ms" multiple="multiple">
+              @foreach($condicoesReferidas as $valor)
+                  @if(isset($paciente))
+                    <option value="{{ $valor->id }}"
+                      {{ array_search( $valor->id, array_column($paciente->condicoes_referidas->toArray(), 'id')) !== false ? 'selected' : '' }}
+                      >{{$valor->sigla . ' - ' . $valor->nome}}</option>
+                  @else
+                    <option value="{{$valor->id}}">{{$valor->sigla . ' - ' . $valor->nome}}</option>
+                  @endif
+              @endforeach
+            </select>
           </div>
         </div>
         <div class="row">
@@ -218,10 +238,12 @@
   @include('layouts.includes.select')
   @include('layouts.includes.formValidator')
   @include('layouts.includes.inputMask')
+  @include('layouts.includes.multiSelect')
 @stop
 
 @section('scripts')
 $(function () {
+    $('#doencasCondicoes').multiSelect({ selectableOptgroup: true });
     $('#adicionaPaciente').validate({
       rules : {
 

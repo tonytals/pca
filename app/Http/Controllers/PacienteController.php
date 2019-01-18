@@ -12,6 +12,7 @@ use ProntuarioEletronico\TipoSanguineo;
 use ProntuarioEletronico\Familia;
 use ProntuarioEletronico\Prontuario;
 use ProntuarioEletronico\TipoRegistro;
+use ProntuarioEletronico\CondicaoReferida;
 
 class PacienteController extends Controller
 {
@@ -64,6 +65,7 @@ class PacienteController extends Controller
       }
 
       $data = $request->all();
+      //$data['doencasCondicoes'] = json_encode($data['doencasCondicoes']);
 
       if($request->file('foto') != null){
         $arquivo = $request->file('foto')->store('pacientes','public');
@@ -73,8 +75,8 @@ class PacienteController extends Controller
       $paciente = new Paciente();
       $paciente = Paciente::create($data);
 
-      //$paciente->prontuarios()->attach($data['user_id']);
       $paciente->users()->attach($data['user_id']);
+      $paciente->condicoes_referidas()->attach($data['doencasCondicoes']);
 
       return redirect()->action('PacienteController@index');
     }
@@ -124,13 +126,15 @@ class PacienteController extends Controller
       $estadoCivil = EstadoCivil::all();
       $tipoSanguineo = TipoSanguineo::all();
       $familia = Familia::all();
+      $condicoesReferidas = CondicaoReferida::all();
 
       return view('pacientes.form',
         compact(
           'paciente',
           'estadoCivil',
           'tipoSanguineo',
-          'familia'
+          'familia',
+          'condicoesReferidas'
         ));
     }
 
@@ -153,8 +157,10 @@ class PacienteController extends Controller
         $paciente = new Paciente();
         $paciente = Paciente::find($id)->update($data);
 
+        $paciente = Paciente::find($id);
+        $paciente->condicoes_referidas()->sync($data['doencasCondicoes']);
 
-        return redirect()->action('PacienteController@index');
+        return redirect()->action('PacienteController@show', $id);
     }
 
     /**
@@ -181,6 +187,7 @@ class PacienteController extends Controller
       }
 
       $estadoCivil = EstadoCivil::all();
+      $condicoesReferidas = CondicaoReferida::all();
       $tipoSanguineo = TipoSanguineo::all();
       $familia = Familia::all();
 
@@ -188,7 +195,8 @@ class PacienteController extends Controller
         compact(
           'estadoCivil',
           'tipoSanguineo',
-          'familia'
+          'familia',
+          'condicoesReferidas'
         ));
     }
 }

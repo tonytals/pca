@@ -30,13 +30,18 @@ class Paciente extends Model
       'frequenta_escola',
       'chefe_familia',
       'trabalha',
-      'profissao',
+      'ocupacao',
       'gestante'
     ];
 
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function condicoes_referidas()
+    {
+        return $this->belongsToMany(CondicaoReferida::class, 'condicao_referida_paciente');
     }
 
     public function estado_civil()
@@ -109,5 +114,16 @@ class Paciente extends Model
         return Paciente::whereHas('users', function ($query) use ($id) {
                     $query->where('user_id', '=', $id);
                 })->select($colunas)->get();
+    }
+
+    public function getAlfabetizadoAttribute($value){
+        if($value){
+          return 'Alfabetizado';
+        }
+    }
+    public function getFrequentaEscolaAttribute($value){
+        if($value){
+          return 'Estudante';
+        }
     }
 }
