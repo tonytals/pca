@@ -123,7 +123,12 @@ class Paciente extends Model
     }
     public function getFrequentaEscolaAttribute($value){
         if($value){
-          return 'Estudante';
+          return '- Estudante';
+        }
+    }
+    public function getChefeFamiliaAttribute($value){
+        if($value){
+          return '- Chefe de Familia';
         }
     }
 }

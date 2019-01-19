@@ -180,8 +180,8 @@
             <div class="form-group form-float">
               <div class="form-line">
                 <select class="form-control show-tick" data-live-search="true" name="familia_id">
-                  @if(!isset($paciente))
-                    <option value selected>-- Familia --</option>
+                  @if(!isset($paciente) || $paciente->getOriginal('familia_id') == null)
+                    <option value="" >-- Familia --</option>
                   @endif
                   @foreach($familia as $valor)
                     @if(isset($paciente))
@@ -198,7 +198,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <h5>Doenças e/ou Condições Referidas</h5>
             <select name="doencasCondicoes[]" id="doencasCondicoes" class="ms" multiple="multiple">
               @foreach($condicoesReferidas as $valor)

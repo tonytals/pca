@@ -28,10 +28,45 @@
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
       @endif
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-3">
               <div class="form-group form-float">
                   <div class="form-line">
                       <input required type="text" class="form-control" name="familia" placeholder="" value="{{ old('familia', $familia->familia ?? null) }}">
+                      <label class="form-label">Familia</label>
+                  </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group form-float">
+                  <div class="form-line">
+                      <input required type="text" class="form-control" name="segmento" placeholder="" value="{{ old('segmento', $familia->segmento ?? null) }}">
+                      <label class="form-label">Segmento</label>
+                  </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group form-float">
+                  <div class="form-line">
+                      <input required type="text" class="form-control" name="area" placeholder="" value="{{ old('area', $familia->area ?? null) }}">
+                      <label class="form-label">Área</label>
+                  </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group form-float">
+                  <div class="form-line">
+                      <input required type="text" class="form-control" name="microarea" placeholder="" value="{{ old('microarea', $familia->microarea ?? null) }}">
+                      <label class="form-label">Microárea</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group form-float">
+                  <div class="form-line">
+                      <input required type="text" class="form-control" name="sobrenome" placeholder="" value="{{ old('sobrenome', $familia->sobrenome ?? null) }}">
                       <label class="form-label">Sobrenome</label>
                   </div>
               </div>
@@ -127,6 +162,46 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group form-float">
+                <div class="form-line">
+                  <div class="form-line">
+                      <input list="tipos-de-casa" id="tipo_casa" type="text" class="form-control" name="tipo_casa" placeholder="" value="{{ old('tipo_casa', $familia->tipo_casa ?? null) }}">
+                      <label class="form-label">Tipo de Casa</label>
+                  </div>
+                  <datalist id="tipos-de-casa">
+                    <option>Tijolo/Adobe</option>
+                    <option>Taipa Revestida</option>
+                    <option>Taipa Não Revestida</option>
+                    <option>Madeira</option>
+                    <option>Material Aproveitado</option>
+                  </datalist>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 text-center">
+                  <div class="switch-title">No. de Cômodos / Peças</div>
+                  <div class="input-group spinner" data-trigger="spinner">
+                      <div class="form-line">
+                          <input type="text" id="numero_comodos" name="numero_comodos" class="form-control text-center" value="1" data-rule="quantity">
+                      </div>
+                      <span class="input-group-addon">
+                          <a href="javascript:;" class="spin-up" data-spin="up"><i class="glyphicon glyphicon-chevron-up"></i></a>
+                          <a href="javascript:;" class="spin-down" data-spin="down"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                      </span>
+                  </div>
+                </div>
+                <div class="col-sm-6 text-center">
+                  <div class="switch-title">Energia Elétrica</div>
+                  <div class="switch" style="bottom: -10px;position: relative;">
+                      <label>Não<input type="checkbox" id="energia_eletrica" name="energia_eletrica" checked><span class="lever switch-col-green"></span>Sim</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         <div class="align-right">
             <button class="btn btn-link waves-effect">SALVAR</button>
         </div>
@@ -142,6 +217,7 @@
   @include('layouts.includes.select')
   @include('layouts.includes.formValidator')
   @include('layouts.includes.inputMask')
+  @include('layouts.includes.spinner')
 @stop
 
 @section('scripts')
@@ -169,8 +245,11 @@ $(function () {
     @if(isset($paciente))
         $('#adicionaPaciente').find('input').focus();
     @endif
-});
 
+});
+$('#estado_civil_id').on('keydown', function (e, clickedIndex, isSelected, previousValue) {
+  console.log(e);
+});
 $(".cep").focusout(function(){
 		$.ajax({
 			url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',

@@ -25,8 +25,9 @@
                       </div>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5" id="dadosPaciente">
-                      <span class="font-bold align-center col-cyan">{{$paciente->alfabetizado}},</span>
+                      <span class="font-bold align-center col-cyan">{{$paciente->alfabetizado}}</span>
                       <span class="font-bold align-center col-cyan">{{$paciente->frequenta_escola}}</span>
+                      <span class="font-bold align-center col-cyan">{{$paciente->chefe_familia}}</span>
                       <ul class="list-unstyled">
                         <li><b>Data de Nascimento:</b> {{ Date::parse($paciente->data_nascimento)->format('j \d\e F\, Y') . ' ('. Date::parse($paciente->data_nascimento)->age .' anos)' }} </li>
                         <li><b>CPF:</b> <span>{{ mascara("###.###.###-##", $paciente->cpf) }}</span></li>
