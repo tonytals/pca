@@ -156,7 +156,6 @@
             <div class="col-sm-4">
               <div class="form-group form-float">
                 <div class="form-line required">
-                  <!--<label class="control-label" for="papel_id"></label>-->
                   <select class="form-control show-tick" data-live-search="true" name="papel_id" required>
                     @if(!isset($usuario))
                       <option value>-- Papel do Usuário --</option>

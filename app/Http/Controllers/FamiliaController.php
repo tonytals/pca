@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use ProntuarioEletronico\Familia;
 use Illuminate\Support\Facades\Gate;
 use ProntuarioEletronico\Paciente;
+use ProntuarioEletronico\User;
 use Illuminate\Support\Facades\Auth;
 
 class FamiliaController extends Controller
@@ -23,7 +24,7 @@ class FamiliaController extends Controller
         }
 
         $tituloColunas = json_encode([
-          array('familia' => 'Sobrenome'),
+          array('familia' => '#'),
           array('cep' => 'CEP'),
           array('cidade' => 'Cidade'),
           array('contador' => 'Qtd de Pessoas')
@@ -57,7 +58,7 @@ class FamiliaController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-dd($data);
+
         $familia = new Familia();
         $familia = Familia::create($data);
 
@@ -69,6 +70,22 @@ dd($data);
       if(Gate::denies('familias-adicionar')){
         abort(403,"Não autorizado!");
       }
+
+      /*
+      * ENVIAR PARA FORMULARIO PACIENTES NÃO VINCULADOS A FAMILIA
+      * !!!!! FAZER !!!!! DO IT !!!!
+      */
+
+      $pacientes = new Paciente();
+      $pacientes = $pacientes->whereHas('users', function ($query) {
+                  $query->where('user_id', '=', Auth::user()->id);
+              })->where('familia_id', null)->get();
+
+      /*
+      * ENVIAR PARA FORMULARIO PACIENTES NÃO VINCULADOS A FAMILIA
+      * !!!!! FAZER !!!!! DO IT !!!!
+      */
+
 
       return view('familias.form');
     }

@@ -31,7 +31,7 @@
             <div class="col-sm-3">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input required type="text" class="form-control" name="familia" placeholder="" value="{{ old('familia', $familia->familia ?? null) }}">
+                      <input type="text" class="form-control" name="familia" placeholder="" value="{{ old('familia', $familia->familia ?? null) }}">
                       <label class="form-label">Familia</label>
                   </div>
               </div>
@@ -39,7 +39,7 @@
             <div class="col-sm-3">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input required type="text" class="form-control" name="segmento" placeholder="" value="{{ old('segmento', $familia->segmento ?? null) }}">
+                      <input type="text" class="form-control" name="segmento" placeholder="" value="{{ old('segmento', $familia->segmento ?? null) }}">
                       <label class="form-label">Segmento</label>
                   </div>
               </div>
@@ -47,7 +47,7 @@
             <div class="col-sm-3">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input required type="text" class="form-control" name="area" placeholder="" value="{{ old('area', $familia->area ?? null) }}">
+                      <input type="text" class="form-control" name="area" placeholder="" value="{{ old('area', $familia->area ?? null) }}">
                       <label class="form-label">Área</label>
                   </div>
               </div>
@@ -55,7 +55,7 @@
             <div class="col-sm-3">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input required type="text" class="form-control" name="microarea" placeholder="" value="{{ old('microarea', $familia->microarea ?? null) }}">
+                      <input type="text" class="form-control" name="microarea" placeholder="" value="{{ old('microarea', $familia->microarea ?? null) }}">
                       <label class="form-label">Microárea</label>
                   </div>
               </div>
@@ -198,6 +198,94 @@
                       <label>Não<input type="checkbox" id="energia_eletrica" name="energia_eletrica" checked><span class="lever switch-col-green"></span>Sim</label>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group form-float">
+                  <div class="form-line">
+                    <select class="form-control show-tick" id="tratamento_agua" name="tratamento_agua" data-live-search="true">
+                        <option disabled selected value>-- Tratamento de Água --</option>
+                        <option value="Filtração">Filtração</option>
+                        <option value="Fervura">Fervura</option>
+                        <option value="Cloração">Cloração</option>
+                        <option value="Sem tratamento">Sem tratamento</option>
+                    </select>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-float">
+                    <div class="form-line">
+                      <div class="form-line">
+                          <input list="abastecimento_agua_list" id="abastecimento_agua" type="text" class="form-control" name="abastecimento_agua" placeholder="" value="{{ old('abastecimento_agua', $familia->abastecimento_agua ?? null) }}">
+                          <label class="form-label">Abastecimento de Água</label>
+                      </div>
+                      <datalist id="abastecimento_agua_list">
+                        <option>Rede pública</option>
+                        <option>Poço</option>
+                        <option>Nascente</option>
+                      </datalist>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-4">
+              <div class="form-group form-float">
+                  <div class="form-line">
+                    <select class="form-control show-tick" id="destino_lixo" name="destino_lixo" data-live-search="true">
+                        <option disabled selected value>-- Destino do Lixo --</option>
+                        <option value="Coletado">Coletado</option>
+                        <option value="Queimado">Queimado</option>
+                        <option value="Enterrado">Enterrado</option>
+                        <option value="Céu aberto">Céu aberto</option>
+                    </select>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-float">
+                      <div class="form-line">
+                        <select class="form-control show-tick" id="destino_fezes_urina" name="destino_fezes_urina" data-live-search="true">
+                            <option disabled selected value>-- Destino de Fezes e Urina --</option>
+                            <option value="Sistema de esgoto (Rede Geral)">Sistema de esgoto (Rede Geral)</option>
+                            <option value="Fossa">Fossa</option>
+                            <option value="Céu aberto">Céu aberto</option>
+                        </select>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <h5>A família é beneficiária do Programa Bolsa Família?</h5>
+              <div class="switch">
+                  <label>Não<input type="checkbox" id="bolsa_familia" name="bolsa_familia"><span class="lever switch-col-green"></span>Sim</label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group form-float" id="nisDoResponsavel">
+                  <div class="form-line">
+                      <input id="nis_responsavel" type="text" class="form-control" name="nis_responsavel" placeholder="" value="{{ old('nis_responsavel', $familia->nis_responsavel ?? null) }}">
+                      <label class="form-label">Nis do Responsável</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <h5>A família está inscrita no Cadastramento Único de Programas Sociais do Governo Federal (CAD-Único)?</h5>
+              <div class="switch">
+                  <label>Não<input type="checkbox" id="cad_unico" name="cad_unico"><span class="lever switch-col-green"></span>Sim</label>
               </div>
             </div>
           </div>

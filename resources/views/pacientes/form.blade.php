@@ -199,6 +199,76 @@
         </div>
         <div class="row">
           <div class="col-sm-12">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input type="text" class="form-control" name="plano_saude" placeholder="" value="{{ old('plano_saude', $paciente->plano_saude ?? null) }}">
+                    <label class="form-label">Plano de Saúde</label>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input list="procura_atendimento" type="text" class="form-control" name="procura_atendimento" placeholder="" value="{{ old('procura_atendimento', $paciente->procura_atendimento ?? null) }}">
+                    <label class="form-label">Em Caso de Doença Procura?</label>
+                </div>
+                <datalist id="procura_atendimento">
+                  <option>Hospital</option>
+                  <option>Unidade de Saúde</option>
+                  <option>Benzedeira</option>
+                  <option>Farmácia</option>
+                </datalist>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input list="grupo_comunitario" type="text" class="form-control" name="grupo_comunitario" placeholder="" value="{{ old('grupo_comunitario', $paciente->grupo_comunitario ?? null) }}">
+                    <label class="form-label">Participa de Grupos Comunitários</label>
+                </div>
+                <datalist id="grupo_comunitario">
+                  <option>Cooperativa</option>
+                  <option>Grupo religioso</option>
+                  <option>Associações</option>
+                </datalist>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input list="meios_comunicacao" type="text" class="form-control" name="meios_comunicacao" placeholder="" value="{{ old('meios_comunicacao', $paciente->meios_comunicacao ?? null) }}">
+                    <label class="form-label">Meios de Comunicação Utilizado</label>
+                </div>
+                <datalist id="meios_comunicacao">
+                  <option>Rádio</option>
+                  <option>Televisão</option>
+                </datalist>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <input list="meio_transporte" type="text" class="form-control" name="meio_transporte" placeholder="" value="{{ old('meio_transporte', $paciente->meio_transporte ?? null) }}">
+                    <label class="form-label">Meio de Transporte</label>
+                </div>
+                <datalist id="meio_transporte">
+                  <option>Ônibus</option>
+                  <option>Caminhão</option>
+                  <option>Carro</option>
+                  <option>Carroça</option>
+                </datalist>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
             <h5>Doenças e/ou Condições Referidas</h5>
             <select name="doencasCondicoes[]" id="doencasCondicoes" class="ms" multiple="multiple">
               @foreach($condicoesReferidas as $valor)
