@@ -14,7 +14,7 @@
             <div class="card">
               <div class="header">
 
-                  <h2>{{ $paciente->nome_completo }}</h2><small>{{ $paciente->familia_id }}</small>
+                  <h2>{{ $paciente->nome_completo }}</h2><small><a href="{{ route('familias.show', $paciente->getOriginal('familia_id'))}}">{{ $paciente->familia_id }}</a></small>
 
                 </div>
                 <div class="body" id="prontuarioPaciente">

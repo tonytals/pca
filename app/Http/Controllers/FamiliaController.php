@@ -123,7 +123,7 @@ class FamiliaController extends Controller
 
         $familia = Familia::find($id);
 
-        return view('admin.usuarios.form',compact('familia'));
+        return view('familias.form',compact('familia'));
     }
 
     /**
@@ -140,7 +140,7 @@ class FamiliaController extends Controller
         $familia = new Familia();
         $familia->find($id)->update($data);
 
-        return redirect()->back();
+        return redirect()->action('FamiliaController@index');
     }
 
     /**

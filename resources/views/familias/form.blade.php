@@ -21,7 +21,7 @@
 
       @if(isset($familia))
           <painel titulo='ATUALIZAR FAMÍLIA'>
-            <formulario id="adicionaFamilia" method="post" action="{{ route('familias.update', $familia->id) }}" token="{{ csrf_token() }}">
+            <formulario id="adicionaFamilia" method="put" action="{{ route('familias.update', $familia->id) }}" token="{{ csrf_token() }}">
       @else
           <painel titulo='ADICIONAR FAMÍLIA'>
             <formulario id="adicionaFamilia" method="post" action="{{ route('familias.store') }}" token="{{ csrf_token() }}">
@@ -327,11 +327,11 @@ $(function () {
           $(element).parents('.form-group').append(error);
       }
     });
-    $('#adicionaPaciente').find('input[required]').css('border-bottom','solid thin red');
+    $('#adicionaFamilia').find('input[required]').css('border-bottom','solid thin red');
     $('.required').css('border-bottom','solid thin red');
 
-    @if(isset($paciente))
-        $('#adicionaPaciente').find('input').focus();
+    @if(isset($familia))
+        $('#adicionaFamilia').find('input').focus();
     @endif
 
 });

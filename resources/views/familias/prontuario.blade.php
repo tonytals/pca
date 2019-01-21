@@ -12,48 +12,70 @@
             <div class="card">
               <div class="header">
 
-                  <h2>{{ $familia->familia }}</h2><small>Quantidade de Membros: {{ $familia->membros->count() }} </small>
+                  <h2>{{ $familia->familia . ' - ' . $familia->sobrenome }}</h2><small>Quantidade de Membros: {{ $familia->membros->count() }} </small>
 
               </div>
                 <div class="body" id="prontuarioFamilia">
                   <div class="row clearfix">
-                    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <div class="col-sm-4">
+                      <span class="font-bold col-blue-grey">Tipo de Casa:</span> {{ $familia->tipo_casa }}<br />
+                      <span class="font-bold col-blue-grey">Quantidade de Cômodos:</span> {{ $familia->numero_comodos }}<br />
+                      <span class="font-bold col-blue-grey">Energia Elétrica:</span> {{ $familia->energia_eletrica }}
+                    </div>
+                    <div class="col-sm-4">
+                      <span class="font-bold col-blue-grey">Tratamento da Água no Domicílio:</span> {{ $familia->tratamento_agua }}<br />
+                      <span class="font-bold col-blue-grey">Abasteciemtno de Água:</span> {{ $familia->abastecimento_agua }}
+                    </div>
+                    <div class="col-sm-4">
+                      <span class="font-bold col-blue-grey">Destino do Lixo:</span> {{ $familia->destino_lixo }}<br />
+                      <span class="font-bold col-blue-grey">Destino das Fezes e Urina:</span> {{ $familia->destino_fezes_urina }}
+                    </div>
+                  </div>
+                  <div class="row clearfix">
+                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                       <div class="table-responsive">
                           <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                               <thead>
                                   <tr>
-                                      <th>Foto</th>
                                       <th>Nome</th>
                                       <th>Idade</th>
                                       <th>Sexo</th>
+                                      <th>Ocupação</th>
+                                      <th>Observações</th>
+                                      <th>Doenças / Condições</th>
                                   </tr>
                               </thead>
                               <tfoot>
                                   <tr>
-                                    <th>Foto</th>
                                     <th>Nome</th>
                                     <th>Idade</th>
                                     <th>Sexo</th>
+                                    <th>Ocupação</th>
+                                    <th>Observações</th>
+                                    <th>Doenças / Condições</th>
                                   </tr>
                               </tfoot>
                               <tbody>
                                 @foreach($familia->membros as $membro)
                                   <tr>
-                                    <td><img src="{{ $membro->foto }}" style="max-width:48px;"/></td>
-                                    <td>{{ $membro->nome_completo }}</td>
+                                    <td><a href="{{ route('pacientes.show', $membro->id) }}">{{ $membro->nome_completo }}</a></td>
                                     <td>{{ Date::parse($membro->data_nascimento)->age }}</td>
                                     <td>{{ $membro->sexo }}</td>
+                                    <td>{{ $membro->ocupacao }}</td>
+                                    <td>{{ $membro->alfabetizado . $membro->frequenta_escola . $membro->chefe_familia }}</td>
+                                    <td>
+                                      @foreach($membro->condicoes_referidas as $valor)
+                                        <span class="label bg-grey">{{$valor->sigla . ' - ' . $valor->nome}}</span>
+                                      @endforeach
+                                    </td>
                                   </tr>
                                 @endforeach
                               </tbody>
                           </table>
                       </div>
 
-                      <div class="image-area">
-
-                      </div>
-                    </div>
-                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                  </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                       <ul class="list-unstyled" id="botoes">
                         <li>
                           <br />

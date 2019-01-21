@@ -34,7 +34,8 @@ class Familia extends Model
         'destino_lixo',
         'destino_fezes_urina',
         'nis_responsavel',
-        'cad_unico'
+        'cad_unico',
+        'sobrenome'
     ];
 
     public function pacientes()
@@ -79,6 +80,15 @@ class Familia extends Model
     {
         $this->attributes['renda_familiar'] = str_replace('R$ ', '', $value);
         $this->attributes['renda_familiar'] = str_replace(',', '', $this->attributes['renda_familiar']);
+    }
+
+    public function getEnergiaEletricaAttribute($value)
+    {
+       if($value){
+         return 'Sim';
+       }else{
+         return 'Não';
+       }
     }
 
 }

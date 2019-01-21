@@ -187,9 +187,9 @@
                     @if(isset($paciente))
                       <option value="{{ $valor->id }}"
                         {{ $paciente['id'] == $valor->id ? 'selected' : '' }}
-                        >{{$valor->familia}}</option>
+                        >{{$valor->familia . ' - ' . $valor->sobrenome}}</option>
                     @else
-                      <option value="{{$valor->id}}">{{$valor->familia}}</option>
+                      <option value="{{$valor->id}}">{{$valor->familia . ' - ' . $valor->sobrenome}}</option>
                     @endif
                   @endforeach
                 </select>
