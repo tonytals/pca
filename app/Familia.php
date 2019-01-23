@@ -61,6 +61,15 @@ class Familia extends Model
         }
     }
 
+    public function setCadUnicoAttribute($value)
+    {
+        if($value == 'on'){
+          $this->attributes['energia_eletrica'] = 1;
+        }else{
+          $this->attributes['energia_eletrica'] = 0;
+        }
+    }
+
     public function setCepAttribute($value)
     {
         $this->attributes['cep'] = preg_replace('/[^a-zA-Z0-9]/', '', $value);

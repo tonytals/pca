@@ -30,7 +30,7 @@ class FamiliaController extends Controller
           array('contador' => 'Qtd de Pessoas')
         ]);
 
-        $familias = Familia::All()->where('user_id', Auth::user()->id);
+        $familias = Familia::all()->where('user_id', Auth::user()->id);
 
         foreach ($familias as $familia) {
           $familia->contador = Paciente::where('familia_id', $familia->id)->count();

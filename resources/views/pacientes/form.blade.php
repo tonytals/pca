@@ -105,9 +105,9 @@
             <div class="form-group form-float">
                 <div class="form-line">
                   @if(isset($paciente))
-                    <input type="text" class="form-control date" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', Date::parse($paciente->data_nascimento)->format('d/m/Y') ?? null) }}">
+                    <input type="text" class="form-control data" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', Date::parse($paciente->data_nascimento)->format('d/m/Y') ?? null) }}">
                   @else
-                    <input type="text" class="form-control date" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', $paciente->data_nascimento ?? null) }}">
+                    <input type="text" class="form-control data" name="data_nascimento" placeholder="" value="{{ old('data_nascimento', $paciente->data_nascimento ?? null) }}">
                   @endif
                     <label class="form-label">Data de Nascimento</label>
                 </div>

@@ -189,7 +189,7 @@ class PacienteController extends Controller
       $estadoCivil = EstadoCivil::all();
       $condicoesReferidas = CondicaoReferida::all();
       $tipoSanguineo = TipoSanguineo::all();
-      $familia = Familia::all();
+      $familia = Familia::all()->where('user_id', Auth::user()->id);
 
       return view('pacientes.form',
         compact(

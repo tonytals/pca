@@ -133,7 +133,7 @@ class UsuarioController extends Controller
 
       $user->papeis()->attach($data['papel_id']);
 
-      return redirect()->back();
+      return redirect()->action('Admin\UsuarioController@index');
     }
 
     /**

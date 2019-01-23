@@ -122,24 +122,13 @@ class ComentarioController extends CommentsController
          ]);
 
          $comment->update([
-             'comment' => $request->message,
-             'comment' => $request->local_atendimento,
-             'comment' => $request->data_hora_atendimento
+             'comment' => $request->message
+             //'comment' => $request->local_atendimento,
+             //'comment' => $request->data_hora_atendimento
          ]);
 
          return redirect()->to(url()->previous() . '#comment-' . $comment->id);
      }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function reply(Request $request, \Laravelista\Comments\Comment $comment)
     {

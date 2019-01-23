@@ -98,6 +98,13 @@
                               <span>Agendar Visita</span>
                           </button>
                         </li>
+                        <li>
+                          <br />
+                          <a type="button" class="btn bg-blue btn-block btn-lg waves-effect" href="{{route('pacientes.adicionar')}}">
+                              <i class="material-icons">date_range</i>
+                              <span>Acrescentar Membro</span>
+                          </a>
+                        </li>
                       </ul>
                     </div>
                   </div>
