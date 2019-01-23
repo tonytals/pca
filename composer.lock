@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69e4126f71e98f2daf92c5424cd98469",
+    "content-hash": "70aa6ae7b493c41abbb8e53d26709b46",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -984,6 +984,50 @@
                 "psr-3"
             ],
             "time": "2018-11-05T09:00:11+00:00"
+        },
+        {
+            "name": "musonza/groups",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/musonza/groups.git",
+                "reference": "bb26b1ae204b36b0e031a4d22e4ce20143028b3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/musonza/groups/zipball/bb26b1ae204b36b0e031a4d22e4ce20143028b3c",
+                "reference": "bb26b1ae204b36b0e031a4d22e4ce20143028b3c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Musonza\\Groups\\": "src/"
+                },
+                "classmap": [
+                    "tests/GroupsTestCase.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tinashe Musonza",
+                    "email": "tinashemusonza@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 user groups package",
+            "keywords": [
+                "conversations",
+                "groups",
+                "laravel"
+            ],
+            "time": "2016-04-02T05:24:09+00:00"
         },
         {
             "name": "nesbot/carbon",

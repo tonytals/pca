@@ -31,6 +31,8 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('familias/adicionar', ['as'=>'familias.adicionar','uses'=>'FamiliaController@adicionar']);
   Route::resource('familias', 'FamiliaController');
 
+  Route::resource('grupos', 'GrupoController');
+
   Route::get('summernoteeditor',array('as'=>'summernoteeditor.get','uses'=>'SummernotefileController@getSummernoteeditor'));
   Route::post('summernoteeditor',array('as'=>'summernoteeditor.post','uses'=>'SummernotefileController@postSummernoteeditor'));
 
@@ -60,6 +62,9 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
   Route::delete('usuarios/papel/{usuario}/{papel}', ['as'=>'usuarios.papel.destroy','uses'=>'Admin\UsuarioController@papelDestroy']);
 
   Route::resource('papeis', 'Admin\PapelController');
+
+  Route::resource('tutores', 'Admin\TutorController');
+  Route::resource('preceptores', 'Admin\PreceptorController');
 
   Route::get('papeis/permissao/{id}', ['as'=>'papeis.permissao','uses'=>'Admin\PapelController@permissao']);
   Route::post('papeis/permissao/{permissao}', ['as'=>'papeis.permissao.store','uses'=>'Admin\PapelController@permissaoStore']);

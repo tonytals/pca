@@ -47885,6 +47885,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
@@ -47998,6 +48004,20 @@ var render = function() {
                 _c("a", { attrs: { href: _vm.montaRota("usuarios.index") } }, [
                   _vm._v("Usuarios")
                 ])
+              ]),
+              _vm._v(" "),
+              _c("li", { class: _vm.activeLink("tutores") }, [
+                _c("a", { attrs: { href: _vm.montaRota("tutores.index") } }, [
+                  _vm._v("Tutores")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { class: _vm.activeLink("preceptores") }, [
+                _c(
+                  "a",
+                  { attrs: { href: _vm.montaRota("preceptores.index") } },
+                  [_vm._v("Preceptores")]
+                )
               ]),
               _vm._v(" "),
               _c("li", { class: _vm.activeLink("papeis") }, [
