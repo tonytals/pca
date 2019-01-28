@@ -5,6 +5,8 @@ namespace ProntuarioEletronico\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use ProntuarioEletronico\User;
+use ProntuarioEletronico\Papel;
 use Groups;
 
 class GrupoController extends Controller
@@ -65,6 +67,21 @@ class GrupoController extends Controller
         }
 
         $data = $request->all();
+
+        $config = [
+          'name'              => $data['name'],
+          'description'       => $data['description'], // optional
+          'short_description' => '', // optional
+          'image'             => '', // optional
+          'private'           => 0,  // 0 (public) or 1 (private)
+          'extra_info'        => '', // optional
+          'settings'          => '', // optional
+          'conversation_id'   => 0,  // optional if you want to add messaging to your groups this can be useful
+        ];
+
+        $group = Groups::create($data['user_id'], $data);
+
+        return redirect()->back();
     }
 
     /**
@@ -75,7 +92,22 @@ class GrupoController extends Controller
      */
     public function show($id)
     {
-        //
+        if(Gate::denies('grupos-show')){
+            abort(403,"Não autorizado!");
+        }
+
+        $papelAluno = Papel::where('nome','Aluno')->first();
+
+        $user = Groups::getUser($id);
+
+        $grupo = $user->groups->first();
+
+        $usuarios = User::whereHas('papeis', function ($query) use ($papelAluno) {
+                $query->where("papel_user.papel_id", "=", $papelAluno->id);
+        })->with('papeis')->get();
+
+
+        return view('admin.grupos.detalhe', compact('usuarios','grupo'));
     }
 
     /**

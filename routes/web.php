@@ -31,8 +31,6 @@ Route::group(['middleware' => ['auth']], function() {
   Route::get('familias/adicionar', ['as'=>'familias.adicionar','uses'=>'FamiliaController@adicionar']);
   Route::resource('familias', 'FamiliaController');
 
-  Route::resource('grupos', 'GrupoController');
-
   Route::get('summernoteeditor',array('as'=>'summernoteeditor.get','uses'=>'SummernotefileController@getSummernoteeditor'));
   Route::post('summernoteeditor',array('as'=>'summernoteeditor.post','uses'=>'SummernotefileController@postSummernoteeditor'));
 
@@ -63,6 +61,7 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 
   Route::resource('papeis', 'Admin\PapelController');
 
+  Route::resource('grupos', 'GrupoController');
   Route::resource('tutores', 'Admin\TutorController');
   Route::resource('preceptores', 'Admin\PreceptorController');
 

@@ -30,7 +30,11 @@ class PreceptorController extends Controller
                 $query->where("papel_user.papel_id", "=", $papelPreceptor->id);
         })->with('papeis')->get();
 
-        return view('admin.preceptores.index', compact('usuarios'));
+        foreach ($usuarios as $preceptor) {
+          $preceptores[] = Groups::getUser($preceptor->id);
+        }
+
+        return view('admin.preceptores.index', compact('preceptores'));
     }
 
     /**

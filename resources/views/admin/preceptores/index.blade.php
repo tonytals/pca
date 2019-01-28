@@ -30,16 +30,23 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                      @foreach($usuarios as $preceptor)
+                      @foreach($preceptores as $preceptor)
                         <tr>
                           <td>{{ $preceptor->name }}</td>
-                          <td>{{ $preceptor->groups }}</td>
-                          <td>{{ $preceptor->nome_completo }}</td>
+                          <td>{{ $preceptor->groups->first()['name'] }}</td>
+                          <td>{{ $preceptor->groups->count() > 0 ? $preceptor->groups->count() - 1 : 0 }}</td>
                           <td>
-                            <a class="btn bg-purple waves-effect" href="">
-                                <i class="material-icons">add</i>
-                                <span>Gerenciar Unidade de Saúde</span>
-                            </a>
+                            @if($preceptor->groups->first()['name'] == null)
+                              <a class="btn bg-blue waves-effect" href="">
+                                  <i class="material-icons">add</i>
+                                  <span>Criar Unidade de Saúde</span>
+                              </a>
+                            @else
+                              <a class="btn bg-purple waves-effect" href="{{route('grupos.show',$preceptor->groups->first()['user_id'])}}">
+                                  <i class="material-icons">group_add</i>
+                                  <span>Gerenciar Unidade de Saúde</span>
+                              </a>
+                            @endif
                           </td>
                         </tr>
                       @endforeach
@@ -69,17 +76,28 @@
               <div class="form-line required">
                 <select class="form-control show-tick" data-live-search="true" name="user_id" required>
                     <option value>-- Responsável Pela Unidade --</option>
-                  @foreach($usuarios as $preceptor)
-                      <option value="{{$preceptor->id}}">{{$preceptor->name}}</option>
+                  @foreach($preceptores as $preceptor)
+                      @if($preceptor->groups->first()['name'] == null)
+                        <option value="{{$preceptor->id}}">{{$preceptor->name}}</option>
+                      @endif
                   @endforeach
                 </select>
               </div>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+                <div class="form-line">
+                    <textarea rows="4" class="form-control no-resize" name="description" placeholder="Por favor digite a sua observação..."></textarea>
+                </div>
+            </div>
+          </div>
+        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CANCELAR</button>
-            <button type="submit" class="btn btn-link waves-effect">RESPONDER</button>
+            <button type="submit" class="btn btn-link waves-effect">SALVAR</button>
         </div>
     </form>
   </modal>
