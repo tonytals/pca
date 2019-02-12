@@ -153,4 +153,13 @@ class GrupoController extends Controller
 
         return redirect()->back();
     }
+
+    public function removeAluno($responsavel, $id)
+    {
+         $userResponsavel = Groups::getUser($responsavel);
+
+         $userResponsavel->groups->first()->leave($id);
+
+         return redirect()->back();
+    }
 }

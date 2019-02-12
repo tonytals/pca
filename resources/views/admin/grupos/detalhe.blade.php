@@ -59,19 +59,27 @@
                       </tr>
                   </tfoot>
                   <tbody>
-                    @foreach($grupo->users as $aluno)
-                      @if($aluno->id != $grupo->users->first()['id'])
-                        <tr>
-                          <td><a href="{{route('tutor.aluno', $aluno->id)}}">{{ $aluno->name }}</a></td>
-                          <td>
-                            <a class="btn btn-danger waves-effect" href="">
-                                <i class="material-icons">delete</i>
-                                <span>Remover da Unidade</span>
-                            </a>
-                          </td>
-                        </tr>
-                      @endif
-                    @endforeach
+                    @if($grupo->users->count() > 1)
+                      @foreach($grupo->users as $aluno)
+                        @if($aluno->id != $grupo->users->first()['id'])
+                          <tr>
+                            <td><a href="{{route('tutor.aluno', $aluno->id)}}">{{ $aluno->name }}</a></td>
+                            <td>
+                              <a class="btn btn-danger waves-effect" href="{{route('grupos.removeAluno', [$grupo->users->first()['id'], $aluno->id])}}">
+                                  <i class="material-icons">delete</i>
+                                  <span>Remover da Unidade</span>
+                              </a>
+                            </td>
+                          </tr>
+                        @endif
+                      @endforeach
+                    @else
+                      <tr>
+                        <td>
+                          Sem Registros
+                        </td>
+                      </tr>
+                    @endif
                   </tbody>
               </table>
           </div>

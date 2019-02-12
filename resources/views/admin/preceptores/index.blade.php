@@ -34,7 +34,7 @@
                         <tr>
                           <td>{{ $preceptor->name }}</td>
                           <td>{{ $preceptor->groups->first()['name'] }}</td>
-                          <td>{{ $preceptor->groups->count() > 0 ? $preceptor->groups->count() - 1 : 0 }}</td>
+                          <td>{{ $preceptor->groups->first()->users->count() > 0 ? $preceptor->groups->first()->users->count() - 1 : 0 }}</td>
                           <td>
                             @if($preceptor->groups->first()['name'] == null)
                               <a class="btn bg-blue waves-effect" href="">

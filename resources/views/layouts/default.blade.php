@@ -68,7 +68,7 @@
           <div class="copyright">
             © 2018 <a href="javascript:void(0);">{{ config('app.name', 'prontuario eletronico') }}</a>.
           </div>
-          <div class="version"><b>Versão: </b> 0.1 a</div>
+          <div class="version"><b>Versão: </b> @version('compact')</div><br />
         </div>
       </aside>
     </section>

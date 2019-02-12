@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Portifolio Clínico Acadêmico'),
     'nameAbreviado' => env('APP_NAME_ABREVIADO', 'PCA'),
+    'version' => env('VERSION', '1.0 a'),
 
     /*
     |--------------------------------------------------------------------------
