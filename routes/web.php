@@ -61,6 +61,7 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 
   Route::resource('papeis', 'Admin\PapelController');
 
+  Route::post('grupos/addAluno', ['as'=>'grupos.addAluno','uses'=>'GrupoController@addAluno']);
   Route::resource('grupos', 'GrupoController');
   Route::resource('tutores', 'Admin\TutorController');
   Route::resource('preceptores', 'Admin\PreceptorController');

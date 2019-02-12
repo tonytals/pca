@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravelista\Comments\Commenter;
 use Jenssegers\Date\Date;
+use Musonza\groups\Models\Group;
 
 class User extends Authenticatable
 {
@@ -52,6 +53,11 @@ class User extends Authenticatable
     public function papeis()
     {
         return $this->belongsToMany(Papel::class);
+    }
+
+    public function grupos()
+    {
+        return $this->belongsToMany(Group::class);
     }
 
     public function pacientes()

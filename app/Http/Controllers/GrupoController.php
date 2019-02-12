@@ -104,8 +104,7 @@ class GrupoController extends Controller
 
         $usuarios = User::whereHas('papeis', function ($query) use ($papelAluno) {
                 $query->where("papel_user.papel_id", "=", $papelAluno->id);
-        })->with('papeis')->get();
-
+        })->with(['papeis','grupos'])->get();
 
         return view('admin.grupos.detalhe', compact('usuarios','grupo'));
     }
@@ -142,5 +141,16 @@ class GrupoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addAluno(Request $request)
+    {
+        $data = $request->all();
+
+        $userResponsavel = Groups::getUser($data['idResponsavel']);
+
+        $userResponsavel->groups[0]->addMembers($data['alunosUnidade']);
+
+        return redirect()->back();
     }
 }
