@@ -37,7 +37,7 @@
           @endif
 
           <modal-link titulo="Editar" css="nenhum" modal="comment-modal-{{ $comment->id }}"></modal-link> |
-          <a href="{{ url('comments/' . $comment->id) }}" onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->id }}').submit();" >Deletar</a>
+          <a style="display:none;" href="{{ url('comments/' . $comment->id) }}" onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->id }}').submit();" >Deletar</a>
           <form id="comment-delete-form-{{ $comment->id }}" action="{{ url('comments/' . $comment->id) }}" method="POST" style="display: none;">
               @method('DELETE')
               @csrf
@@ -80,7 +80,7 @@
             </div>
         </form>
       </modal>
-      
+
     </div>
         <br />{{-- Margin bottom --}}
 

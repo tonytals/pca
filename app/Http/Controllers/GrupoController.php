@@ -109,6 +109,25 @@ class GrupoController extends Controller
         return view('admin.grupos.detalhe', compact('usuarios','grupo'));
     }
 
+    public function showPreceptores($id)
+    {
+        if(Gate::denies('grupos-show')){
+            abort(403,"Não autorizado!");
+        }
+
+        $papelAluno = Papel::where('nome','Preceptor')->first();
+
+        $user = Groups::getUser($id);
+
+        $grupo = $user->groups->first();
+
+        $usuarios = User::whereHas('papeis', function ($query) use ($papelAluno) {
+                $query->where("papel_user.papel_id", "=", $papelAluno->id);
+        })->with(['papeis','grupos'])->get();
+
+        return view('admin.grupos.detalheTutor', compact('usuarios','grupo'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

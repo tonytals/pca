@@ -8,6 +8,7 @@ use ProntuarioEletronico\Agendamento;
 use Illuminate\Support\Facades\Auth;
 use Laravelista\Comments\Comment;
 use Illuminate\Support\Facades\Gate;
+use Groups;
 
 class DashboardController extends Controller
 {
@@ -19,6 +20,10 @@ class DashboardController extends Controller
         switch (Auth::user()->papeis[0]->nome) {
           case 'Aluno':
             return redirect()->action('DashboardController@dashboardAluno');
+            break;
+
+          case 'Preceptor':
+            return redirect()->action('DashboardController@dashboardPreceptor');
             break;
 
           case 'Tutor':
@@ -77,9 +82,22 @@ class DashboardController extends Controller
         abort(403,"Não autorizado!");
       }
 
-      $usuarios = new User();
-      $alunos = $usuarios::all()->where('turma', Auth::user()->turma)->where('id', '<>', Auth::user()->id);
+      $user = Groups::getUser(Auth::user()->id);
+      $alunos = $user->groups;
 
       return view('dashboardTutor', compact('alunos'));
+    }
+
+    public function dashboardPreceptor()
+    {
+
+      if(Gate::denies('dashboard-preceptor')){
+        abort(403,"Não autorizado!");
+      }
+
+      $user = Groups::getUser(Auth::user()->id);
+      $alunos = $user->groups->first();
+
+      return view('dashboardPreceptor', compact('alunos'));
     }
 }

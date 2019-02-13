@@ -14,7 +14,7 @@ class Familia extends Model
         'segmento',
         'area',
         'micro_area',
-        'familia',
+        'siab',
         'observacoes',
         'renda_familiar',
         'cep',
@@ -87,8 +87,15 @@ class Familia extends Model
 
     public function setRendaFamiliarAttribute($value)
     {
+      if($value != ''){
+
         $this->attributes['renda_familiar'] = str_replace('R$ ', '', $value);
         $this->attributes['renda_familiar'] = str_replace(',', '', $this->attributes['renda_familiar']);
+
+      }else{
+        $this->attributes['renda_familiar'] = 0;
+      }
+
     }
 
     public function getEnergiaEletricaAttribute($value)

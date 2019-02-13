@@ -31,8 +31,8 @@
             <div class="col-sm-3">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input type="text" class="form-control" name="familia" placeholder="" value="{{ old('familia', $familia->familia ?? null) }}">
-                      <label class="form-label">Familia</label>
+                      <input type="text" required class="form-control" name="siab" placeholder="" value="{{ old('siab', $familia->siab ?? null) }}">
+                      <label class="form-label">Número SIAB</label>
                   </div>
               </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="col-sm-2">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input type="text" class="form-control cep" name="cep" placeholder="" value="{{ old('cep', $familia->cep ?? null) }}">
+                      <input type="text" required class="form-control cep" name="cep" placeholder="" value="{{ old('cep', $familia->cep ?? null) }}">
                       <label class="form-label">CEP</label>
                   </div>
               </div>
@@ -85,7 +85,7 @@
             <div class="col-sm-1">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input type="text" id="estado" class="form-control" name="estado" placeholder="" value="{{ old('estado', $familia->estado ?? null) }}">
+                      <input type="text" required id="estado" class="form-control" name="estado" placeholder="" value="{{ old('estado', $familia->estado ?? null) }}">
                       <label class="form-label">Estado</label>
                   </div>
               </div>
@@ -93,7 +93,7 @@
             <div class="col-sm-4">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input type="text" id="cidade" class="form-control" name="cidade" placeholder="" value="{{ old('cidade', $familia->cidade ?? null) }}">
+                      <input type="text" required id="cidade" class="form-control" name="cidade" placeholder="" value="{{ old('cidade', $familia->cidade ?? null) }}">
                       <label class="form-label">Cidade</label>
                   </div>
               </div>
@@ -101,7 +101,7 @@
             <div class="col-sm-4">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input type="text" id="endereco" class="form-control" name="endereco" placeholder="" value="{{ old('endereco', $familia->endereco ?? null) }}">
+                      <input type="text" required id="endereco" class="form-control" name="endereco" placeholder="" value="{{ old('endereco', $familia->endereco ?? null) }}">
                       <label class="form-label">Endereço</label>
                   </div>
               </div>
@@ -109,7 +109,7 @@
             <div class="col-sm-1">
               <div class="form-group form-float">
                   <div class="form-line">
-                      <input type="text" id="numero" class="form-control" name="numero" placeholder="" value="{{ old('numero', $familia->numero ?? null) }}">
+                      <input type="text" required id="numero" class="form-control" name="numero" placeholder="" value="{{ old('numero', $familia->numero ?? null) }}">
                       <label class="form-label">Número</label>
                   </div>
               </div>

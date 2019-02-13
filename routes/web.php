@@ -15,6 +15,7 @@
 
 Route::group(['middleware' => ['auth']], function() {
 
+  Route::get('/dashboardPreceptor', ['as'=>'dashboardPreceptor','uses'=>'DashboardController@dashboardPreceptor']);
   Route::get('/dashboardTutor', ['as'=>'dashboardTutor','uses'=>'DashboardController@dashboardTutor']);
   Route::get('/dashboardAluno', ['as'=>'dashboardAluno','uses'=>'DashboardController@dashboardAluno']);
   Route::get('/', ['as'=>'dashboard','uses'=>'DashboardController@index']);
@@ -61,6 +62,7 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
 
   Route::resource('papeis', 'Admin\PapelController');
 
+  Route::get('grupos/showPreceptores/{id}', ['as'=>'grupos.showPreceptores','uses'=>'GrupoController@showPreceptores']);
   Route::get('grupos/removeAluno/{responsavel}/{id}', ['as'=>'grupos.removeAluno','uses'=>'GrupoController@removeAluno']);
   Route::post('grupos/addAluno', ['as'=>'grupos.addAluno','uses'=>'GrupoController@addAluno']);
   Route::resource('grupos', 'GrupoController');

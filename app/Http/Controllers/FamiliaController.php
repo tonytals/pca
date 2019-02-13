@@ -24,7 +24,7 @@ class FamiliaController extends Controller
         }
 
         $tituloColunas = json_encode([
-          array('familia' => '#'),
+          array('siab' => 'SIAB'),
           array('cep' => 'CEP'),
           array('cidade' => 'Cidade'),
           array('contador' => 'Qtd de Pessoas')
