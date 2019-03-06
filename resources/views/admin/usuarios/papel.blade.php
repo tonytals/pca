@@ -60,4 +60,5 @@
 @endsection
 @section('includeJs')
   @include('layouts.includes.datatables')
+  @include('layouts.includes.select')
 @stop

@@ -13,6 +13,7 @@ use ProntuarioEletronico\Familia;
 use ProntuarioEletronico\Prontuario;
 use ProntuarioEletronico\TipoRegistro;
 use ProntuarioEletronico\CondicaoReferida;
+use Illuminate\Support\Facades\DB;
 
 class PacienteController extends Controller
 {
@@ -30,13 +31,19 @@ class PacienteController extends Controller
       $tituloColunas = json_encode([
         array('id' => '#'),
         array('nome_completo' => 'Nome'),
-        array('email' => 'E-mail'),
-        array('sexo' => 'Sexo'),
-        array('familia_id' => 'Familia')
+        array('familia_id' => 'Familia'),
+        array('data_nascimento' => 'Data'),
       ]);
 
       $pacientes = new Paciente();
-      $pacientes = $pacientes->getPacientesPorUsuario(['id','nome_completo','email','sexo','familia_id']);
+      $pacientes = $pacientes->getPacientesPorUsuario(['id','nome_completo','familia_id','data_nascimento']);
+
+      foreach ($pacientes as $key => $paciente) {
+        $paciente['ultimo_atendimento'] = DB::table('comments')->where([
+                                                                 ['commenter_id', Auth::user()->id],
+                                                                 ['commentable_id', $paciente->id],
+                                                               ])->orderBy('created_at', 'desc')->value('created_at');
+      }
 
       return view('pacientes.index', compact('pacientes', 'tituloColunas'));
 
@@ -189,7 +196,7 @@ class PacienteController extends Controller
       $estadoCivil = EstadoCivil::all();
       $condicoesReferidas = CondicaoReferida::all();
       $tipoSanguineo = TipoSanguineo::all();
-      $familia = Familia::all()->where('user_id', Auth::user()->id);
+      $familia = Familia::where('user_id', Auth::user()->id)->get();
 
       return view('pacientes.form',
         compact(

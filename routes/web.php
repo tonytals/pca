@@ -68,10 +68,12 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
   Route::resource('grupos', 'GrupoController');
   Route::resource('tutores', 'Admin\TutorController');
   Route::resource('preceptores', 'Admin\PreceptorController');
+  Route::resource('unidadesdesaude', 'Admin\UnidadeDeSaudeController');
 
   Route::get('papeis/permissao/{id}', ['as'=>'papeis.permissao','uses'=>'Admin\PapelController@permissao']);
   Route::post('papeis/permissao/{permissao}', ['as'=>'papeis.permissao.store','uses'=>'Admin\PapelController@permissaoStore']);
   Route::delete('papeis/permissao/{papel}/{permissao}', ['as'=>'papeis.permissao.destroy','uses'=>'Admin\PapelController@permissaoDestroy']);
 
   Route::get('aluno/{id}', ['as'=>'tutor.aluno','uses'=>'Admin\TutorController@aluno_show']);
+  Route::get('showAlunosPreceptores/{id}', ['as'=>'tutor.showAlunosPreceptores','uses'=>'Admin\TutorController@showAlunosPreceptores']);
 });

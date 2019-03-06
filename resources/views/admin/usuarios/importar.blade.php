@@ -20,6 +20,17 @@
         </div>
         <formulario id="importarCsv" method="post" action="{{ route('usuarios.importarCsv') }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
           <div class="row">
+            <div class="col-sm-6">
+              <a href="/download/csv_modelo_import_users.csv">
+                <button type="button" class="btn bg-indigo waves-effect">
+                    <i class="material-icons">save</i>
+                    <span>Download CSV Modelo</span>
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <div class="row">
             <div class="col-sm-5">
               <div class="form-group form-float">
                 <div class="form-line">

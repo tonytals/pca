@@ -30,7 +30,7 @@
                   @foreach($alunos as $aluno)
                     <tr>
                         <td>{{$aluno->id}}</td>
-                        <td><a href="{{route('tutor.aluno', $aluno->id)}}">{{$aluno->name}}</a></td>
+                        <td><a href="{{route('tutor.showAlunosPreceptores', $aluno->id)}}">{{$aluno->name}}</a></td>
                         <td>{{$aluno->email}}</td>
                     </tr>
                   @endforeach

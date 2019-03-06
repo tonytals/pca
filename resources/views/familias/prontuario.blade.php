@@ -12,7 +12,7 @@
             <div class="card">
               <div class="header">
 
-                  <h2>{{ $familia->familia . ' - ' . $familia->sobrenome }}</h2><small>Quantidade de Membros: {{ $familia->membros->count() }} </small>
+                  <h2>{{ $familia->siab . ' - ' . $familia->sobrenome }}</h2><small>Quantidade de Membros: {{ $familia->membros->count() }} </small>
 
               </div>
                 <div class="body" id="prontuarioFamilia">

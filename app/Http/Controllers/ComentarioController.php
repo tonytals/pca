@@ -48,7 +48,7 @@ class ComentarioController extends CommentsController
 
          $detail = $request->input('message');
          $dom = new \DomDocument();
-         $dom->loadHtml($detail);
+         $dom->loadHtml(mb_convert_encoding($detail, 'HTML-ENTITIES', 'UTF-8'));
          $images = $dom->getElementsByTagName('img');
 
          foreach($images as $k => $img){

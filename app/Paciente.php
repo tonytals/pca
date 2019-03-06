@@ -81,7 +81,7 @@ class Paciente extends Model
 
     public function getFamiliaIdAttribute($value){
         $familia = Familia::find($value);
-        $familia = $familia != null ? $familia['familia'] . ' - ' . $familia['sobrenome'] : 'Não Associado';
+        $familia = $familia != null ? $familia['sobrenome'] . ' - ' . $familia['siab'] : 'Não Associado';
         return $this->attributes['familia_id'] = $familia;
     }
 

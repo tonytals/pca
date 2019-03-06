@@ -49,8 +49,11 @@
             <li :class="activeLink('tutores')">
                 <a :href="montaRota('tutores.index')">Tutores</a>
             </li>
-            <li :class="activeLink('preceptores')">
+            <!--<li :class="activeLink('preceptores')">
                 <a :href="montaRota('preceptores.index')">Preceptores</a>
+            </li>-->
+            <li :class="activeLink('unidadesdesaude')">
+                <a :href="montaRota('unidadesdesaude.index')">Unidades De Saúde</a>
             </li>
             <li :class="activeLink('papeis')">
                 <a :href="montaRota('papeis.index')">Papéis</a>

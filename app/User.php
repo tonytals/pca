@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravelista\Comments\Commenter;
 use Jenssegers\Date\Date;
 use Musonza\groups\Models\Group;
+//use Groups;
 
 class User extends Authenticatable
 {

@@ -15,7 +15,7 @@
                 <table class="table table-bordered table-striped table-hover dataTable tabelaPreceptores">
                     <thead>
                         <tr>
-                            <th>Nome</th>
+                            <th>Responsável</th>
                             <th>Unidade de Saúde</th>
                             <th>Quantidade de Preceptores</th>
                             <th>Ações</th>
@@ -23,7 +23,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                          <th>Nome</th>
+                          <th>Responsável</th>
                           <th>Unidade de Saúde</th>
                           <th>Quantidade de Preceptores</th>
                           <th>Ações</th>
@@ -34,7 +34,7 @@
                         <tr>
                           <td>{{ $tutor->name }}</td>
                           <td>{{ $tutor->groups->first()['name'] }}</td>
-                          <td></td>
+                          <td>{{ $tutor->groups->first()->users->count() > 0 ? $tutor->groups->first()->users->count() - 1 : 0 }}</td>
                           <td>
                             @if($tutor->groups->first()['name'] == null)
 

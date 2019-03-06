@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use ProntuarioEletronico\Paciente;
 use ProntuarioEletronico\User;
 use Illuminate\Support\Facades\Auth;
+use Groups;
 
 class FamiliaController extends Controller
 {
@@ -30,7 +31,14 @@ class FamiliaController extends Controller
           array('contador' => 'Qtd de Pessoas')
         ]);
 
-        $familias = Familia::all()->where('user_id', Auth::user()->id);
+        if(Auth::user()->eAdmin()){
+            $familias = Familia::all();
+            $tituloColunas = json_decode($tituloColunas, true);
+            array_splice( $tituloColunas, 0, 0, array(array('user_id' => 'Aluno')) );
+            $tituloColunas = json_encode($tituloColunas);
+        }else{
+            $familias = Familia::where('user_id', Auth::user()->id)->get();
+        }
 
         foreach ($familias as $familia) {
           $familia->contador = Paciente::where('familia_id', $familia->id)->count();
@@ -81,13 +89,15 @@ class FamiliaController extends Controller
                   $query->where('user_id', '=', Auth::user()->id);
               })->where('familia_id', null)->get();
 
+      $unidadesDeSaude = Groups::getUser(Auth::user()->id)->groups->first();
+
       /*
       * ENVIAR PARA FORMULARIO PACIENTES NÃO VINCULADOS A FAMILIA
       * !!!!! FAZER !!!!! DO IT !!!!
       */
 
 
-      return view('familias.form');
+      return view('familias.form',compact('unidadesDeSaude'));
     }
 
     /**

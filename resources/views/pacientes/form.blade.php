@@ -163,8 +163,11 @@
           <div class="col-sm-3">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input type="text" class="form-control" name="religiao" placeholder="" value="{{ old('religiao', $paciente->religiao ?? null) }}">
+                    <input type="text" list="religiao" class="form-control" name="religiao" placeholder="" value="{{ old('religiao', $paciente->religiao ?? null) }}">
                     <label class="form-label">Religião</label>
+                    <datalist id="religiao">
+                      <option>Não Possui</option>
+                    </datalist>
                 </div>
             </div>
           </div>
@@ -181,7 +184,7 @@
               <div class="form-line">
                 <select class="form-control show-tick" data-live-search="true" name="familia_id">
                   @if(!isset($paciente) || $paciente->getOriginal('familia_id') == null)
-                    <option value="" >-- Familia --</option>
+                    <option value="" >-- Familia ( Número SIAB ) --</option>
                   @endif
                   @foreach($familia as $valor)
                     @if(isset($paciente))
@@ -189,7 +192,7 @@
                         {{ $paciente['id'] == $valor->id ? 'selected' : '' }}
                         >{{$valor->familia . ' - ' . $valor->sobrenome}}</option>
                     @else
-                      <option value="{{$valor->id}}">{{$valor->familia . ' - ' . $valor->sobrenome}}</option>
+                      <option value="{{$valor->id}}">{{$valor->siab}}</option>
                     @endif
                   @endforeach
                 </select>
@@ -198,10 +201,16 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-2">
+            <div class="switch-title">Possui Plano de Saúde?</div>
+            <div class="switch" style="bottom: -10px;position: relative;">
+                <label>Não<input onclick="possuiPlano(this)" type="checkbox" id="possui_plano" name="possui_plano"><span class="lever switch-col-green"></span>Sim</label>
+            </div>
+          </div>
+          <div class="col-sm-10">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input type="text" class="form-control" name="plano_saude" placeholder="" value="{{ old('plano_saude', $paciente->plano_saude ?? null) }}">
+                    <input disabled type="text" class="form-control" name="plano_saude" id="plano_saude" placeholder="" value="{{ old('plano_saude', $paciente->plano_saude ?? null) }}">
                     <label class="form-label">Plano de Saúde</label>
                 </div>
             </div>
@@ -245,6 +254,9 @@
                     <label class="form-label">Meios de Comunicação Utilizado</label>
                 </div>
                 <datalist id="meios_comunicacao">
+                  <option>Celular</option>
+                  <option>Internet</option>
+                  <option>Telefonia</option>
                   <option>Rádio</option>
                   <option>Televisão</option>
                 </datalist>
@@ -269,8 +281,8 @@
 
         <div class="row">
           <div class="col-sm-12">
-            <h5>Doenças e/ou Condições Referidas</h5>
-            <select name="doencasCondicoes[]" id="doencasCondicoes" class="ms" multiple="multiple">
+            <h5>Doenças e/ou Condições Referidas <small>Preennchimento Obrigatório</small></h5>
+            <select required name="doencasCondicoes[]" id="doencasCondicoes" class="ms" multiple="multiple">
               @foreach($condicoesReferidas as $valor)
                   @if(isset($paciente))
                     <option value="{{ $valor->id }}"
@@ -312,6 +324,17 @@
 @stop
 
 @section('scripts')
+function possuiPlano(valor)
+{
+  if($('#possui_plano').prop("checked") == true){
+    $('#plano_saude').prop('disabled',false);
+  }
+  else if($('#possui_plano').prop("checked") == false){
+    $('#plano_saude').prop('disabled',true);
+    $('#plano_saude').val('');
+  }
+
+}
 $(function () {
     $('#doencasCondicoes').multiSelect({ selectableOptgroup: true });
     $('#adicionaPaciente').validate({

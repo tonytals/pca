@@ -35,7 +35,8 @@ class Familia extends Model
         'destino_fezes_urina',
         'nis_responsavel',
         'cad_unico',
-        'sobrenome'
+        'sobrenome',
+        'unidade_saude'
     ];
 
     public function pacientes()
@@ -105,6 +106,19 @@ class Familia extends Model
        }else{
          return 'Não';
        }
+    }
+
+    public function getUserIdAttribute($value)
+    {
+
+        $user = User::find($value);
+
+        try {
+          return $this->attributes['user_id'] = $user->name;
+        } catch (\Exception $e) {
+          return $this->attributes['user_id'] = $value;
+        }
+
     }
 
 }

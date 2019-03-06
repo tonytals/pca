@@ -27,6 +27,8 @@
             <formulario id="adicionaFamilia" method="post" action="{{ route('familias.store') }}" token="{{ csrf_token() }}">
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" />
       @endif
+            <input type="hidden" class="form-control" name="unidade_saude" placeholder="" value="{{ old('unidade_saude', $familia->unidade_saude ?? $unidadesDeSaude->id) }}">
+      
           <div class="row">
             <div class="col-sm-3">
               <div class="form-group form-float">

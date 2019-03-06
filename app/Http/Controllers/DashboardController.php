@@ -8,6 +8,7 @@ use ProntuarioEletronico\Agendamento;
 use Illuminate\Support\Facades\Auth;
 use Laravelista\Comments\Comment;
 use Illuminate\Support\Facades\Gate;
+use ProntuarioEletronico\Papel;
 use Groups;
 
 class DashboardController extends Controller
@@ -82,8 +83,15 @@ class DashboardController extends Controller
         abort(403,"Não autorizado!");
       }
 
+      $papelAluno = Papel::where('nome','Preceptor')->first();
+
       $user = Groups::getUser(Auth::user()->id);
-      $alunos = $user->groups;
+
+      $grupo = $user->groups->first();
+
+      $alunos = User::whereHas('papeis', function ($query) use ($papelAluno) {
+              $query->where("papel_user.papel_id", "=", $papelAluno->id);
+      })->with(['papeis','grupos'])->get();
 
       return view('dashboardTutor', compact('alunos'));
     }
