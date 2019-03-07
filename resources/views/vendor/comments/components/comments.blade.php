@@ -8,7 +8,7 @@
           </div>
         </div>
     @endif
-    
+
     <ul class="list-unstyled">
         @foreach($model->comments->where('parent', null) as $comment)
             @include('comments::_comment')

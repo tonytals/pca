@@ -253,7 +253,7 @@ class UsuarioController extends Controller
 
           $arquivo = $request->file('arquivo')->store('importarcsv','public');
 
-          $data = array_map('str_getcsv', file('storage/'.$arquivo));
+          $data = array_map('str_getcsv', file('storage/' . $arquivo, FILE_IGNORE_NEW_LINES));
           array_walk($data, function(&$a) use ($data) {
             $a = array_combine($data[0], $a);
           });
@@ -262,8 +262,8 @@ class UsuarioController extends Controller
 
           array_shift($data);
 
-          foreach ($data as $key => $item) {
-            $salvar['password'] = Hash::make($item['senha']);
+          foreach ($data as $item) {
+            $salvar['password'] = Hash::make($item["﻿senha"]);
             $salvar['cpf'] = array_key_exists('cpf', $item) ?  $item['cpf'] : '';
             $salvar['rg'] = array_key_exists('rg', $item) ?  $item['rg'] : '';
             $salvar['email'] = $item['email'];

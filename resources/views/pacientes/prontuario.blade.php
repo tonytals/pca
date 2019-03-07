@@ -14,8 +14,14 @@
             <div class="card">
               <div class="header">
 
-                  <h2>{{ $paciente->nome_completo }}</h2><small><a href="{{ route('familias.show', $paciente->getOriginal('familia_id'))}}">{{ $paciente->familia_id }}</a></small>
-
+                  <h2>{{ $paciente->nome_completo }}</h2>
+                  @if(is_numeric($paciente->getOriginal('familia_id')))
+                  <small>
+                    <a href="{{ route('familias.show', $paciente->getOriginal('familia_id') )}}">
+                      {{ $paciente->familia_id }}
+                    </a>
+                  </small>
+                  @endif
                 </div>
                 <div class="body" id="prontuarioPaciente">
                   <div class="row clearfix">
@@ -56,13 +62,15 @@
                               <span>Baixar Prontuário</span>
                           </button>
                         </li>
-                        <li>
-                          <br />
-                          <button type="button" class="btn bg-teal btn-block btn-lg waves-effect" data-toggle="modal" data-target="#adicionarRegistro">
-                              <i class="material-icons">add</i>
-                              <span>Adicionar Um Novo Registro</span>
-                          </button>
-                        </li>
+                        @can('pacientes-create')
+                          <li>
+                            <br />
+                            <button type="button" class="btn bg-teal btn-block btn-lg waves-effect" data-toggle="modal" data-target="#adicionarRegistro">
+                                <i class="material-icons">add</i>
+                                <span>Adicionar Um Novo Registro</span>
+                            </button>
+                          </li>
+                          @endcan
                         <li>
                           <br />
                           <button type="button" class="btn bg-green btn-block btn-lg waves-effect" data-toggle="modal" data-target="#adicionarAgenda">
@@ -148,6 +156,14 @@ $(function () {
         lang: 'pt-BR',
         time: true,
     });
+
+    $('#novoRegistro').find('input[required]').css('border-bottom','solid thin red');
+    $('.required').css('border-bottom','solid thin red');
+
+    @if(isset($paciente))
+        $('#adicionaPaciente').find('input').focus();
+    @endif
+
   });
   $('#baixarProntuario').click(function () {
     $('#botoes').hide();
@@ -164,7 +180,7 @@ $(function () {
             }
         };
         doc.addImage(canvas, 'PNG', 10, 10, 190, 114);
-        doc.save('thisMotion.pdf');
+        doc.save('prontuario.pdf');
         $('#botoes').show();
         swal({
             title: "Tudo bem",

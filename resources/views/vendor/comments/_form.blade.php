@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <h4 class="modal-title" id="adicionarRegistroLabel">Adicionar Novo Registro</h4>
             </div>
-            <form method="POST" action="{{ url('comments') }}">
+            <form method="POST" action="{{ url('comments') }}" id="novoRegistro">
               <div class="modal-body">
 
                   @csrf
@@ -27,16 +27,17 @@
                                 <i class="material-icons">date_range</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" name="data_hora_atendimento" class="form-control datetime" placeholder="Ex: 30/07/2016 13:45">
+                                <input required type="text" name="data_hora_atendimento" class="form-control datetime" placeholder="Ex: 30/07/2016 13:45">
                             </div>
                         </div>
 
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <div class="form-line">
+                            <div class="form-line required">
                               <b>Local do Atendimento</b>
-                              <select name="local_atendimento" class="form-control">
+                              <select required name="local_atendimento" class="form-control">
+                                  <option value="">-- Selecione --</option>
                                   <option value="Residencial">Atendimento Residencial</option>
                                   <option value="Hospital">Atendimento no Hospital</option>
                                   <option value="UBS">Atendimento Posto de Saúde</option>

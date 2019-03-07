@@ -87,13 +87,9 @@ class DashboardController extends Controller
 
       $user = Groups::getUser(Auth::user()->id);
 
-      $grupo = $user->groups->first();
+      $preceptores = $user->groups->first()->users;
 
-      $alunos = User::whereHas('papeis', function ($query) use ($papelAluno) {
-              $query->where("papel_user.papel_id", "=", $papelAluno->id);
-      })->with(['papeis','grupos'])->get();
-
-      return view('dashboardTutor', compact('alunos'));
+      return view('dashboardTutor', compact('preceptores'));
     }
 
     public function dashboardPreceptor()
@@ -104,7 +100,7 @@ class DashboardController extends Controller
       }
 
       $user = Groups::getUser(Auth::user()->id);
-      $alunos = $user->groups->first();
+      $alunos = $user->groups->first()->users;
 
       return view('dashboardPreceptor', compact('alunos'));
     }

@@ -28,9 +28,9 @@
                 </tfoot>
                 <tbody>
                   @if($alunos->count() > 1)
-                    @foreach($alunos->users as $aluno)
+                    @foreach($alunos as $aluno)
                       <tr>
-                        @if($aluno->id != $alunos->user_id)
+                        @if($aluno->id != Auth::user()->id)
                           <td>{{$aluno->id}}</td>
                           <td><a href="{{route('tutor.aluno', $aluno->id)}}">{{$aluno->name}}</a></td>
                           <td>{{$aluno->email}}</td>

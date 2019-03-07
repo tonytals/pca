@@ -39,7 +39,7 @@
           <div class="col-sm-3">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input required type="text" class="form-control email" name="email" value="{{ old('email', $paciente->email ?? null) }}">
+                    <input type="text" class="form-control email" name="email" value="{{ old('email', $paciente->email ?? null) }}">
                     <label class="form-label">E-mail</label>
                 </div>
             </div>
@@ -78,7 +78,7 @@
           <div class="col-sm-6">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input type="text" class="form-control" name="nome_mae" value="{{ old('nome_mae', $paciente->nome_mae ?? null) }}">
+                    <input required type="text" class="form-control" name="nome_mae" value="{{ old('nome_mae', $paciente->nome_mae ?? null) }}">
                     <label class="form-label">Nome da Mãe</label>
                 </div>
             </div>
@@ -115,8 +115,8 @@
           </div>
           <div class="col-sm-3">
             <div class="form-group form-float">
-              <div class="form-line required">
-                <select class="form-control show-tick" data-live-search="true" name="tipo_sanguineo_id" required>
+              <div class="form-line">
+                <select class="form-control show-tick" data-live-search="true" name="tipo_sanguineo_id">
                   @if(!isset($paciente))
                     <option value>-- Tipo Sanguíneo --</option>
                   @endif

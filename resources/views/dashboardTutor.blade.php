@@ -27,12 +27,14 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                  @foreach($alunos as $aluno)
-                    <tr>
-                        <td>{{$aluno->id}}</td>
-                        <td><a href="{{route('tutor.showAlunosPreceptores', $aluno->id)}}">{{$aluno->name}}</a></td>
-                        <td>{{$aluno->email}}</td>
-                    </tr>
+                  @foreach($preceptores as $preceptor)
+                    @if($preceptor->id != Auth::user()->id)
+                        <tr>
+                            <td>{{$preceptor->id}}</td>
+                            <td><a href="{{route('tutor.showAlunosPreceptores', $preceptor->id)}}">{{$preceptor->name}}</a></td>
+                            <td>{{$preceptor->email}}</td>
+                        </tr>
+                    @endif
                   @endforeach
                 </tbody>
               </table>
