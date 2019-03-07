@@ -7,7 +7,7 @@
 
     </div>
     <div class="row">
-      <painel titulo='PRECEPTORES'>
+      <painel titulo='TUTORES'>
         <modal-link titulo="Adicionar Grupo" css="btn bg-blue m-b-15" modal="adicionarUnidadeSaude"></modal-link>
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -34,7 +34,8 @@
                         <tr>
                           <td>{{ $tutor->name }}</td>
                           <td>{{ $tutor->groups->first()['name'] }}</td>
-                          <td>{{ $tutor->groups->first()->users->count() > 0 ? $tutor->groups->first()->users->count() - 1 : 0 }}</td>
+
+                          <td>{{ $tutor->groups->count() > 0 ? $tutor->groups->count() - 1 : 0 }}</td>
                           <td>
                             @if($tutor->groups->first()['name'] == null)
 

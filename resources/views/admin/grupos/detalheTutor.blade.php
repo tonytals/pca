@@ -6,7 +6,7 @@
     <div class="block-header">
     </div>
 
-    <painel  titulo='GERENCIAR UNIDADE DE SAUDE: {{ $grupo->name }}'>
+    <painel  titulo='GERENCIAR GRUPO: {{ $grupo->name }}'>
 
       <formulario method="post" action="{{ route('grupos.addAluno') }}" token="{{ csrf_token() }}" enctype="multipart/form-data">
         <div class="row">

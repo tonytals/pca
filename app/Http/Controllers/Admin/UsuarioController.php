@@ -258,12 +258,14 @@ class UsuarioController extends Controller
             $a = array_combine($data[0], $a);
           });
 
+          $salvar = [];
+
           array_shift($data);
 
-          foreach ($data as $item) {
-            $salvar['password'] = Hash::make($item['password']);
-            $salvar['cpf'] = $item['cpf'];
-            $salvar['rg'] = $item['rg'];
+          foreach ($data as $key => $item) {
+            $salvar['password'] = Hash::make($item['senha']);
+            $salvar['cpf'] = array_key_exists('cpf', $item) ?  $item['cpf'] : '';
+            $salvar['rg'] = array_key_exists('rg', $item) ?  $item['rg'] : '';
             $salvar['email'] = $item['email'];
             $salvar['name'] = $item['name'];
 
@@ -273,6 +275,7 @@ class UsuarioController extends Controller
                 $salvar['papel_id'] = 2;
                 break;
 
+              case 'Preceptor':
               case 'preceptor':
               case 'Preceptores':
                 $salvar['papel_id'] = 4;
