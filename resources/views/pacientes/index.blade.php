@@ -50,8 +50,11 @@
                             @endif
                           </td>
                           <td>{{ Date::parse($paciente->data_nascimento)->age .' anos' }}</td>
-                          <td>{{ Date::parse($paciente->ultimo_atendimento)->format('j \d\e F\, Y') }}<br />
-                            <small><timeago datetime="{{ $paciente->ultimo_atendimento }}" locale="pt-BR"></timeago></small>
+                          <td>
+                            @if($paciente->ultimo_atendimento != null)
+                              {{ Date::parse($paciente->ultimo_atendimento)->format('j \d\e F\, Y') }}<br />
+                              <small><timeago datetime="{{ $paciente->ultimo_atendimento }}" locale="pt-BR"></timeago></small>
+                            @endif
                           </td>
                           <td>
                             <form action="{{ route('pacientes.destroy', $paciente->id) }}" method="post">

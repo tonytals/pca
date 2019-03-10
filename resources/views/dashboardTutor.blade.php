@@ -8,15 +8,16 @@
     </div>
 
     <div class="row">
-      <painel titulo='MEUS ALUNOS'>
-
+      <painel titulo='PRECEPTORES'>
+        <button id="btn" class="btn bg-blue waves-effect">Enviar E-mail a Todos os Preceptores</button>
         <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+            <table id="tabelaPreceptores" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -24,6 +25,7 @@
                       <th>#</th>
                       <th>Nome</th>
                       <th>Email</th>
+                      <th>Ações</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -32,7 +34,12 @@
                         <tr>
                             <td>{{$preceptor->id}}</td>
                             <td><a href="{{route('tutor.showAlunosPreceptores', $preceptor->id)}}">{{$preceptor->name}}</a></td>
-                            <td>{{$preceptor->email}}</td>
+                            <td class="email">{{$preceptor->email}}</td>
+                            <td>
+                              <a type="button" href="mailto:{{$preceptor->email}}?Subject=Contato%20Prontuario%20Academico" class="btn bg-green waves-effect">
+                                    <i class="material-icons">email</i>
+                                </a>
+                            </td>
                         </tr>
                     @endif
                   @endforeach
@@ -56,4 +63,11 @@
 $(function () {
     $('.count-to').countTo();
   });
+  $('#btn').click( function( ) {
+    var emails = '';
+        $('#tabelaPreceptores td.email').each( function( ) {
+            emails += $(this).html() + ';';
+        } );
+        window.location = 'mailto:' + $.trim(emails) + '?subject=Contato%20Prontuario%20Academico';
+    } );
 @stop
