@@ -38,15 +38,21 @@ class TutorController extends Controller
 
     $papelTutor = Papel::where('nome','Tutor')->first();
 
-    $usuarios = User::whereHas('papeis', function ($query) use ($papelTutor) {
+    if($papelTutor != null)
+    {
+        $usuarios = User::whereHas('papeis', function ($query) use ($papelTutor) {
             $query->where("papel_user.papel_id", "=", $papelTutor->id);
-    })->with('papeis')->get();
+        })->with('papeis')->get();
 
-    $tutores = [];
+        $tutores = [];
 
-    foreach ($usuarios as $tutor) {
-      $tutores[] = Groups::getUser($tutor->id);
+        foreach ($usuarios as $tutor) {
+            $tutores[] = Groups::getUser($tutor->id);
+        }
+    }else{
+        return redirect()->back()->withErrors('O papel de tutor não foi criado')->withInput();
     }
+
 
     return view('admin.tutores.index', compact('tutores'));
   }
@@ -64,7 +70,7 @@ class TutorController extends Controller
         $alunos[] = $aluno;
       };
     }
-    
+
     return view('admin.tutores.listaAlunos', compact('alunos'));
 
   }

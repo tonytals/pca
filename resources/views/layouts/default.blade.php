@@ -72,6 +72,12 @@
         </div>
       </aside>
     </section>
+    @if($errors->any())
+        <section class="content">
+            <h4>{{$errors->first()}}</h4>
+        </section>
+    @endif
+
     @yield('content')
 
   </div>
