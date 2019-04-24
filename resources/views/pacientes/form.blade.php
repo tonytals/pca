@@ -282,7 +282,7 @@
         <div class="row">
           <div class="col-sm-12">
             <h5>Doenças e/ou Condições Referidas <small>Preennchimento Obrigatório</small></h5>
-            <select required name="doencasCondicoes[]" id="doencasCondicoes" class="ms" multiple="multiple">
+            <select name="doencasCondicoes[]" id="doencasCondicoes" class="ms" multiple="multiple">
               @foreach($condicoesReferidas as $valor)
                   @if(isset($paciente))
                     <option value="{{ $valor->id }}"
@@ -339,10 +339,14 @@ $(function () {
     $('#doencasCondicoes').multiSelect({ selectableOptgroup: true });
     $('#adicionaPaciente').validate({
       rules : {
-
+        doencasCondicoes:{
+                    required:true
+            },
       },
       messages:{
-
+        doencasCondicoes:{
+                  required: "Campo obrigatório"
+            },
       },
       highlight: function (input) {
           $(input).parents('.form-line').addClass('error');
@@ -358,7 +362,7 @@ $(function () {
     $('#adicionaPaciente').find('input[required]').css('border-bottom','solid thin red');
     $('.required').css('border-bottom','solid thin red');
 
-    @if(isset($paciente))
+    @if(isset($paciente) || $errors->all())
         $('#adicionaPaciente').find('input').focus();
     @endif
 });

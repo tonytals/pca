@@ -15,6 +15,7 @@ app/storage/
 public/storage
 public/upload
 public/hot
+public/images
 storage/*.key
 .env
 Homestead.yaml

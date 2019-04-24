@@ -27,7 +27,12 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 
-<body class="login-page theme-teal">
+@if(env('BACKGROUND_LOGIN', 'background_login') != '')
+    <body class="login-page theme-teal" style="background:url( {{ env('BACKGROUND_LOGIN', 'background_login') }})">
+@else
+    <body class="login-page theme-teal">
+@endif
+
     <div class="login-box">
         <div class="logo">
             <a href="javascript:void(0);"><b>{{ config('app.name', 'prontuario eletronico') }}</b></a>

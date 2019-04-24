@@ -71,6 +71,17 @@ class PacienteController extends Controller
           abort(403,"Não autorizado!");
       }
 
+
+        $rules = [
+            'doencasCondicoes' => 'required'
+        ];
+
+        $customMessages = [
+            'doencasCondicoes.required' => 'O campo "Doenças e Condições" é obrigatório.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
       $data = $request->all();
       //$data['doencasCondicoes'] = json_encode($data['doencasCondicoes']);
 
