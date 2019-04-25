@@ -87,9 +87,14 @@ class DashboardController extends Controller
 
       $user = Groups::getUser(Auth::user()->id);
 
-      $preceptores = $user->groups->first()->users;
+      if($user->groups->first() != null)
+      {
+        $preceptores = $user->groups->first()->users;
+        return view('dashboardTutor', compact('preceptores'));
+      }else{
+        return view('dashboardTutor');
+      }
 
-      return view('dashboardTutor', compact('preceptores'));
     }
 
     public function dashboardPreceptor()
@@ -100,8 +105,13 @@ class DashboardController extends Controller
       }
 
       $user = Groups::getUser(Auth::user()->id);
-      $alunos = $user->groups->first()->users;
 
-      return view('dashboardPreceptor', compact('alunos'));
+      if($user->groups->first() != null)
+      {
+        $alunos = $user->groups->first()->users;
+        return view('dashboardPreceptor', compact('alunos'));
+      }else{
+        return view('dashboardPreceptor');
+      }
     }
 }

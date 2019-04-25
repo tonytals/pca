@@ -3,7 +3,11 @@
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="{{route('dashboard')}}">{{ config('app.name', 'prontuario eletronico') }}</a>
+            @if(env('LOGO', 'logo') != '')
+                <a class="navbar-brand" style="padding:0;margin-left:12px" href="{{route('dashboard')}}"><img src="{{ env('LOGO', 'logo') }}" style="max-height:100%"></a>
+            @else
+                <a class="navbar-brand" href="{{route('dashboard')}}">{{ config('app.name', 'prontuario eletronico') }}</a>
+            @endif
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
