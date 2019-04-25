@@ -37,7 +37,7 @@
                           <td>{{ $preceptor->groups->count() > 0 ? $preceptor->groups->count() - 1 : 0 }}</td>
                           <td>
                             @if($preceptor->groups->first()['name'] == null)
-                              <a class="btn bg-blue waves-effect" href="">
+                              <a class="btn bg-blue waves-effect" href="{{ route('unidadesdesaude.create') }}">
                                   <i class="material-icons">add</i>
                                   <span>Criar Unidade de Saúde</span>
                               </a>

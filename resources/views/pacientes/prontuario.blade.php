@@ -106,7 +106,7 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                           <div class="form-line">
-                              <input type="text" class="datetimepicker form-control" name="data_inicio" id="data_inicio" placeholder="Selecione Data e Hora para a visita...">
+                              <input required type="text" class="datetimepicker form-control" name="data_inicio" id="data_inicio" placeholder="Selecione Data e Hora para a visita...">
                           </div>
                       </div>
                     </div>
@@ -115,7 +115,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                           <div class="form-line">
-                              <textarea rows="3" id="observacao" class="form-control no-resize" name="observacao" placeholder="Digite sua observação..."></textarea>
+                              <textarea required rows="3" id="observacao" class="form-control no-resize" name="observacao" placeholder="Digite sua observação..."></textarea>
                           </div>
                       </div>
                     </div>

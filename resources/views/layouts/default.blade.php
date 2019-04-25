@@ -73,8 +73,10 @@
       </aside>
     </section>
     @if($errors->any())
-        <section class="content">
-            <h4>{{$errors->first()}}</h4>
+        <section class="content" style="margin-bottom:-80px">
+            <div class="alert alert-danger" role="alert">
+                {{ $errors->first() }}
+            </div>
         </section>
     @endif
 

@@ -23,7 +23,7 @@ class PapelSeeder extends Seeder
         ]);
 
         $p3 = Papel::firstOrCreate([
-            'nome' =>'Preceptores',
+            'nome' =>'Preceptor',
             'descricao' => 'Acesso para Preceptores'
         ]);
 

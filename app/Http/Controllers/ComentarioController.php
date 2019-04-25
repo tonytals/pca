@@ -42,6 +42,8 @@ class ComentarioController extends CommentsController
              'commentable_type' => 'required|string',
              'commentable_id' => 'required|integer|min:1',
              'message' => 'required|string'
+         ],[
+             'message.required' => 'Campo de mensagem é obrigatório'
          ]);
 
          $model = $request->commentable_type::findOrFail($request->commentable_id);

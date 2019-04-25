@@ -25,17 +25,26 @@ class UnidadeDeSaudeController extends Controller
 
       $papelPreceptor = Papel::where('nome','Preceptor')->first();
 
-      $usuarios = User::whereHas('papeis', function ($query) use ($papelPreceptor) {
-              $query->where("papel_user.papel_id", "=", $papelPreceptor->id);
-      })->with('papeis')->get();
+        if($papelPreceptor != null)
+        {
 
-      $preceptores = [];
+            $usuarios = User::whereHas('papeis', function ($query) use ($papelPreceptor) {
+                    $query->where("papel_user.papel_id", "=", $papelPreceptor->id);
+            })->with('papeis')->get();
 
-      foreach ($usuarios as $preceptor) {
-        $preceptores[] = Groups::getUser($preceptor->id);
-      }
+            $preceptores = [];
+
+            foreach ($usuarios as $preceptor) {
+                $preceptores[] = Groups::getUser($preceptor->id);
+            }
+
+        }else{
+            return redirect()->back()->withErrors('Não há preceptores para as unidades')->withInput();
+        }
 
       return view('admin.unidades.index', compact('preceptores'));
+
+
     }
 
     /**

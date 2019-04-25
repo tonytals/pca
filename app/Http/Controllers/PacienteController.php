@@ -165,6 +165,17 @@ class PacienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $rules = [
+            'doencasCondicoes' => 'required'
+        ];
+
+        $customMessages = [
+            'doencasCondicoes.required' => 'O campo "Doenças e Condições" é obrigatório.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
         $data = $request->all();
 
         if($request->file('foto') != null){

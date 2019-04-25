@@ -66,7 +66,7 @@
           <div class="col-sm-6">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input type="text" class="form-control" name="name" placeholder="">
+                    <input required type="text" class="form-control" name="name" placeholder="">
                     <label class="form-label">Nome do Grupo</label>
                 </div>
             </div>

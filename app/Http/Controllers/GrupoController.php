@@ -166,11 +166,17 @@ class GrupoController extends Controller
     {
         $data = $request->all();
 
-        $userResponsavel = Groups::getUser($data['idResponsavel']);
+        if(isset($data['alunosUnidade']))
+        {
+            $userResponsavel = Groups::getUser($data['idResponsavel']);
 
-        $userResponsavel->groups[0]->addMembers($data['alunosUnidade']);
+            $userResponsavel->groups[0]->addMembers($data['alunosUnidade']);
 
-        return redirect()->back();
+            return redirect()->back();
+        }else{
+            return redirect()->back()->withErrors('Selecione um usuário')->withInput();
+        }
+
     }
 
     public function removeAluno($responsavel, $id)
