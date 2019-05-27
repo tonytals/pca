@@ -67,6 +67,10 @@ class FamiliaController extends Controller
     {
         $data = $request->all();
 
+        if(!isset($data['unidade_saude'])){
+            $data['unidade_saude'] = '000000';
+        }
+
         $familia = new Familia();
         $familia = Familia::create($data);
 

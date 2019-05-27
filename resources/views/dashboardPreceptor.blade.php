@@ -27,7 +27,7 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                  @if($alunos->count() > 1)
+                  @if(isset($alunos) && $alunos->count() > 1)
                     @foreach($alunos as $aluno)
                       <tr>
                         @if($aluno->id != Auth::user()->id)

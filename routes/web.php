@@ -77,3 +77,8 @@ Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
   Route::get('aluno/{id}', ['as'=>'tutor.aluno','uses'=>'Admin\TutorController@aluno_show']);
   Route::get('showAlunosPreceptores/{id}', ['as'=>'tutor.showAlunosPreceptores','uses'=>'Admin\TutorController@showAlunosPreceptores']);
 });
+
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});

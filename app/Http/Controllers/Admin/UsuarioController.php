@@ -175,9 +175,9 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Gate::denies('usuario-edit')){
-          abort(403,"Não autorizado!");
-        }
+        //if(Gate::denies('usuario-edit')){
+        //  abort(403,"Não autorizado!");
+        //}
 
         $data = $request->all();
 

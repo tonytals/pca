@@ -25,7 +25,7 @@
           <div class="col-sm-6">
             <div class="form-group form-float">
                 <div class="form-line">
-                    <input required type="text" class="form-control" name="user" placeholder="" value="{{ old('user', $usuario->user ?? null) }}">
+                    <input type="text" class="form-control" name="user" placeholder="" value="{{ old('user', $usuario->user ?? null) }}">
                     <label class="form-label">Usuário</label>
                 </div>
             </div>
@@ -180,7 +180,7 @@ $(function () {
     $('#adicionaUser').validate({
       rules : {
             user:{
-                    required:true
+                    required:false
             },
             email:{
                    required:true,

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravelista\Comments\CommentsController as CommentsController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use ProntuarioEletronico\User;
+use Jenssegers\Date\Date;
 
 class ComentarioController extends CommentsController
 {
@@ -71,7 +72,7 @@ class ComentarioController extends CommentsController
          $comment->commenter()->associate(auth()->user());
          $comment->commentable()->associate($model);
          $comment->local_atendimento = $request->local_atendimento;
-         $comment->data_hora_atendimento =  date("Y-m-d H:i:s", strtotime($request->data_hora_atendimento));
+         $comment->data_hora_atendimento =  date("Y-m-d H:i:s", strtotime(str_replace('/','-',$request->data_hora_atendimento)));
          $comment->comment = $detail;
          $comment->save();
 
