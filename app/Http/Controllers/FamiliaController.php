@@ -165,9 +165,7 @@ class FamiliaController extends Controller
      */
     public function destroy($id)
     {
-      $familia = new Familia();
-      $familia->find($id)->detele();
-
-      return redirect()->back();
+        Familia::find($id)->delete();
+        return back();
     }
 }

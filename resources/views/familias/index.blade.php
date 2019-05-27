@@ -50,9 +50,8 @@
                             <a title="Editar" class="btn btn-primary waves-effect" href="{{ route('familias.edit', $familia->id) }}">
                               <i class="material-icons">mode_edit</i>
                             </a>
-                            <input type="hidden" name="_method" value="DELETE" />
+                            {{ method_field('DELETE') }}
                             @csrf
-
                             <button type="submit" title="Excluir" class="btn btn-danger waves-effect">
                               <i class="material-icons">delete</i>
                             </button>
