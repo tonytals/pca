@@ -172,6 +172,10 @@ class FamiliaController extends Controller
      */
     public function destroy($id)
     {
+        if(Gate::denies('familias-delete')){
+            abort(403,"Não autorizado!");
+         }
+
         Familia::find($id)->delete();
         return back();
     }

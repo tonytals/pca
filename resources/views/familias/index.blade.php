@@ -52,9 +52,11 @@
                             </a>
                             {{ method_field('DELETE') }}
                             @csrf
+                            @can('familias-delete')
                             <button type="submit" title="Excluir" class="btn btn-danger waves-effect">
                               <i class="material-icons">delete</i>
                             </button>
+                            @endcan
                           </form>
                         </td>
                       </tr>
