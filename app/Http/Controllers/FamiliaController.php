@@ -65,6 +65,13 @@ class FamiliaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'siab' => 'unique:familias'
+         ],[
+            'siab.unique' => 'O número SIAB já existe!'
+         ]);
+
         $data = $request->all();
 
         if(!isset($data['unidade_saude'])){
