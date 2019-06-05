@@ -64,7 +64,7 @@
                               <input type="hidden" name="_method" value="DELETE" />
                               @csrf
 
-                              <button type="submit" title="Excluir" class="btn btn-danger waves-effect">
+                              <button type="submit" onclick="return confirm('Deseja realmente excluir esse item?\nEssa ação não poderá ser revertida!')" title="Excluir" class="btn btn-danger waves-effect">
                                 <i class="material-icons">delete</i>
                               </button>
                             </form>
